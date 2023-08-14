@@ -9,11 +9,14 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 `#import "admonish:0.0.1": info, success, warning, error`
 
+Writing this,
 
 ```typst
-  #info[Some important info]
+  #note[Whatever you want to say]
 ```
+turns into this.
 
+![Screenshot of the info admonish](screenshot-info-admonish.png)
 
 
 ## License 
