@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import "admonish:0.0.1": info, success, warning, error`
+`#import " @preview/admonish:0.0.1": info, success, warning, error`
 
 Writing this,
 
