@@ -12,7 +12,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 Writing this,
 
 ```typst
-  #note[Whatever you want to say]
+  #info[Whatever you want to say]
 ```
 turns into this.
 
