@@ -1,5 +1,5 @@
 [package]
-name="admonish"
+name = "admonish"
 version = "0.1.0"
 entrypoint = "admonish.typ"
 authors = ["Jomaway <https://github.com/jomaway>"]
