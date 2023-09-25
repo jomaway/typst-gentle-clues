@@ -1,5 +1,5 @@
 [package]
-name = "admonish"
+name = "gentle-clues"
 version = "0.2.0"
 entrypoint = "admonish.typ"
 authors = ["Jomaway <https://github.com/jomaway>"]
