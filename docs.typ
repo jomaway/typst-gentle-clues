@@ -1,5 +1,5 @@
 
-#import "@local/admonish:0.1.0": *
+#import "@local/admonish:0.2.0": *
 #set text(font: "Roboto")
 
 = Admonishments for typst
@@ -16,7 +16,17 @@ Add some beautifull, predefined amonishments or define your own.
   The default is a gray admonish.
 ]
 
+#admonish(title: "NEW v0.2.0", color: (stroke: luma(150), bg: teal), header-inset: 0.6em)[ 
+  - smaller header. `#admonish(header-inset: 0.5em)`
+  - custom color: `#admonish(color: (stroke: luma(150), bg: teal))`
+  - example admonition: `#example[Testing]`
+  #example(header-inset: 0.8em)[Testing]
+]
+
 == Predefined
+
+`example`,
+#example[Testing ...]
 
 `question`, `faq`, `help` 
 #faq[How do amonishments work?]
@@ -85,6 +95,7 @@ just add `title: none` to any example
   width: auto, 
   radius: 2pt, // radius of the right side. For no radius set to 0pt.
   inset: 1em, // inset of the content, header-inset not yet supported
+  header-inset: 1em // make the header smaller or wider
 )
 ```
 
@@ -105,4 +116,5 @@ just add `title: none` to any example
     success[...content], "", "", [`success`, `done`],
     warning[...content], "", "", [`warning`, `attention`, `caution`],
     error[...content], "", "", [`error`, `failing`, `missing`],
+    example[...content], "", "", [],
 )
