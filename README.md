@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import " @preview/gentle-clues:0.2.1: info, success, warning, error`
+`#import " @preview/gentle-clues:0.3.0: info, success, warning, error`
 
 Writing this,
 
@@ -16,11 +16,20 @@ Writing this,
 ```
 turns into this.
 
-![Screenshot of the info admonish](https://github.com/jomaway/typst-admonish/blob/main/screenshot-info-admonish.png)
+![Screenshot of the info clue](screenshot_info-clue.png)
 
-### Available Admonitions
+### Change header title language 
 
-The follwing admonitions (+ some aliases) are available at the moment. `abstract`, `info`, `question`, `memo`, `task`, `idea`, `tip`, `quote`, `success`, `warning`, `error`, `example`.
+You can change the default language for the header titles by 
+
+```typst
+  #gc_header-title-lang.update("de")
+```
+At the moment valid options are: "de" and "en"
+
+### Available Clues
+
+The follwing clues/admonitions (+ some aliases) are available at the moment. `abstract`, `info`, `question`, `memo`, `task`, `idea`, `tip`, `quote`, `success`, `warning`, `error`, `example`.
 
 [See here for more Information](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)
 
@@ -30,14 +39,20 @@ But it is very easy to define your own.
 
 ```typst 
 //Define it
-#let ghost-admon(title: "Buuuuh", icon: emohi.ghost, ..args) = clue(color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(..args) = clue(
+  title: "Buuuuh", 
+  _color: teal,
+  icon: emoji.ghost, 
+  ..args
+)
 // Use it
 #ghost-admon[Huuuuuh.]
 ```
 
 The icon can be an `emoji`, `symbol` or `.svg`-file. 
 
-At the moment the colors are hardcoded. The following color profiles are available to use in your own admonish. In a future version this should be changed. 
+The following color profiles are available to use in your own admonish. 
+In a future version this probably will changed. 
 
 ```typst
 // color profiles
@@ -72,7 +87,7 @@ clue(
   width: auto,
   radius: 2pt, // radius of the right side. For no radius set to 0pt.
   inset: 1em, // inset of the content, header-inset not yet supported
-  header-inset: 1em, // define header inset.
+  header-inset: 0.5em, // define header inset.
 )
 ```
 
@@ -82,14 +97,15 @@ MIT
 
 # Changelog
 
-## v0.2.1
+## v0.3.0
 
 - renamed entry files and base template
 - default `header-inset` is `0.5em` now.
 - added `gc_header-title-lang` state, which defines the language of the title.
   - Update with `#gc_header-title-lang.update("en")`
   - Accepts `"de"` or `"en"` at the moment.
-- Using new `type` checks. 
+- Using new `type` checks which requires typst version `0.8.0`
+- renamed Parameter `color` to `_color` due to naming conflicts with the color type.
 
 ## v0.2.0
 

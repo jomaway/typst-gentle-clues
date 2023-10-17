@@ -1,5 +1,5 @@
 
-#import "@local/gentle-clues:0.2.1": *
+#import "@local/gentle-clues:0.3.0": *
 #gc_header-title-lang.update("en")
 
 #set text(font: "Roboto")
