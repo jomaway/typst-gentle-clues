@@ -1,26 +1,35 @@
 
-#import "@local/admonish:0.2.0": *
+#import "@local/gentle-clues:0.2.1": *
+#gc_header-title-lang.update("en")
+
 #set text(font: "Roboto")
 
-= Admonishments for typst
+= Gentle clues for typst
 
-Add some beautifull, predefined amonishments or define your own.
+Add some beautiful, predefined admonitions or define your own.
 
-#admonish(title: "Example")[
+#clue(title: "Example")[
 ```typst
-#admonish(title: "Example")[Test content.]
+#clue(title: "Example")[Test content.]
 ```
 ]
 #h(1fr)
-#admonish(title: none)[
-  The default is a gray admonish.
+#clue(title: none)[
+  The default is a gray clue.
 ]
 
-#admonish(title: "NEW v0.2.0", color: (stroke: luma(150), bg: teal), header-inset: 0.6em)[ 
-  - smaller header. `#admonish(header-inset: 0.5em)`
-  - custom color: `#admonish(color: (stroke: luma(150), bg: teal))`
+#info(title: "NEW v0.2.1")[
+  - Default `header-inset` is `0.5em` now.
+  - Added `gc_header-title-lang` state. Update with: `#gc_header-title-lang.update("de")`
+    - Accepts `"de"` or `"en"` for the moment
+  - 
+]
+
+#clue(title: "NEW v0.2.0", _color: (stroke: teal, bg: teal.lighten(40%)), header-inset: 0.6em)[ 
+  - smaller header. `#clue(header-inset: 0.5em)`
+  - custom color: `#clue(color: (stroke: teal, bg: teal.lighten(40%)))`
   - example admonition: `#example[Testing]`
-  #example(header-inset: 0.8em)[Testing]
+  #example[Testing]
 ]
 
 == Predefined
@@ -76,18 +85,18 @@ just add `title: none` to any example
 
 ```typst
 // Define it
-#let ghost-admon(title: "Buuuuuuh", icon: emoji.ghost , ..args) = admonish(color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(color: "purple", title: title, icon: icon, ..args)
 // Use it
 #ghost-admon[Huuuuuuh.]
 ```
-#let ghost-admon(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = admonish(color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: "purple", title: title, icon: icon, ..args)
 #ghost-admon[Huuuuuuh.]
 
 
 == Reference
 
 ```typst
-#admonish(
+#clue(
   body, 
   title: none, // Default: none, or string 
   icon: "assets/flag.svg", // can be a file or an symbol|emoji

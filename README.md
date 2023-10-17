@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import " @preview/gentle-clues:0.1.0: info, success, warning, error`
+`#import " @preview/gentle-clues:0.2.1: info, success, warning, error`
 
 Writing this,
 
@@ -30,7 +30,7 @@ But it is very easy to define your own.
 
 ```typst 
 //Define it
-#let ghost-admon(title: "Buuuuh", icon: emohi.ghost, ..args) = admonish(color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(title: "Buuuuh", icon: emohi.ghost, ..args) = clue(color: "purple", title: title, icon: icon, ..args)
 // Use it
 #ghost-admon[Huuuuuh.]
 ```
@@ -64,11 +64,11 @@ At the moment the colors are hardcoded. The following color profiles are availab
 Here the full reference to the admonish function.
 
 ```typst
-admonish(
+clue(
   body,
   title: none, // Default: none, or string
   icon: "assets/flag.svg", // can be a file or an symbol|emoji
-  color: "gray",
+  _color: "gray",  // `_` due to naming conflicts with the type color.
   width: auto,
   radius: 2pt, // radius of the right side. For no radius set to 0pt.
   inset: 1em, // inset of the content, header-inset not yet supported
@@ -81,6 +81,15 @@ admonish(
 MIT
 
 # Changelog
+
+## v0.2.1
+
+- renamed entry files and base template
+- default `header-inset` is `0.5em` now.
+- added `gc_header-title-lang` state, which defines the language of the title.
+  - Update with `#gc_header-title-lang.update("en")`
+  - Accepts `"de"` or `"en"` at the moment.
+- Using new `type` checks. 
 
 ## v0.2.0
 
