@@ -24,7 +24,7 @@
   memo: (de: "Merke", en: "Memorize"),
   task: (de: "Aufgabe", en: "Task"),
   conclusion: (de: "Zusammenfassung", en:"Conclusion"),
-  tip: (de: "Tipp", en: "tip"),
+  tip: (de: "Tipp", en: "Tip"),
   success: (de: "Erledigt", en: "Success"),
   warning: (de: "Achtung", en: "Warning"),
   error: (de: "Fehler", en: "Error"),
