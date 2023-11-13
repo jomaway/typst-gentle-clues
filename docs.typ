@@ -1,5 +1,4 @@
-
-#import "@local/gentle-clues:0.3.0": *
+#import "@local/gentle-clues:0.3.1": *
 #gc_header-title-lang.update("en")
 
 #set text(font: "Roboto")
@@ -12,30 +11,43 @@ Add some beautiful, predefined admonitions or define your own.
 ```typst
 #clue(title: "Example")[Test content.]
 ```
-]
-#h(1fr)
-#clue(title: none)[
-  The default is a gray clue.
+#sym.arrow The default is a navy colored clue.
 ]
 
-#info(title: "NEW v0.2.1")[
-  - Default `header-inset` is `0.5em` now.
-  - Added `gc_header-title-lang` state. Update with: `#gc_header-title-lang.update("de")`
-    - Accepts `"de"` or `"en"` for the moment
-  - 
+#info(title: "NEW v0.4.0",_color: gradient.linear(..color.map.crest))[
+  * Translations:*
+  - French language titles: `gc_header-title-lang.update("fr")`
+
+  *Colors:*
+  - Colored borders by default.
+  - Added support for gradients: `#clue(_color: gradient.linear(..color.map.crest))`
+  - *Breaking:* Removed string color_profiles.
+
+  *Task Counter*
+    - Added a Task Counter.
+    - Disable with `#gc_enable-task-counter.update(false)`
+    #set text(9pt)
+  #grid( columns: 4, gutter: 1em,  task[Do], task[Do], task[Do])
+
+   
 ]
 
-#clue(title: "NEW v0.2.0", _color: (stroke: teal, bg: teal.lighten(40%)), header-inset: 0.6em)[ 
-  - smaller header. `#clue(header-inset: 0.5em)`
-  - custom color: `#clue(color: (stroke: teal, bg: teal.lighten(40%)))`
-  - example admonition: `#example[Testing]`
-  #example[Testing]
+#info(title: "Options")[ 
+  - Changing header title language with: `gc_header-title-lang.update("en")`
+    - Accepts `"en", "de"` or `"fr"` for the moment.
+  - define header inset: `#clue(header-inset: 0.5em)[]`
+  - define header title: `#clue(title: "MyTitle")[]`
+  - define custom color: 
+    - `#clue(_color: red)[]`
+    - `#clue(_color: (stroke: teal, bg: teal.lighten(40%), border: red))[]`
+  - define the width: `#clue(width: 4cm)[]`
+  - define right radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
+  #example(title:"Test peace", width: 4cm, radius: 9pt)[Testing]
 ]
 
 == Predefined
-
-`example`,
-#example[Testing ...]
+`abstract`, `summary`, `tldr`
+#abstract[Make it short. This is all you need.]
 
 `question`, `faq`, `help` 
 #faq[How do amonishments work?]
@@ -46,6 +58,9 @@ Add some beautiful, predefined admonitions or define your own.
   #note[Whatever you want to say]
   ```
 ]
+
+`example`,
+#example[Testing ...]
 
 `task`, `todo`
 #task[#box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderfull admonishments!]
@@ -62,8 +77,7 @@ Add some beautiful, predefined admonitions or define your own.
 `tip`, `hint`, `important`
 #tip[Try it yourself]
 
-`abstract`, `summary`, `tldr`
-#abstract[Make it short. This is all you need.]
+
 
 `conclusion`,`idea`
 #conclusion[This package makes it easy to add some beatufillness to your documents]
@@ -80,50 +94,13 @@ just add `title: none` to any example
 
 #info(title:none)[Just a short information.]
 
-#pagebreak()
 == Define your own
 
 ```typst
 // Define it
-#let ghost-admon(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(color: purple, title: title, icon: icon, ..args)
 // Use it
 #ghost-admon[Huuuuuuh.]
 ```
-#let ghost-admon(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: "purple", title: title, icon: icon, ..args)
+#let ghost-admon(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: gray, title: title, icon: icon, ..args)
 #ghost-admon[Huuuuuuh.]
-
-
-== Reference
-
-```typst
-#clue(
-  body, 
-  title: none, // Default: none, or string 
-  icon: "assets/flag.svg", // can be a file or an symbol|emoji
-  color: "gray", 
-  width: auto, 
-  radius: 2pt, // radius of the right side. For no radius set to 0pt.
-  inset: 1em, // inset of the content, header-inset not yet supported
-  header-inset: 1em // make the header smaller or wider
-)
-```
-
-
-
-#table( 
-    columns: (6cm, auto, auto, auto), 
-    align: horizon + center,
-    "Admonishment", "Stroke color", "Background color", "Aliases",
-    abstract[...content], "", "", [`abstract`, `summary`, `tldr`],
-    info[...content], "", "", [`info`, `note`],
-    question[...content], "", "", [`question`],
-    memo[...content], "", "", [`memo`, `remember`],
-    task[...content], "", "", [`task`, `todo`],
-    idea[...content], "", "", [`conclusion`, `idea`],
-    tip[...content], "", "", [`tip`, `hint`],
-    quote[...content], "", "", [`quote`],
-    success[...content], "", "", [`success`, `done`],
-    warning[...content], "", "", [`warning`, `attention`, `caution`],
-    error[...content], "", "", [`error`, `failing`, `missing`],
-    example[...content], "", "", [],
-)

@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import " @preview/gentle-clues:0.3.0: info, success, warning, error`
+`#import " @preview/gentle-clues:0.4.0: info, success, warning, error`
 
 Writing this,
 
@@ -25,7 +25,7 @@ You can change the default language for the header titles by
 ```typst
   #gc_header-title-lang.update("de")
 ```
-At the moment valid options are: "de" and "en"
+At the moment valid options are: "en","de" and "fr"
 
 ### Available Clues
 
@@ -41,7 +41,7 @@ But it is very easy to define your own.
 //Define it
 #let ghost-admon(..args) = clue(
   title: "Buuuuh", 
-  _color: teal,
+  _color: gray,
   icon: emoji.ghost, 
   ..args
 )
@@ -50,29 +50,6 @@ But it is very easy to define your own.
 ```
 
 The icon can be an `emoji`, `symbol` or `.svg`-file. 
-
-The following color profiles are available to use in your own admonish. 
-In a future version this probably will changed. 
-
-```typst
-// color profiles
-#let colors = (
-  gray:   (border: luma(70),          bg: luma(230)),
-  blue:   (border: rgb(29, 144, 208), bg: rgb(232, 246, 253)),
-  green:  (border: rgb(102, 174, 62), bg: rgb(235, 244, 222)),
-  red:    (border: rgb(237, 32, 84),  bg: rgb(255, 231, 236)),
-  yellow: (border: rgb(255, 201, 23), bg: rgb(252, 243, 207)),
-  purple: (border: rgb(158, 84, 159), bg: rgb(241, 230, 241)),
-  teal:   (border: rgb(0, 191, 165),  bg: rgb(229, 248, 246)),
-  orange: (border: rgb(255, 145, 0),  bg: rgb(255, 244, 229)),
-  redish: (border: rgb(255, 82, 82),  bg: rgb(253, 228, 224)),
-  blueish:(border: rgb(0, 184, 212),  bg: rgb(229, 248, 251)),
-  grayish:(border: rgb(158, 158, 158),bg: rgb(245, 245, 245)),
-  greenish:(border: rgb(0, 143, 115),bg: rgb(221, 243, 231)),
-  purpleish: (border: rgb(124, 77, 255), bg: rgb(242, 237, 255)),
-)
-```
-
 
 ### Reference 
 
@@ -96,6 +73,23 @@ clue(
 MIT
 
 # Changelog
+
+## v0.4.0 
+
+- Added french header titles. Use with `#gc_header-title-lang.update("fr")`
+- Fixed minor border issues
+- Added an task-counter (disable with `gc_enable-task-counter.update(false)`)
+
+*Colors:*
+
+- Changed default color to `navy`
+- Changed border-color
+  - Fixed bug that it was sometimes no longer visible after `typst 0.9.0` update.
+  - Default is now the same as `bg-color`
+  - Set via color-dict `border` field.
+- Added support for gradients: `#clue(_color: gradient.linear(..color.map.crest))`
+- *Breaking:* Removed string color_profiles. 
+- Changed some predefined colors.
 
 ## v0.3.0
 

@@ -1,21 +1,8 @@
-// color profiles
-#let color_profiles = (
-  gray:   (border: luma(70),          bg: luma(230)),
-  blue:   (border: rgb(29, 144, 208), bg: rgb(232, 246, 253)),
-  green:  (border: rgb(102, 174, 62), bg: rgb(235, 244, 222)),
-  red:    (border: rgb(237, 32, 84),  bg: rgb(255, 231, 236)),
-  yellow: (border: rgb(255, 201, 23), bg: rgb(252, 243, 207)),
-  purple: (border: rgb(158, 84, 159), bg: rgb(241, 230, 241)),
-  teal:   (border: rgb(0, 191, 165),  bg: rgb(229, 248, 246)),
-  orange: (border: rgb(255, 145, 0),  bg: rgb(255, 244, 229)),
-  readish: (border: rgb(255, 82, 82),  bg: rgb(253, 228, 224)),
-  blueish:(border: rgb(0, 184, 212),  bg: rgb(229, 248, 251)),
-  grayish:(border: rgb(158, 158, 158),bg: rgb(245, 245, 245)),
-  greenish:(border: rgb(0, 143, 115),bg: rgb(221, 243, 231)),
-  purpleish: (border: rgb(124, 77, 255), bg: rgb(242, 237, 255)),
-)
+// gentle-clues
 
 #let gc_header-title-lang = state("lang", "en")
+#let gc_task-counter = counter("gc-task-counter")
+#let gc_enable-task-counter = state("gc-task-counter", true)
 
 #let title_dict = (
   abstract: (de: "Einführung", en: "Abstract", fr: "Résumé"),
@@ -38,8 +25,8 @@
 #let clue(
   content, 
   title: none, // string or none
-  icon: "assets/flag.svg", // file or symbol
-  _color: "gray", // color profile name
+  icon: emoji.magnify.l, // file or symbol
+  _color: navy, // color profile name
   width: auto, // length
   radius: 2pt, // length
   inset: 1em, // length
@@ -47,18 +34,16 @@
 
 ) = {
   // Set default color:
-  let stroke-color = color_profiles.at("gray").border;
-  let bg-color = color_profiles.at("gray").bg;
-  let border-color = luma(200);
+  let stroke-color = luma(70);
+  let bg-color = stroke-color.lighten(85%);
+  let border-color = bg-color.darken(10%); // gray.lighten(20%);
+  let border-width = 0.5pt;
 
   // setting bg and stroke color from color argument
-  if (type(_color) == str) {
-    assert(color_profiles.at(_color, default: none) != none, message: "No valid color value. See color-profiles for available options.")
-    stroke-color = color_profiles.at(_color).border
-    bg-color = color_profiles.at(_color).bg;
-  } else if (type(_color) == color) { 
+  if (type(_color) == color) { 
     stroke-color = _color;
-    bg-color = _color.lighten(50%);
+    bg-color = _color.lighten(85%);
+    border-color = bg-color.darken(10%);
   } else if (type(_color) == dictionary) {
     if (_color.keys().contains("stroke")) {
       assert(type(_color.stroke) == color, message: "stroke must be of type color");
@@ -67,10 +52,19 @@
     if (_color.keys().contains("bg")) {
       assert(type(_color.bg) == color, message: "bg must be of type color");
       bg-color = _color.bg;
+      border-color = bg-color.darken(10%);
     }
+        if (_color.keys().contains("border")) {
+      assert(type(_color.border) == color, message: "border must be of type color");
+      border-color = _color.border;
+    }
+  } else if (type(_color) == gradient) {
+    stroke-color = _color;
+    bg-color = _color;
   } else {
-    panic("No valid color type. Use a color-profile string or specify a dict with (stroke, bg)");
+    panic("No valid color type. Use a gradient, color, or specify a dict with (stroke, bg)");
   }
+
 
   // Disable Heading numbering for those headings
   set heading(numbering: none, outlined: false, supplement: "Box")
@@ -80,6 +74,7 @@
           width: 100%,
           radius: (top-right: radius),
           inset: header-inset,
+          stroke: (right: border-width + bg-color )
         )[
             #grid(
               columns: (auto, auto),
@@ -99,17 +94,22 @@
       width: 100%,
       fill: white, 
       inset: inset, 
-      radius: (bottom-left: 0pt, rest: radius)
+      radius: (
+        top-left: 0pt,
+        bottom-left: 0pt, 
+        top-right: if (title != none){0pt} else {radius},
+        rest: radius
+      ),
     )[#content]
   
   box(
     width: width,
     inset: (left: 1pt),
-    radius: (right: radius, ),
+    radius: (right: radius, left: 0pt),
     stroke: (
-      left: (thickness: 2pt, paint: stroke-color, cap: "butt"), 
-      top: if (title != none){0.1pt + bg-color} else {0.1pt + border-color},
-      rest: 0.1pt + border-color,
+      left: (thickness: 2pt, paint: stroke-color, cap: "butt"),
+      top: if (title != none){border-width + bg-color} else {border-width + border-color},
+      rest: border-width + border-color,
     ),
   )[
     #set align(start)
@@ -130,10 +130,26 @@
   })
 }
 
+#let increment_task_counter() = {
+    locate(loc => {
+    if (gc_enable-task-counter.at(loc) == true){
+      gc_task-counter.step()
+    }
+  })
+}
+
+#let get_task_number() = {
+  locate(loc => {
+    if (gc_enable-task-counter.at(loc) == true){
+      " " + gc_task-counter.display()
+    }
+  })
+}
+
 
 /* info, note */
 #let info(title: auto, icon: "assets/info.svg", ..args) = clue(
-  _color: blue,
+  _color: rgb(29, 144, 208), // blue
   title: if (title != auto) { title  } else { get_title_for("info") }, 
   icon: icon, 
   ..args
@@ -142,7 +158,7 @@
 
 /* success, check, done */
 #let success(title: auto, icon: "assets/checkbox.svg", ..args) = clue(
-  _color: "green", 
+  _color: rgb(102, 174, 62), // green
   title: if (title != auto) { title  } else { get_title_for("success") }, 
   icon: icon, 
   ..args
@@ -152,7 +168,7 @@
 
 /* warning, attention, caution */
 #let warning(title: auto, icon: "assets/warning.svg", ..args) = clue(
-  _color: "orange", 
+  _color: rgb(255, 145, 0), // orange 
   title: if (title != auto) { title  } else { get_title_for("warning") }, 
   icon: icon, 
   ..args
@@ -162,7 +178,7 @@
 
 /* error, failure */
 #let error(title: auto, icon: "assets/crossmark.svg", ..args) = clue(
-  _color: "red", 
+  _color: rgb(237, 32, 84),  // red 
   title: if (title != auto) { title  } else { get_title_for("error") },
   icon: icon, 
   ..args
@@ -170,17 +186,20 @@
 #let failure = error
 
 /* task */
-#let task(title: auto, icon: "assets/task.svg", ..args) = clue(
-  _color: "purple", 
-  title: if (title != auto) { title  } else { get_title_for("task") }, 
-  icon: icon, 
-  ..args
-)
+#let task(title: auto, icon: "assets/task.svg", ..args) = {
+  increment_task_counter()
+  clue(
+    _color: maroon, // purple rgb(158, 84, 159)
+    title: if (title != auto) { title  } else { get_title_for("task") + get_task_number()}, 
+    icon: icon, 
+    ..args
+  )
+}
 #let todo = task
 
 /* tip, hint, important */
 #let tip(title: auto, icon: "assets/tip.svg", ..args) = clue(
-  _color: "teal", 
+  _color: rgb(0, 191, 165),  // teal 
   title: if (title != auto) { title  } else { get_title_for("tip") },
   icon: icon, 
   ..args
@@ -190,7 +209,7 @@
 
 /* abstract, summary, tldr */
 #let abstract(title: auto, icon: "assets/abstract.svg", ..args) = clue(
-  _color: "purpleish", 
+  _color: olive, // rgb(124, 77, 255), // kind of purple
   title: if (title != auto) { title  } else { get_title_for("abstract") }, 
   icon: icon, 
   ..args
@@ -198,7 +217,7 @@
 
 /* conclusion, idea */
 #let conclusion(title: auto, icon: "assets/lightbulb.svg", ..args) = clue(
-  _color: "yellow", 
+  _color: rgb(255, 201, 23), // yellow
   title: if (title != auto) { title  } else { get_title_for("conclusion") }, 
   icon: icon, 
   ..args
@@ -207,7 +226,7 @@
 
 /* memorize, remember */
 #let memo(title: auto, icon: "assets/excl.svg", ..args) = clue(
-  _color: "readish", 
+  _color: rgb(255, 82, 82), // kind of red 
   title: if (title != auto) { title  } else { get_title_for("memo") }, 
   icon: icon, 
   ..args
@@ -216,7 +235,7 @@
 
 /* question, faq, help */
 #let question(title: auto, icon: "assets/questionmark.svg", ..args) = clue(
-  _color: "greenish", 
+  _color: rgb("#7ba10a"), // greenish
   title: if (title != auto) { title  } else { get_title_for("question") }, 
   icon: icon, 
   ..args
@@ -226,7 +245,7 @@
 
 /* quote */
 #let quote(title: auto, icon: "assets/quote.svg", ..args) = clue(
-  _color: "gray", 
+  _color: eastern, 
   title: if (title != auto) { title  } else { get_title_for("quote") }, 
   icon: icon, 
   ..args
@@ -234,7 +253,7 @@
 
 /* example */
 #let example(title: auto, icon: "assets/example.svg", ..args) = clue(
-  _color: (bg: orange.lighten(50%), stroke: orange), 
+  _color: orange, 
   title: if (title != auto) { title  } else { get_title_for("example") }, 
   icon: icon, 
   ..args
