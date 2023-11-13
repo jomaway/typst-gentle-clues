@@ -18,18 +18,18 @@
 #let gc_header-title-lang = state("lang", "en")
 
 #let title_dict = (
-  abstract: (de: "Einführung", en: "Abstract"),
-  info: (de: "Info", en: "Info"),
-  question: (de: "Frage", en: "Question"),
-  memo: (de: "Merke", en: "Memorize"),
-  task: (de: "Aufgabe", en: "Task"),
-  conclusion: (de: "Zusammenfassung", en:"Conclusion"),
-  tip: (de: "Tipp", en: "Tip"),
-  success: (de: "Erledigt", en: "Success"),
-  warning: (de: "Achtung", en: "Warning"),
-  error: (de: "Fehler", en: "Error"),
-  example: (de: "Beispiel", en: "Example"),
-  quote: (de: "Zitat", en: "Quote"),
+  abstract: (de: "Einführung", en: "Abstract", fr: "Résumé"),
+  info: (de: "Info", en: "Info", fr: "Info"),
+  question: (de: "Frage", en: "Question", fr: "Question"),
+  memo: (de: "Merke", en: "Memorize", fr: "À retenir"),
+  task: (de: "Aufgabe", en: "Task", fr: "Tâche"),
+  conclusion: (de: "Zusammenfassung", en: "Conclusion", fr: "Conclusion"),
+  tip: (de: "Tipp", en: "Tip", fr: "Conseil"),
+  success: (de: "Erledigt", en: "Success", fr: "Succès"),
+  warning: (de: "Achtung", en: "Warning", fr: "Avertissement"),
+  error: (de: "Fehler", en: "Error", fr: "Erreur"),
+  example: (de: "Beispiel", en: "Example", fr: "Exemple"),
+  quote: (de: "Zitat", en: "Quote", fr: "Citation"),
 )
 
 /*
