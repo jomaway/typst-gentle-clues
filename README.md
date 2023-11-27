@@ -9,7 +9,8 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 `#import " @preview/gentle-clues:0.4.0: info, success, warning, error`
 
-Overview of the predefined clues
+Overview of the predefined clues:
+
 ![Overview of the predefined clues](gc_overview.svg)
 
 To use the *info* one, it is as easy as writing 
