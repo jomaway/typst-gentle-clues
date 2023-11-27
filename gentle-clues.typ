@@ -31,7 +31,7 @@
   radius: 2pt, // length
   inset: 1em, // length
   header-inset: 0.5em, // length
-
+  breakable: true,
 ) = {
   // Set default color:
   let stroke-color = luma(70);
@@ -90,7 +90,8 @@
             )
         ]
 
-  let content-box(content) = box(
+  let content-box(content) = block(
+      breakable: breakable,
       width: 100%,
       fill: white, 
       inset: inset, 
@@ -102,7 +103,8 @@
       ),
     )[#content]
   
-  box(
+  block(
+    breakable: breakable,
     width: width,
     inset: (left: 1pt),
     radius: (right: radius, left: 0pt),
