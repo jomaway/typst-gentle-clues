@@ -16,7 +16,7 @@ Writing this,
 ```
 turns into this.
 
-![Screenshot of the info clue](screenshot_info-clue.png)
+![Overview of the predefined clues](gc_overview.svg)
 
 ### Change header title language 
 
