@@ -9,14 +9,14 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 `#import " @preview/gentle-clues:0.4.0: info, success, warning, error`
 
-Writing this,
-
-```typst
-  #info[Whatever you want to say]
-```
-turns into this.
-
+Overview of the predefined clues
 ![Overview of the predefined clues](gc_overview.svg)
+
+To use the *info* one, it is as easy as writing 
+```typst 
+    #info[ This is the info clue ... ] 
+```
+
 
 ### Change header title language 
 
