@@ -31,7 +31,7 @@
   radius: 2pt, // length
   inset: 1em, // length
   header-inset: 0.5em, // length
-  breakable: true,
+  breakable: false,
 ) = {
   // Set default color:
   let stroke-color = luma(70);
