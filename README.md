@@ -75,6 +75,12 @@ MIT
 
 # Changelog
 
+
+## upcoming
+
+- Added option `breakable: true` to make clues breakable .
+
+
 ## v0.4.0 
 
 - Added french header titles. Use with `#gc_header-title-lang.update("fr")`

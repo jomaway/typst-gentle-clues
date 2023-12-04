@@ -1,4 +1,4 @@
-#import "@local/gentle-clues:0.4.0": *
+#import "@local/gentle-clues:0.4.1": *
 #gc_header-title-lang.update("en")
 
 #set text(font: "Roboto")
@@ -41,8 +41,12 @@ Add some beautiful, predefined admonitions or define your own.
     - `#clue(_color: red)[]`
     - `#clue(_color: (stroke: teal, bg: teal.lighten(40%), border: red))[]`
   - define the width: `#clue(width: 4cm)[]`
-  - define right radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
-  #example(title:"Test peace", width: 4cm, radius: 9pt)[Testing]
+  - define right border radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
+  - make clues break onto next page -> `breakable: true`
+]
+
+#success(title: "Clues can now break onto the next page")[
+  #lorem(80)
 ]
 
 == Predefined
