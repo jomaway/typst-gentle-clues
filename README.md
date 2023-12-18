@@ -79,7 +79,7 @@ MIT
 ## upcoming
 
 - Added option `breakable: true` to make clues breakable .
-
+- Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
 
 ## v0.4.0 
 
