@@ -5,18 +5,18 @@
 #let gc_enable-task-counter = state("gc-task-counter", true)
 
 #let title_dict = (
-  abstract: (de: "Einführung", en: "Abstract", fr: "Résumé"),
-  info: (de: "Info", en: "Info", fr: "Info"),
-  question: (de: "Frage", en: "Question", fr: "Question"),
-  memo: (de: "Merke", en: "Memorize", fr: "À retenir"),
-  task: (de: "Aufgabe", en: "Task", fr: "Tâche"),
-  conclusion: (de: "Zusammenfassung", en: "Conclusion", fr: "Conclusion"),
-  tip: (de: "Tipp", en: "Tip", fr: "Conseil"),
-  success: (de: "Erledigt", en: "Success", fr: "Succès"),
-  warning: (de: "Achtung", en: "Warning", fr: "Avertissement"),
-  error: (de: "Fehler", en: "Error", fr: "Erreur"),
-  example: (de: "Beispiel", en: "Example", fr: "Exemple"),
-  quote: (de: "Zitat", en: "Quote", fr: "Citation"),
+  abstract: (de: "Einführung", en: "Abstract", fr: "Résumé", es: "Resumen"),
+  info: (de: "Info", en: "Info", fr: "Info", es: "Info"),
+  question: (de: "Frage", en: "Question", fr: "Question", es: "Pregunta"),
+  memo: (de: "Merke", en: "Memorize", fr: "À retenir", es: "Recordatorio"),
+  task: (de: "Aufgabe", en: "Task", fr: "Tâche", es: "Tarea"),
+  conclusion: (de: "Zusammenfassung", en: "Conclusion", fr: "Conclusion", es: "Conclusión"),
+  tip: (de: "Tipp", en: "Tip", fr: "Conseil", es: "Consejo"),
+  success: (de: "Erledigt", en: "Success", fr: "Succès", es: "Éxito"),
+  warning: (de: "Achtung", en: "Warning", fr: "Avertissement", es: "Advertencia"),
+  error: (de: "Fehler", en: "Error", fr: "Erreur", es: "Error"),
+  example: (de: "Beispiel", en: "Example", fr: "Exemple", es: "Ejemplo"),
+  quote: (de: "Zitat", en: "Quote", fr: "Citation", es: "Cita"),
 )
 
 /*
