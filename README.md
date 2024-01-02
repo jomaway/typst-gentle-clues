@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import " @preview/gentle-clues:0.4.0: info, success, warning, error`
+`#import "@preview/gentle-clues:0.4.0": info, success, warning, error`
 
 Overview of the predefined clues:
 
