@@ -149,43 +149,37 @@
 }
 
 
-/* info, note */
+/* info */
 #let info(title: auto, icon: "assets/info.svg", ..args) = clue(
   _color: rgb(29, 144, 208), // blue
   title: if (title != auto) { title  } else { get_title_for("info") }, 
   icon: icon, 
   ..args
 )
-#let note = info
 
-/* success, check, done */
+/* success */
 #let success(title: auto, icon: "assets/checkbox.svg", ..args) = clue(
   _color: rgb(102, 174, 62), // green
   title: if (title != auto) { title  } else { get_title_for("success") }, 
   icon: icon, 
   ..args
 )
-#let check = success
-#let done = success
 
-/* warning, attention, caution */
+/* warning */
 #let warning(title: auto, icon: "assets/warning.svg", ..args) = clue(
   _color: rgb(255, 145, 0), // orange 
   title: if (title != auto) { title  } else { get_title_for("warning") }, 
   icon: icon, 
   ..args
 )
-#let attention = warning
-#let caution = warning
 
-/* error, failure */
+/* error */
 #let error(title: auto, icon: "assets/crossmark.svg", ..args) = clue(
   _color: rgb(237, 32, 84),  // red 
   title: if (title != auto) { title  } else { get_title_for("error") },
   icon: icon, 
   ..args
 )
-#let failure = error
 
 /* task */
 #let task(title: auto, icon: "assets/task.svg", ..args) = {
@@ -197,19 +191,16 @@
     ..args
   )
 }
-#let todo = task
 
-/* tip, hint, important */
+/* tip */
 #let tip(title: auto, icon: "assets/tip.svg", ..args) = clue(
   _color: rgb(0, 191, 165),  // teal 
   title: if (title != auto) { title  } else { get_title_for("tip") },
   icon: icon, 
   ..args
 )
-#let hint = tip
-#let important = tip 
 
-/* abstract, summary, tldr */
+/* abstract */
 #let abstract(title: auto, icon: "assets/abstract.svg", ..args) = clue(
   _color: olive, // rgb(124, 77, 255), // kind of purple
   title: if (title != auto) { title  } else { get_title_for("abstract") }, 
@@ -217,33 +208,29 @@
   ..args
 )
 
-/* conclusion, idea */
+/* conclusion */
 #let conclusion(title: auto, icon: "assets/lightbulb.svg", ..args) = clue(
   _color: rgb(255, 201, 23), // yellow
   title: if (title != auto) { title  } else { get_title_for("conclusion") }, 
   icon: icon, 
   ..args
 )
-#let idea = conclusion
 
-/* memorize, remember */
+/* memorize */
 #let memo(title: auto, icon: "assets/excl.svg", ..args) = clue(
   _color: rgb(255, 82, 82), // kind of red 
   title: if (title != auto) { title  } else { get_title_for("memo") }, 
   icon: icon, 
   ..args
 )
-#let remember = memo
 
-/* question, faq, help */
+/* question */
 #let question(title: auto, icon: "assets/questionmark.svg", ..args) = clue(
   _color: rgb("#7ba10a"), // greenish
   title: if (title != auto) { title  } else { get_title_for("question") }, 
   icon: icon, 
   ..args
 )
-#let faq = question
-#let help = question
 
 /* quote */
 #let quote(title: auto, icon: "assets/quote.svg", ..args) = clue(
