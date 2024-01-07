@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import "@preview/gentle-clues:0.4.0": info, success, warning, error`
+`#import "@preview/gentle-clues:0.5.0": *`
 
 Overview of the predefined clues:
 
@@ -40,7 +40,7 @@ But it is very easy to define your own.
 
 ```typst 
 //When you import the package, include clue
-#import "@preview/gentle-clues:0.4.0": info, success, warning, error, clue
+#import "@preview/gentle-clues:0.5.0": clue
 
 //Define it
 #let ghost-admon(..args) = clue(
@@ -78,11 +78,11 @@ MIT
 
 # Changelog
 
-
-## upcoming
+## v0.5.0 (latest)
 
 - Added option `breakable: true` to make clues breakable .
 - Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
+- Removed aliases (breaking)
 
 ## v0.4.0 
 
