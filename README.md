@@ -7,7 +7,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import " @preview/gentle-clues:0.4.0: info, success, warning, error`
+`#import "@preview/gentle-clues:0.4.0": info, success, warning, error`
 
 Overview of the predefined clues:
 
@@ -39,6 +39,9 @@ The follwing clues/admonitions (+ some aliases) are available at the moment. `ab
 But it is very easy to define your own. 
 
 ```typst 
+//When you import the package, include clue
+#import "@preview/gentle-clues:0.4.0": info, success, warning, error, clue
+
 //Define it
 #let ghost-admon(..args) = clue(
   title: "Buuuuh", 
