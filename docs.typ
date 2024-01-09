@@ -1,7 +1,9 @@
 #import "@local/gentle-clues:0.5.1": *
-
+#import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);
+
+#show: setup-emoji
 
 #show: gentle-clues.with(
   lang: "de",
@@ -97,14 +99,6 @@ Add some beautiful, predefined admonitions or define your own.
   header-inset: auto, // [length]
   breakable: auto, // if clue can break onto next page [bool]
   ```
-  // - define header title: `#clue(title: "MyTitle")[]`
-  // - make clues break onto next page -> `breakable: true`
-  // - define the width: `#clue(width: 4cm)[]`
-  // - define right border radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
-  // - define header inset: `#clue(header-inset: 0.5em)[]`
-  // - define custom color: 
-  //   - `#clue(_color: red)[]`
-  //   - `#clue(_color: (stroke: teal, bg: teal.lighten(40%), border: red))[]`
 ]
 
 #box(

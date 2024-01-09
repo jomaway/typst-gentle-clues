@@ -7,34 +7,35 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-`#import "@preview/gentle-clues:0.5.0": *`
+Import the package
+```typst
+#import "@preview/gentle-clues:0.6.0": *
+```
+Change the default settings.
+```typst
+#show: gentle-clues.with(
+  lang: "de", // set header title language (default: "en")
+)
+```
+[See the docs.pdf for all options](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)
+
+### Use predefined clues
+
+```typst
+// info clue
+#info[ This is the info clue ... ] 
+
+// or a tip
+#tip(title: "Best tip ever")[Check out this cool package]
+```
 
 Overview of the predefined clues:
 
 ![Overview of the predefined clues](gc_overview.svg)
 
-To use the *info* one, it is as easy as writing 
-```typst 
-    #info[ This is the info clue ... ] 
-```
+`abstract`, `info`, `question`, `memo`, `task`, `idea`, `tip`, `quote`, `success`, `warning`, `error`, `example`.
 
-
-### Change header title language 
-
-You can change the default language for the header titles by 
-
-```typst
-  #gc_header-title-lang.update("de")
-```
-At the moment valid options are: "en","de" and "fr"
-
-### Available Clues
-
-The follwing clues/admonitions (+ some aliases) are available at the moment. `abstract`, `info`, `question`, `memo`, `task`, `idea`, `tip`, `quote`, `success`, `warning`, `error`, `example`.
-
-[See here for more Information](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)
-
-### Define your own
+### Define your own clue
 
 But it is very easy to define your own. 
 
@@ -54,23 +55,6 @@ But it is very easy to define your own.
 ```
 
 The icon can be an `emoji`, `symbol` or `.svg`-file. 
-
-### Reference 
-
-Here the full reference to the admonish function.
-
-```typst
-clue(
-  body,
-  title: none, // Default: none, or string
-  icon: "assets/flag.svg", // can be a file or an symbol|emoji
-  _color: "gray",  // `_` due to naming conflicts with the type color.
-  width: auto,
-  radius: 2pt, // radius of the right side. For no radius set to 0pt.
-  inset: 1em, // inset of the content, header-inset not yet supported
-  header-inset: 0.5em, // define header inset.
-)
-```
 
 ## License 
 
