@@ -1,5 +1,18 @@
-#import "@local/gentle-clues:0.5.0": *
-#gc_header-title-lang.update("en")
+#import "@local/gentle-clues:0.5.1": *
+
+
+#set page(margin: 2cm);
+
+#show: gentle-clues.with(
+  lang: "de",
+  headless: false,
+  breakable: false,
+  // header-inset: 0.4em,
+  // content-inset: 1.3em,
+  // border-radius: 12pt,
+  // border-width: 1pt,
+  // stroke-width: 5pt,
+)
 
 #set text(font: "Roboto")
 
@@ -7,106 +20,178 @@
 
 Add some beautiful, predefined admonitions or define your own.
 
-#clue(title: "Example")[
-```typst
-#clue(title: "Example")[Test content.]
-```
-#sym.arrow The default is a navy colored clue.
+
+#clue(title: "Getting Started")[
+  A minimal starting example
+  ```typ
+  #import "@preview/gentle-clues:0.6.0": *
+
+  #show: gentle-clues.with(
+    lang: "de", // set header title language (default: "en")
+  )
+
+  #tip[Check out this cool package]
+  ```
+  #tip[Check out this cool package]
 ]
 
-#info(title: "NEW v0.5.0")[
-  - Added option `breakable: true` to make clues breakable. (See below)
-  - Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
-  - *Breaking:* Removed aliases
+#clue(title: "Usage")[
+  + Import the package like this:
+    ```typ
+    #import "@preview/gentle-clues:0.6.0": *
+    ```
+
+  + Change the default settings for a clue.
+    ```typ
+    #show: gentle-clues.with(
+      lang: "de", // set header title language (default: "en") 
+      // Accepts "en", "de", "fr" or "es" for the moment.
+      headless: false,  // never show any headers
+      breakable: false, // default breaking behavior
+      header-inset: 0.5em, // default header-inset
+      content-inset: 1em, // default content-inset
+      stroke-width: 2pt, // default left stroke-width
+      border-radius: 2pt, // default border-radius
+      border-width: 0.5pt,  // default boarder-width 
+    )
+    ```
+  + 
+    #grid(columns: 2, gutter: 1em)[
+      Use a predefined clue without any options
+      ```typ
+      #info[You will find a list with all predefined clues at the last page.]
+      ```
+      #align(end)[_Turns into this_ #sym.arrow]
+      
+    ][
+      #set align(bottom)
+      #info[You will find a list with all predefined clues at the last page.]
+    ]
+  + #grid(columns: 2, gutter: 1em)[
+      Or add some options like a custom title
+      ```typ
+      #example(title: "Custom title")[ Content ...]
+      ```
+      #align(end)[_Turns into this_ #sym.arrow]
+    ][
+      #set align(bottom)
+      #example(title: "Custom title")[ Content ...]
+    ]
+
+  #memo(title: "New in v0.6.0",_color: gradient.linear(..color.map.crest))[
+    Using global show rule for default configuration.
+  ]
 ]
 
-#info(title: "NEW v0.4.0",_color: gradient.linear(..color.map.crest))[
-  * Translations:*
-  - French language titles: `gc_header-title-lang.update("fr")`
 
-  *Colors:*
-  - Colored borders by default.
-  - Added support for gradients: `#clue(_color: gradient.linear(..color.map.crest))`
-  - *Breaking:* Removed string color_profiles.
-
-  *Task Counter*
-    - Added a Task Counter.
-    - Disable with `#gc_enable-task-counter.update(false)`
-    #set text(9pt)
-  #grid( columns: 4, gutter: 1em,  task[Do], task[Do], task[Do])
+#clue(title: "All Options for a clue")[ 
+  All default settings can also be applied to a single clue through passing it as an named argument. Here is a list of accepted arguments:
+  ```typ
+  title: auto, // [string] or [none] (none will print headless)
+  icon: emoji.magnify.l, // [file] or [symbol]
+  _color: navy, // base color [color]
+  width: auto, // total width [length]
+  radius: auto, // radius of the right border [length]
+  border-width: auto, // width of the right and down border [length]
+  content-inset: auto, // [length]
+  header-inset: auto, // [length]
+  breakable: auto, // if clue can break onto next page [bool]
+  ```
+  // - define header title: `#clue(title: "MyTitle")[]`
+  // - make clues break onto next page -> `breakable: true`
+  // - define the width: `#clue(width: 4cm)[]`
+  // - define right border radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
+  // - define header inset: `#clue(header-inset: 0.5em)[]`
+  // - define custom color: 
+  //   - `#clue(_color: red)[]`
+  //   - `#clue(_color: (stroke: teal, bg: teal.lighten(40%), border: red))[]`
 ]
 
-#info(title: "Options")[ 
-  - Changing header title language with: `gc_header-title-lang.update("en")`
-    - Accepts `"en", "de"`, `"fr"` or `"es"` for the moment.
-  - define header inset: `#clue(header-inset: 0.5em)[]`
-  - define header title: `#clue(title: "MyTitle")[]`
-  - define custom color: 
-    - `#clue(_color: red)[]`
-    - `#clue(_color: (stroke: teal, bg: teal.lighten(40%), border: red))[]`
-  - define the width: `#clue(width: 4cm)[]`
-  - define right border radius: `#clue(radius: 9tp)[]`  #text(9pt, fill: gray)[(`0pt` to disable)]
-  - make clues break onto next page -> `breakable: true`
+#box(
+  height: 4.5cm, 
+  stroke: gray.lighten(40%),
+  radius: 2pt,
+  inset: 2mm, 
+  columns(2)[
+    #example(title: "Breaking news", breakable: true)[
+      Clues can now break onto the next page with option: `breakable: true`
+
+      #lorem(30)
+    ]
+    This is a two columns layout.
+])
+
+
+#clue(title: "Define your own clue")[
+  ```typst
+  #import "@preview/gentle-clues:0.6.0": *
+  // Define a clue called ghost
+  #let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
+    _color: purple, // Define a base color
+    title: title,   // Define the default title
+    icon: icon,     // Define the default icon
+    ..args          // Pass along all other arguments
+  )
+  // Use it
+  #ghost[Huuuuuuh.]
+  ```
+  The result looks like this.
+  #let ghost(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: gray, title: title, icon: icon, ..args)
+  #ghost[Huuuuuuh.]
+
+  #tip[Use the `svg-emoji` package until emoji support is fully supported in typst ]
 ]
 
-#success(title: "Clues can now break onto the next page")[
-  #lorem(40)
-]
-
-== Predefined
-`abstract`
+#pagebreak()
+== List of all predefined clues <predefined>
+#columns(2)[
+`#abstract`
 #abstract[Make it short. This is all you need.]
 
-`question`
+`#question`
 #question[How do amonishments work?]
 
-`info`
+`#info`
 #info[It's as easy as 
 ```typst 
-  #note[Whatever you want to say]
+  #info[Whatever you want to say]
   ```
 ]
 
-`example`,
+`#example`,
 #example[Testing ...]
 
-`task`
-#task[#box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderfull admonishments!]
+`#task`
+#task[
+  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderfull typst package!
+]
 
-`error`
+`#error`
 #error[Something did not work here.]
 
-`warning`
+`#warning`
 #warning[Still a work in progress.]
 
-`success`
+`#success`
 #success[All tests passed. It's worth a try.]
 
-`tip`
+`#tip`
 #tip[Try it yourself]
 
-`conclusion`
+`#conclusion`
 #conclusion[This package makes it easy to add some beatufillness to your documents]
 
-`memorize`
+`#memo`
 #memo[Leave a #emoji.star on github.]
 
-`quote`
+`#quote`
 #quote[Keep it simple. Admonish your life.]
 
-== Headless
+=== Headless Variant
 
 just add `title: none` to any example
 
 #info(title:none)[Just a short information.]
 
-== Define your own
+] // columns end
 
-```typst
-// Define it
-#let ghost-admon(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(color: purple, title: title, icon: icon, ..args)
-// Use it
-#ghost-admon[Huuuuuuh.]
-```
-#let ghost-admon(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: gray, title: title, icon: icon, ..args)
-#ghost-admon[Huuuuuuh.]

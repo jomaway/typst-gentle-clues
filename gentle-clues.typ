@@ -1,45 +1,168 @@
 // gentle-clues
 
+// Title dict for all supported languages
+#let title_dict = (
+  abstract: (
+    de: "Einführung", en: "Abstract", 
+    fr: "Résumé", es: "Resumen"
+  ),
+  info: (
+    de: "Info", en: "Info", 
+    fr: "Info", es: "Info"
+  ),
+  question: (
+    de: "Frage", en: "Question", 
+    fr: "Question", es: "Pregunta"
+  ),
+  memo: (
+    de: "Merke", en: "Memorize", 
+    fr: "À retenir", es: "Recordatorio"
+  ),
+  task: (
+    de: "Aufgabe", en: "Task", 
+    fr: "Tâche", es: "Tarea"
+  ),
+  conclusion: (
+    de: "Zusammenfassung", en: "Conclusion", 
+    fr: "Conclusion", es: "Conclusión"
+  ),
+  tip: (
+    de: "Tipp", en: "Tip", 
+    fr: "Conseil", es: "Consejo"
+  ),
+  success: (
+    de: "Erledigt", en: "Success", 
+    fr: "Succès", es: "Éxito"
+  ),
+  warning: (
+    de: "Achtung", en: "Warning", 
+    fr: "Avertissement", es: "Advertencia"
+  ),
+  error: (
+    de: "Fehler", en: "Error", 
+    fr: "Erreur", es: "Error"
+  ),
+  example: (
+    de: "Beispiel", en: "Example", 
+    fr: "Exemple", es: "Ejemplo"
+  ),
+  quote: (
+    de: "Zitat", en: "Quote", 
+    fr: "Citation", es: "Cita"
+  ),
+)
+
+// Global states
 #let gc_header-title-lang = state("lang", "en")
+#let __gc_clues_breakable = state("breakable", false)
+#let __gc_clues_headless = state("headless", false)
+#let __gc_clue_width = state("clue-width", auto)
+#let __gc_header_inset = state("header-inset", 0.5em)
+#let __gc_content_inset = state("content-inset", 1em)
+#let __gc_border_radius = state("border-radius", 2pt)
+#let __gc_border_width = state("border-width", 0.5pt)
+#let __gc_stroke_width = state("stroke-width", 2pt)
+
 #let gc_task-counter = counter("gc-task-counter")
 #let gc_enable-task-counter = state("gc-task-counter", true)
 
-#let title_dict = (
-  abstract: (de: "Einführung", en: "Abstract", fr: "Résumé", es: "Resumen"),
-  info: (de: "Info", en: "Info", fr: "Info", es: "Info"),
-  question: (de: "Frage", en: "Question", fr: "Question", es: "Pregunta"),
-  memo: (de: "Merke", en: "Memorize", fr: "À retenir", es: "Recordatorio"),
-  task: (de: "Aufgabe", en: "Task", fr: "Tâche", es: "Tarea"),
-  conclusion: (de: "Zusammenfassung", en: "Conclusion", fr: "Conclusion", es: "Conclusión"),
-  tip: (de: "Tipp", en: "Tip", fr: "Conseil", es: "Consejo"),
-  success: (de: "Erledigt", en: "Success", fr: "Succès", es: "Éxito"),
-  warning: (de: "Achtung", en: "Warning", fr: "Avertissement", es: "Advertencia"),
-  error: (de: "Fehler", en: "Error", fr: "Erreur", es: "Error"),
-  example: (de: "Beispiel", en: "Example", fr: "Exemple", es: "Ejemplo"),
-  quote: (de: "Zitat", en: "Quote", fr: "Citation", es: "Cita"),
-)
+
+/* Config Init */
+#let gentle-clues(
+  lang: "en",
+  breakable: false,
+  headless: false,
+  header-inset: 0.5em,
+  // default-title: auto, // string or none
+  // default-icon: emoji.magnify.l, // file or symbol
+  // default-color: navy, // color profile name
+  width: auto, // length
+  stroke-width: 2pt,
+  border-radius: 2pt, // length
+  border-width: 0.5pt, // length
+  content-inset: 1em, // length
+  body
+) = {
+  // Check language
+  assert(
+    type(lang) == str, 
+    message: "The lang parameter needs to be of type string."
+  );
+  assert(
+    lang == "en" or 
+    lang == "de" or
+    lang == "es" or
+    lang == "fr",
+    message: "The defined language is not supported yet."
+  )
+  // Update title to lang parameter
+  gc_header-title-lang.update(lang)  // keep without underscore for compatible reasons
+
+  // Update breakability
+  __gc_clues_breakable.update(breakable);
+
+  // Update width
+  __gc_clue_width.update(width);
+
+  // Update headless state
+  __gc_clues_headless.update(headless);
+
+  // Update header inset
+  __gc_header_inset.update(header-inset);
+
+  // Update border radius
+  __gc_border_radius.update(border-radius);
+  // Update border width
+  __gc_border_width.update(border-width);
+  // Update stroke width
+  __gc_stroke_width.update(stroke-width);
+
+  // Update content inset
+  __gc_content_inset.update(content-inset);
+
+  body
+}
+
+// Helper
+#let if-auto-then(val,ret) = {
+  if (val == auto){
+    ret
+  } else { 
+    val 
+  }
+}
+
+#let get_base_color(val) = {
+  if (type(_color) == color) { val }
+}
 
 /*
   Basic gentle-clue (clue) template
 */
 #let clue(
   content, 
-  title: none, // string or none
+  title: auto, // string or none
   icon: emoji.magnify.l, // file or symbol
-  _color: navy, // color profile name
+  _color: navy, // color
   width: auto, // length
-  radius: 2pt, // length
-  inset: 1em, // length
-  header-inset: 0.5em, // length
-  breakable: true,
+  radius: auto, // length
+  border-width: auto, // length
+  content-inset: auto, // length
+  header-inset: auto, // length
+  breakable: auto,
 ) = {
+  locate(loc => {
   // Set default color:
   let stroke-color = luma(70);
   let bg-color = stroke-color.lighten(85%);
   let border-color = bg-color.darken(10%); // gray.lighten(20%);
-  let border-width = 0.5pt;
+  let _border-width = if-auto-then(border-width, __gc_border_width.at(loc));
+  let _border-radius = if-auto-then(radius, __gc_border_radius.at(loc))
+  let _stroke-width = if-auto-then(auto, __gc_stroke_width.at(loc))
+  let _clip-content = true
 
   // setting bg and stroke color from color argument
+  // TODO: refactor
   if (type(_color) == color) { 
     stroke-color = _color;
     bg-color = _color.lighten(85%);
@@ -69,12 +192,13 @@
   // Disable Heading numbering for those headings
   set heading(numbering: none, outlined: false, supplement: "Box")
 
+  // Header Part
   let header = rect(
           fill: bg-color,
           width: 100%,
-          radius: (top-right: radius),
-          inset: header-inset,
-          stroke: (right: border-width + bg-color )
+          radius: (top-right: _border-radius),
+          inset: if-auto-then(header-inset, __gc_header_inset.at(loc)),
+          stroke: (right: _border-width + bg-color )
         )[
             #grid(
               columns: (auto, auto),
@@ -90,45 +214,51 @@
             )
         ]
 
+  // Content-Box
   let content-box(content) = block(
-      breakable: breakable,
+      breakable: if-auto-then(breakable, __gc_clues_breakable.at(loc)),
       width: 100%,
       fill: white, 
-      inset: inset, 
+      inset: if-auto-then(content-inset, __gc_content_inset.at(loc)), 
       radius: (
         top-left: 0pt,
         bottom-left: 0pt, 
-        top-right: if (title != none){0pt} else {radius},
-        rest: radius
+        top-right: if (title != none){0pt} else {_border-radius},
+        rest: _border-radius
       ),
     )[#content]
   
-  block(
-    breakable: breakable,
-    width: width,
-    inset: (left: 1pt),
-    radius: (right: radius, left: 0pt),
-    stroke: (
-      left: (thickness: 2pt, paint: stroke-color, cap: "butt"),
-      top: if (title != none){border-width + bg-color} else {border-width + border-color},
-      rest: border-width + border-color,
-    ),
-  )[
-    #set align(start)
-    #stack(dir: ttb,
-    if title != none { header; },
-    content-box(content)
-    )
-  ]
+    // Wrapper-Block
+    block(
+      breakable: if-auto-then(breakable, __gc_clues_breakable.at(loc)),
+      width: if-auto-then(width, __gc_clue_width.at(loc)),
+      inset: (left: 1pt),
+      radius: (right: _border-radius, left: 0pt),
+      stroke: (
+        left: (thickness: _stroke-width, paint: stroke-color, cap: "butt"),
+        top: if (title != none){_border-width + bg-color} else {_border-width + border-color},
+        rest: _border-width + border-color,
+      ),
+      clip: _clip-content,
+    )[
+      #set align(start)
+      #stack(dir: ttb,
+        if __gc_clues_headless.at(loc) == false and title != none {
+          header
+        },
+      content-box(content)
+      )
+    ] // block end
+  })
 }
 
 
-// Predefined gentle clues
+// Helpers for predefined gentle clues
 #let get_title_for(clue) = {
   assert.eq(type(clue),str);
   locate(loc => {
     let lang = gc_header-title-lang.at(loc)
-    title_dict.at(clue).at(lang)
+    return title_dict.at(clue).at(lang)
   })
 }
 
@@ -148,11 +278,11 @@
   })
 }
 
-
+// Predefined gentle clues
 /* info */
 #let info(title: auto, icon: "assets/info.svg", ..args) = clue(
   _color: rgb(29, 144, 208), // blue
-  title: if (title != auto) { title  } else { get_title_for("info") }, 
+  title: if (title != auto) { title } else { get_title_for("info") }, 
   icon: icon, 
   ..args
 )
@@ -233,6 +363,7 @@
 )
 
 /* quote */
+// TODO: add source field.
 #let quote(title: auto, icon: "assets/quote.svg", ..args) = clue(
   _color: eastern, 
   title: if (title != auto) { title  } else { get_title_for("quote") }, 
