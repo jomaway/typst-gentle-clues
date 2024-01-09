@@ -74,47 +74,8 @@ clue(
 
 ## License 
 
-MIT
+[MIT License](LICENSE)
 
-# Changelog
+## Changelog
 
-## v0.5.0 (latest)
-
-- Added option `breakable: true` to make clues breakable .
-- Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
-- Removed aliases (breaking)
-
-## v0.4.0 
-
-- Added french header titles. Use with `#gc_header-title-lang.update("fr")`
-- Fixed minor border issues
-- Added an task-counter (disable with `gc_enable-task-counter.update(false)`)
-
-*Colors:*
-
-- Changed default color to `navy`
-- Changed border-color
-  - Fixed bug that it was sometimes no longer visible after `typst 0.9.0` update.
-  - Default is now the same as `bg-color`
-  - Set via color-dict `border` field.
-- Added support for gradients: `#clue(_color: gradient.linear(..color.map.crest))`
-- *Breaking:* Removed string color_profiles. 
-- Changed some predefined colors.
-
-## v0.3.0
-
-- renamed entry files and base template
-- default `header-inset` is `0.5em` now.
-- added `gc_header-title-lang` state, which defines the language of the title.
-  - Update with `#gc_header-title-lang.update("en")`
-  - Accepts `"de"` or `"en"` at the moment.
-- Using new `type` checks which requires typst version `0.8.0`
-- renamed Parameter `color` to `_color` due to naming conflicts with the color type.
-
-## v0.2.0
-
-- set header inset. `#admonish(header-inset: 0.5em)`
-- custom color: `#admonish(color: (stroke: luma(150), bg: teal))`
-- new example admonition: `#example[Testing]`
-  #example(header-inset: 0.8em)[Testing]
-
+[See CHANGELOG.md](CHANGELOG.md)
