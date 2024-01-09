@@ -53,7 +53,7 @@
 )
 
 // Global states
-#let gc_header-title-lang = state("lang", "en")
+#let gc_header-title-lang = state("lang", "en")  // Keep for compatible reasons without underscore till 1.0.0
 #let __gc_clues_breakable = state("breakable", false)
 #let __gc_clues_headless = state("headless", false)
 #let __gc_clue_width = state("clue-width", auto)
@@ -63,8 +63,8 @@
 #let __gc_border_width = state("border-width", 0.5pt)
 #let __gc_stroke_width = state("stroke-width", 2pt)
 
-#let gc_task-counter = counter("gc-task-counter")
-#let gc_enable-task-counter = state("gc-task-counter", true)
+#let __gc_task-counter = counter("gc-task-counter")
+#let gc_enable-task-counter = state("gc-task-counter", true)  // Keep for compatible reasons without underscore till 1.0.0
 
 
 /* Config Init */
@@ -81,6 +81,7 @@
   border-radius: 2pt, // length
   border-width: 0.5pt, // length
   content-inset: 1em, // length
+  show-task-counter: false, // [bool]
   body
 ) = {
   // Check language
@@ -101,7 +102,7 @@
   // Update breakability
   __gc_clues_breakable.update(breakable);
 
-  // Update width
+  // Update clues width
   __gc_clue_width.update(width);
 
   // Update headless state
@@ -120,6 +121,9 @@
   // Update content inset
   __gc_content_inset.update(content-inset);
 
+  // Update if task counter should be shown
+  gc_enable-task-counter.update(show-task-counter);
+
   body
 }
 
@@ -134,6 +138,10 @@
 
 #let get_base_color(val) = {
   if (type(_color) == color) { val }
+}
+
+#let get_colors(base_color) = {
+  return (base_color, base_color.lighten(85%), base_color.lighten(70%))
 }
 
 /*
@@ -153,9 +161,9 @@
 ) = {
   locate(loc => {
   // Set default color:
-  let stroke-color = luma(70);
-  let bg-color = stroke-color.lighten(85%);
-  let border-color = bg-color.darken(10%); // gray.lighten(20%);
+  let _stroke-color = luma(70);
+  let _bg-color = _stroke-color.lighten(85%);
+  let _border-color = _bg-color.darken(10%); // gray.lighten(20%);
   let _border-width = if-auto-then(border-width, __gc_border_width.at(loc));
   let _border-radius = if-auto-then(radius, __gc_border_radius.at(loc))
   let _stroke-width = if-auto-then(auto, __gc_stroke_width.at(loc))
@@ -164,26 +172,26 @@
   // setting bg and stroke color from color argument
   // TODO: refactor
   if (type(_color) == color) { 
-    stroke-color = _color;
-    bg-color = _color.lighten(85%);
-    border-color = bg-color.darken(10%);
+    _stroke-color = _color;
+    _bg-color = _color.lighten(85%);
+    _border-color = _bg-color.darken(10%);
   } else if (type(_color) == dictionary) {
     if (_color.keys().contains("stroke")) {
       assert(type(_color.stroke) == color, message: "stroke must be of type color");
-      stroke-color = _color.stroke;
+      _stroke-color = _color.stroke;
     }
     if (_color.keys().contains("bg")) {
       assert(type(_color.bg) == color, message: "bg must be of type color");
-      bg-color = _color.bg;
-      border-color = bg-color.darken(10%);
+      _bg-color = _color.bg;
+      _border-color = _bg-color.darken(10%);
     }
         if (_color.keys().contains("border")) {
       assert(type(_color.border) == color, message: "border must be of type color");
-      border-color = _color.border;
+      _border-color = _color.border;
     }
   } else if (type(_color) == gradient) {
-    stroke-color = _color;
-    bg-color = _color;
+    _stroke-color = _color;
+    _bg-color = _color;
   } else {
     panic("No valid color type. Use a gradient, color, or specify a dict with (stroke, bg)");
   }
@@ -194,11 +202,11 @@
 
   // Header Part
   let header = rect(
-          fill: bg-color,
+          fill: _bg-color,
           width: 100%,
           radius: (top-right: _border-radius),
           inset: if-auto-then(header-inset, __gc_header_inset.at(loc)),
-          stroke: (right: _border-width + bg-color )
+          stroke: (right: _border-width + _bg-color )
         )[
             #grid(
               columns: (auto, auto),
@@ -235,9 +243,9 @@
       inset: (left: 1pt),
       radius: (right: _border-radius, left: 0pt),
       stroke: (
-        left: (thickness: _stroke-width, paint: stroke-color, cap: "butt"),
-        top: if (title != none){_border-width + bg-color} else {_border-width + border-color},
-        rest: _border-width + border-color,
+        left: (thickness: _stroke-width, paint: _stroke-color, cap: "butt"),
+        top: if (title != none){_border-width + _bg-color} else {_border-width + _border-color},
+        rest: _border-width + _border-color,
       ),
       clip: _clip-content,
     )[
@@ -265,7 +273,7 @@
 #let increment_task_counter() = {
     locate(loc => {
     if (gc_enable-task-counter.at(loc) == true){
-      gc_task-counter.step()
+      __gc_task-counter.step()
     }
   })
 }
@@ -273,7 +281,7 @@
 #let get_task_number() = {
   locate(loc => {
     if (gc_enable-task-counter.at(loc) == true){
-      " " + gc_task-counter.display()
+      " " + __gc_task-counter.display()
     }
   })
 }
