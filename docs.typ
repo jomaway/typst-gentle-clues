@@ -1,4 +1,4 @@
-#import "@local/gentle-clues:0.5.1": *
+#import "@local/gentle-clues:0.6.0": *
 #import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);

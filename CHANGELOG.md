@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.6.0 (upcoming)
+## v0.6.0 (latest)
 
 - Added possibility to define default settings via `#show: gentle-clues.with()`  - *lang*, *width*, *stroke-width*, *border-width*, *border-radius*, *breakable* - (See all options in [docs.pdf](docs.pdf))
     - **Deprecated:** `#gc_header-title-lang.update("de")` use `#show: gentle-clues.with(lang: "de")` now.
@@ -8,7 +8,7 @@
 - Added option to show all clues without headers. `#show: gentle-clues.with(headless: true)`
 
 
-## v0.5.0 (latest)
+## v0.5.0
 
 - Added option `breakable: true` to make clues breakable .
 - Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
