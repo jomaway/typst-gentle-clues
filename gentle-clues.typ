@@ -1,56 +1,6 @@
 // gentle-clues
 
-// Title dict for all supported languages
-#let title_dict = (
-  abstract: (
-    de: "Einführung", en: "Abstract", 
-    fr: "Résumé", es: "Resumen"
-  ),
-  info: (
-    de: "Info", en: "Info", 
-    fr: "Info", es: "Info"
-  ),
-  question: (
-    de: "Frage", en: "Question", 
-    fr: "Question", es: "Pregunta"
-  ),
-  memo: (
-    de: "Merke", en: "Memorize", 
-    fr: "À retenir", es: "Recordatorio"
-  ),
-  task: (
-    de: "Aufgabe", en: "Task", 
-    fr: "Tâche", es: "Tarea"
-  ),
-  conclusion: (
-    de: "Zusammenfassung", en: "Conclusion", 
-    fr: "Conclusion", es: "Conclusión"
-  ),
-  tip: (
-    de: "Tipp", en: "Tip", 
-    fr: "Conseil", es: "Consejo"
-  ),
-  success: (
-    de: "Erledigt", en: "Success", 
-    fr: "Succès", es: "Éxito"
-  ),
-  warning: (
-    de: "Achtung", en: "Warning", 
-    fr: "Avertissement", es: "Advertencia"
-  ),
-  error: (
-    de: "Fehler", en: "Error", 
-    fr: "Erreur", es: "Error"
-  ),
-  example: (
-    de: "Beispiel", en: "Example", 
-    fr: "Exemple", es: "Ejemplo"
-  ),
-  quote: (
-    de: "Zitat", en: "Quote", 
-    fr: "Citation", es: "Cita"
-  ),
-)
+
 
 // Global states
 #let gc_header-title-lang = state("lang", "en")  // Keep for compatible reasons without underscore till 1.0.0
@@ -66,6 +16,18 @@
 #let __gc_task-counter = counter("gc-task-counter")
 #let gc_enable-task-counter = state("gc-task-counter", true)  // Keep for compatible reasons without underscore till 1.0.0
 
+// load lang file
+#let lang_dict = toml("lang.toml")
+
+// Helpers for lang
+#let _get_str_for(key) = {
+  locate(loc => {
+    let selected_lang = gc_header-title-lang.at(loc)
+    if (not lang_dict.keys().contains(selected_lang)) {  selected_lang = "en" }
+    let string = lang_dict.at(selected_lang).at(key, default: none)
+    return string
+  })
+}
 
 /* Config Init */
 #let gentle-clues(
@@ -260,14 +222,10 @@
   })
 }
 
-
 // Helpers for predefined gentle clues
 #let get_title_for(clue) = {
   assert.eq(type(clue),str);
-  locate(loc => {
-    let lang = gc_header-title-lang.at(loc)
-    return title_dict.at(clue).at(lang)
-  })
+  return _get_str_for(clue);
 }
 
 #let increment_task_counter() = {

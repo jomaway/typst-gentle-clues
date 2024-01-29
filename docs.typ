@@ -1,4 +1,4 @@
-#import "@local/gentle-clues:0.6.0": *
+#import "@local/gentle-clues:0.6.1": *
 #import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);
@@ -6,7 +6,7 @@
 #show: setup-emoji
 
 #show: gentle-clues.with(
-  lang: "de",
+  lang: "en",
   headless: false,
   breakable: false,
   // header-inset: 0.4em,
