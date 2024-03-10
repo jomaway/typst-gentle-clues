@@ -1,3 +1,5 @@
+default-lang = "en"
+
 [en]
 abstract = "Abstract"
 info = "Info"

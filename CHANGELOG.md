@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.7.0 (upcomming)
+
+- Removed `#gc_header-title-lang.update("de")`.
+- Removed `#gc_enable-task-counter.update(false)` use `#show: gentle-clues.with(show-task-counter: false)` now.
+- Use linguify:0.2.0 package to manage different languages.
+    - **Deprecated:** `#show: gentle-clues.with(lang: "de")` use `#set text(lang: "de")` now.
+- **Breaking:** Changed `_color` to `accent-color`. Only type color and gradient are supported.
+- Added `border-color` and `header-color` to overwrite default color calculation from the accent-color.
+
 ## v0.6.0 (latest)
 
 - Added possibility to define default settings via `#show: gentle-clues.with()`  - *lang*, *width*, *stroke-width*, *border-width*, *border-radius*, *breakable* - (See all options in [docs.pdf](docs.pdf))

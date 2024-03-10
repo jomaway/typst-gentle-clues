@@ -1,4 +1,4 @@
-#import "@local/gentle-clues:0.6.1": *
+#import "@local/gentle-clues:0.7.0": *
 #import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);
@@ -6,7 +6,6 @@
 #show: setup-emoji
 
 #show: gentle-clues.with(
-  lang: "en",
   headless: false,
   breakable: false,
   // header-inset: 0.4em,
@@ -16,7 +15,7 @@
   // stroke-width: 5pt,
 )
 
-#set text(font: "Roboto")
+#set text(font: "Roboto", lang: "en")
 
 = Gentle clues for typst
 
@@ -26,11 +25,7 @@ Add some beautiful, predefined admonitions or define your own.
 #clue(title: "Getting Started")[
   A minimal starting example
   ```typ
-  #import "@preview/gentle-clues:0.6.0": *
-
-  #show: gentle-clues.with(
-    lang: "de", // set header title language (default: "en")
-  )
+  #import "@preview/gentle-clues:0.7.0": *
 
   #tip[Check out this cool package]
   ```
@@ -40,14 +35,12 @@ Add some beautiful, predefined admonitions or define your own.
 #clue(title: "Usage")[
   + Import the package like this:
     ```typ
-    #import "@preview/gentle-clues:0.6.0": *
+    #import "@preview/gentle-clues:0.7.0": *
     ```
 
   + Change the default settings for a clue.
     ```typ
     #show: gentle-clues.with(
-      lang: "de", // set header title language (default: "en") 
-      // Accepts "en", "de", "fr" or "es" for the moment.
       headless: false,  // never show any headers
       breakable: false, // default breaking behavior
       header-inset: 0.5em, // default header-inset
@@ -80,8 +73,10 @@ Add some beautiful, predefined admonitions or define your own.
       #example(title: "Custom title")[ Content ...]
     ]
 
-  #memo(title: "New in v0.6.0",_color: gradient.linear(..color.map.crest))[
-    Using global show rule for default configuration.
+  #memo(title: "New in v0.7.0",accent-color: gradient.linear(..color.map.crest))[
+    - language is detected by `#set text(lang: "de")`. `lang` argument is now deprecated.
+    - *Breaking:* `_color` changed to `accent-color` and can only be of type color or gradient.
+    - Use `border-color` and `header-color` to overwrite calculated header and border colors.
   ]
 ]
 
@@ -91,7 +86,7 @@ Add some beautiful, predefined admonitions or define your own.
   ```typ
   title: auto, // [string] or [none] (none will print headless)
   icon: emoji.magnify.l, // [file] or [symbol]
-  _color: navy, // base color [color]
+  accent-color: navy, // left accent color [color] or [gradient]
   width: auto, // total width [length]
   radius: auto, // radius of the right border [length]
   border-width: auto, // width of the right and down border [length]
@@ -118,10 +113,9 @@ Add some beautiful, predefined admonitions or define your own.
 
 #clue(title: "Define your own clue")[
   ```typst
-  #import "@preview/gentle-clues:0.6.0": *
   // Define a clue called ghost
   #let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
-    _color: purple, // Define a base color
+    accent-color: purple, // Define a base color
     title: title,   // Define the default title
     icon: icon,     // Define the default icon
     ..args          // Pass along all other arguments
@@ -130,14 +124,25 @@ Add some beautiful, predefined admonitions or define your own.
   #ghost[Huuuuuuh.]
   ```
   The result looks like this.
-  #let ghost(title: "Buuuuuuh.", icon: emoji.ghost , ..args) = clue(_color: gray, title: title, icon: icon, ..args)
+  #let ghost(
+    title: "Buuuuuuh.", 
+    accent-color: purple,
+    icon: emoji.ghost , 
+    ..args
+  ) = clue(title: title, icon: icon, ..args)
   #ghost[Huuuuuuh.]
-
+  #set text(9pt)
   #tip[Use the `svg-emoji` package until emoji support is fully supported in typst ]
+]
+
+#clue(title: "Header title language")[
+  The current language which is set by `#set text(lang: "de")` changes header title to german.
+  Currently supported are `en`, `de`, `fr` and `es`. This package uses linguify for language settings so you can load your own language data file or feel free to contribute more languages.
 ]
 
 #pagebreak()
 == List of all predefined clues <predefined>
+
 #columns(2)[
 `#abstract`
 #abstract[Make it short. This is all you need.]
