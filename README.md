@@ -9,14 +9,9 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 Import the package
 ```typst
-#import "@preview/gentle-clues:0.6.0": *
+#import "@preview/gentle-clues:0.7.0": *
 ```
-Change the default settings.
-```typst
-#show: gentle-clues.with(
-  lang: "de", // set header title language (default: "en")
-)
-```
+if needed you can change the default settings.
 [See the docs.pdf for all options](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)
 
 ### Use predefined clues
@@ -40,18 +35,16 @@ Overview of the predefined clues:
 But it is very easy to define your own. 
 
 ```typst 
-//When you import the package, include clue
-#import "@preview/gentle-clues:0.5.0": clue
-
-//Define it
-#let ghost-admon(..args) = clue(
-  title: "Buuuuh", 
-  _color: gray,
-  icon: emoji.ghost, 
+// Define a clue called ghost
+#let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
+  accent-color: purple,
+  title: title,
+  icon: icon,
   ..args
 )
+
 // Use it
-#ghost-admon[Huuuuuh.]
+#ghost[Huuuuuuh.]
 ```
 
 The icon can be an `emoji`, `symbol` or `.svg`-file. 
