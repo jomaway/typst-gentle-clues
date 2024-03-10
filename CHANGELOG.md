@@ -2,12 +2,14 @@
 
 ## v0.7.0 (upcomming)
 
-- Removed `#gc_header-title-lang.update("de")`.
-- Removed `#gc_enable-task-counter.update(false)` use `#show: gentle-clues.with(show-task-counter: false)` now.
 - Use linguify:0.2.0 package to manage different languages.
-    - **Deprecated:** `#show: gentle-clues.with(lang: "de")` use `#set text(lang: "de")` now.
+    - lang will be detected from `#set text(lang: "de")` now.
+    - Removed `#gc_header-title-lang.update("de")`.
+
+- Removed `#gc_enable-task-counter.update(false)` use `#show: gentle-clues.with(show-task-counter: false)` now.
 - **Breaking:** Changed `_color` to `accent-color`. Only type color and gradient are supported.
 - Added `border-color` and `header-color` to overwrite default color calculation from the accent-color.
+- Added `origin` parameter to `quote`.
 
 ## v0.6.0 (latest)
 

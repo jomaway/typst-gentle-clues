@@ -16,7 +16,6 @@
 )
 
 #set text(font: "Roboto", lang: "en")
-
 = Gentle clues for typst
 
 Add some beautiful, predefined admonitions or define your own.
@@ -135,8 +134,8 @@ Add some beautiful, predefined admonitions or define your own.
   #tip[Use the `svg-emoji` package until emoji support is fully supported in typst ]
 ]
 
-#clue(title: "Header title language")[
-  The current language which is set by `#set text(lang: "de")` changes header title to german.
+#clue(title: "i18n")[
+  The current language which is set by `#set text(lang: "de")` changes the default header title.
   Currently supported are `en`, `de`, `fr` and `es`. This package uses linguify for language settings so you can load your own language data file or feel free to contribute more languages.
 ]
 
@@ -184,7 +183,7 @@ Add some beautiful, predefined admonitions or define your own.
 #memo[Leave a #emoji.star on github.]
 
 `#quote`
-#quote[Keep it simple. Admonish your life.]
+#quote(origin: "The maintainer")[Keep it simple. Admonish your life.]
 
 === Headless Variant
 

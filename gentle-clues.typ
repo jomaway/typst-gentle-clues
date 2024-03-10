@@ -292,13 +292,18 @@
 )
 
 /* quote */
-// TODO: add source field.
-#let quote(title: auto, icon: "assets/quote.svg", src: none, ..args) = clue(
+#let quote(title: auto, icon: "assets/quote.svg", origin: none, content, ..args) = clue(
   accent-color: eastern, 
   title: if-auto-then(title, get_title_for("quote")), 
   icon: icon, 
   ..args
-)
+)[
+  #content
+  #align(end)[
+    #set text(0.9em, style: "italic")
+    #origin
+    ]
+]
 
 /* example */
 #let example(title: auto, icon: "assets/example.svg", ..args) = clue(
