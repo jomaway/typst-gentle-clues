@@ -56,6 +56,16 @@ error = "Erreur"
 example = "Exemple"
 quote = "Citation"
 
-
-
-
+[zh]
+abstract = "摘要"
+info = "简介"
+question = "问题"
+memo = "备忘"
+task = "任务"
+conclusion = "结论"
+tip = "提示"
+success = "成功"
+warning = "警告"
+error = "错误"
+example = "例子"
+quote = "引述"
