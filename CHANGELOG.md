@@ -1,9 +1,9 @@
 # Changelog
 
-## v0.7.0 (upcomming)
+## v0.7.0 (upcoming)
 
-- Use linguify:0.2.0 package to manage different languages.
-    - lang will be detected from `#set text(lang: "de")` now.
+- Use linguify:0.3.0 package to manage different languages.
+    - lang will be detected from `context text.lang` now.
     - Removed `#gc_header-title-lang.update("de")`.
 
 - Removed `#gc_enable-task-counter.update(false)` use `#show: gentle-clues.with(show-task-counter: false)` now.

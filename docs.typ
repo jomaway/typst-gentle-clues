@@ -1,4 +1,5 @@
-#import "@local/gentle-clues:0.7.0": *
+// #import "@local/gentle-clues:0.7.0": *
+#import "gentle-clues.typ": *
 #import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);
@@ -161,7 +162,7 @@ Add some beautiful, predefined admonitions or define your own.
 
 `#task`
 #task[
-  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderfull typst package!
+  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderful typst package!
 ]
 
 `#error`
