@@ -1,6 +1,10 @@
 # Changelog
 
-## v0.7.0 (upcoming)
+
+## v0.7.1 (latest)
+    - fix: bug with linguify.
+    
+## v0.7.0 
 
 - Use linguify:0.3.0 package to manage different languages.
     - lang will be detected from `context text.lang` now.
@@ -11,7 +15,7 @@
 - Added `border-color` and `header-color` to overwrite default color calculation from the accent-color.
 - Added `origin` parameter to `quote`.
 
-## v0.6.0 (latest)
+## v0.6.0 
 
 - Added possibility to define default settings via `#show: gentle-clues.with()`  - *lang*, *width*, *stroke-width*, *border-width*, *border-radius*, *breakable* - (See all options in [docs.pdf](docs.pdf))
     - **Deprecated:** `#gc_header-title-lang.update("de")` use `#show: gentle-clues.with(lang: "de")` now.
