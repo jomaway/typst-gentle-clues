@@ -1,5 +1,5 @@
 // gentle-clues
-#import "@preview/linguify:0.3.0": *
+#import "@preview/linguify:0.3.1": *
 
 // Global states
 #let __gc_clues_breakable = state("breakable", false)
@@ -13,6 +13,9 @@
 
 #let __gc_task-counter = counter("gc-task-counter")
 #let __gc_enable-task-counter = state("gc-task-counter", true) 
+
+
+#let lang_database = toml("lang.toml")
 
 /// Config Init
 #let gentle-clues(
@@ -31,7 +34,7 @@
   body
 ) = {
   // Conf linguify to lang parameter
-  linguify_set_database(toml("lang.toml"));
+  // linguify_set_database(toml("lang.toml"));
 
   // Update breakability
   __gc_clues_breakable.update(breakable);
@@ -89,9 +92,9 @@
   breakable: auto,
 ) = {
   context {
-    if not linguify_is_database_initialized() {
-      linguify_set_database(toml("lang.toml"));
-    }
+    // if not linguify_is_database_initialized() {
+    //   linguify_set_database(toml("lang.toml"));
+    // }
     // Set default color:
     let _stroke-color = luma(70);
     let _bg-color = _stroke-color.lighten(85%);
@@ -188,7 +191,7 @@
 // Helpers for predefined gentle clues
 #let get_title_for(clue) = {
   assert.eq(type(clue),str); 
-  return linguify(clue, default: linguify(clue, lang: "en", default: clue));
+  return linguify(clue, from: lang_database, default: linguify(clue, lang: "en", default: clue));
 }
 
 #let increment_task_counter() = {
