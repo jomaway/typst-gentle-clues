@@ -1,5 +1,5 @@
 // gentle-clues
-#import "@preview/linguify:0.3.1": *
+#import "@preview/linguify:0.4.0": *
 
 // Global states
 #let __gc_clues_breakable = state("breakable", false)

@@ -1,6 +1,7 @@
+[conf]
 default-lang = "en"
 
-[en]
+[lang.en]
 abstract = "Abstract"
 info = "Info"
 question = "Question"
@@ -14,7 +15,7 @@ error = "Error"
 example = "Example"
 quote = "Quote"
 
-[de]
+[lang.de]
 abstract = "Einführung"
 info = "Info"
 question = "Frage"
@@ -28,7 +29,7 @@ error = "Fehler"
 example = "Beispiel"
 quote = "Zitat"
 
-[es]
+[lang.es]
 abstract = "Resumen"
 info = "Info"
 question = "Pregunta"
@@ -42,7 +43,7 @@ error = "Error"
 example = "Ejemplo"
 quote = "Cita"
 
-[fr]
+[lang.fr]
 abstract = "Résumé"
 info = "Info"
 question = "Question"
@@ -56,7 +57,7 @@ error = "Erreur"
 example = "Exemple"
 quote = "Citation"
 
-[zh]
+[lang.zh]
 abstract = "摘要"
 info = "简介"
 question = "问题"
