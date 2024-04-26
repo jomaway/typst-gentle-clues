@@ -94,13 +94,10 @@
   breakable: auto,
 ) = {
   context {
-    // if not linguify_is_database_initialized() {
-    //   linguify_set_database(toml("lang.toml"));
-    // }
     // Set default color:
     let _stroke-color = luma(70);
-    let _bg-color = _stroke-color.lighten(85%);
-    let _border-color = _bg-color.darken(10%); 
+    let _header-color = _stroke-color.lighten(85%);
+    let _border-color = _header-color.darken(10%); 
     let _border-width = if-auto-then(border-width, __gc_border_width.get());
     let _border-radius = if-auto-then(radius, __gc_border_radius.get())
     let _stroke-width = if-auto-then(auto, __gc_stroke_width.get())
@@ -117,11 +114,11 @@
 
     if (type(accent-color) == color) { 
       _stroke-color = accent-color;
-      _bg-color = if-auto-then(header-color, accent-color.lighten(85%));
+      _header-color = if-auto-then(header-color, accent-color.lighten(85%));
       _border-color = if-auto-then(border-color, accent-color.lighten(70%));
     } else if (type(accent-color) == gradient) {
       _stroke-color = accent-color
-      _bg-color = if-auto-then(header-color, accent-color);
+      _header-color = if-auto-then(header-color, accent-color);
       _border-color = if-auto-then(border-color, accent-color);
     }
 
@@ -131,11 +128,11 @@
 
     // Header Part
     let header = box(
-            fill: _bg-color,
+            fill: _header-color,
             width: 100%,
             radius: (top-right: _border-radius),
             inset: if-auto-then(header-inset, __gc_header_inset.get()),
-            stroke: (right: _border-width + _bg-color )
+            stroke: (right: _border-width + _header-color )
           )[
               #if icon == none { strong(title) } else {
                 grid(
@@ -176,7 +173,7 @@
       radius: (right: _border-radius, left: 0pt),
       stroke: (
         left: (thickness: _stroke-width, paint: _stroke-color, cap: "butt"),
-        top: if (title != none){_border-width + _bg-color} else {_border-width + _border-color},
+        top: if (title != none){_border-width + _header-color} else {_border-width + _border-color},
         rest: _border-width + _border-color,
       ),
       clip: _clip-content,
