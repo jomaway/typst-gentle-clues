@@ -79,7 +79,7 @@
 // Basic gentle-clue (clue) template
 #let clue(
   content, 
-  title: auto, // string or none
+  title: "", // string or none
   icon: emoji.magnify.l, // file or symbol
   accent-color: navy, // color
   border-color: auto, 
@@ -135,19 +135,21 @@
             inset: if-auto-then(header-inset, __gc_header_inset.get()),
             stroke: (right: _border-width + _bg-color )
           )[
-              #grid(
-                columns: (auto, auto),
-                align: (horizon, left + horizon),
-                gutter: 1em,
-                box(height: 1em)[
-                  #if type(icon) == symbol {
-                      text(1em,icon)
-                  } else {
-                    image(icon, fit: "contain")
-                  }
-                ],
-                strong(title)
-              )
+              #if icon == none { strong(title) } else {
+                grid(
+                  columns: (auto, auto),
+                  align: (horizon, left + horizon),
+                  gutter: 1em,
+                  box(height: 1em)[
+                    #if type(icon) == symbol {
+                        text(1em,icon)
+                    } else {
+                      image(icon, fit: "contain")
+                    }
+                  ],
+                  strong(title)
+                )
+              }
           ]
 
     // Content-Box
