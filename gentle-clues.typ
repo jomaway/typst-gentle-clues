@@ -1,5 +1,6 @@
 // gentle-clues
 #import "@preview/linguify:0.4.0": *
+#import quote as typst_quote  // needed for quote
 
 // Global states
 #let __gc_clues_breakable = state("breakable", false)
@@ -14,7 +15,7 @@
 #let __gc_task-counter = counter("gc-task-counter")
 #let __gc_enable-task-counter = state("gc-task-counter", true) 
 
-
+// load linguify language database
 #let lang_database = toml("lang.toml")
 
 /// Config Init
@@ -297,18 +298,15 @@
   ..args
 )
 
+
 /* quote */
-#let quote(title: auto, icon: "assets/quote.svg", origin: none, content, ..args) = clue(
+#let quote(title: auto, icon: "assets/quote.svg", attribution: none, content, ..args) = clue(
   accent-color: eastern, 
   title: if-auto-then(title, get_title_for("quote")), 
   icon: icon, 
   ..args
 )[
-  #content
-  #align(end)[
-    #set text(0.9em, style: "italic")
-    #origin
-    ]
+  #typst_quote(block: true, attribution: attribution)[#content]
 ]
 
 /* example */
