@@ -309,7 +309,16 @@
 /* example */
 #let example(title: auto, icon: "assets/example.svg", ..args) = clue(
   accent-color: orange, 
-  title: if-auto-then(title, get_title_for("example")), //if (title != auto) { title  } else { get_title_for("example") }, 
+  title: if-auto-then(title, get_title_for("example")),
   icon: icon, 
+  ..args
+)
+
+
+/* aim */
+#let goal(title: auto, icon: "assets/flag.svg", ..args) = clue(
+  accent-color: red,
+  title: if-auto-then(title, get_title_for("goal")),
+  icon: icon,
   ..args
 )

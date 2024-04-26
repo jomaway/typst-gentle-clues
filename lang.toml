@@ -14,6 +14,7 @@ warning = "Warning"
 error = "Error"
 example = "Example"
 quote = "Quote"
+goal = "Goals"
 
 [lang.de]
 abstract = "Einführung"
@@ -28,6 +29,7 @@ warning = "Achtung"
 error = "Fehler"
 example = "Beispiel"
 quote = "Zitat"
+goal = "Ziele"
 
 [lang.es]
 abstract = "Resumen"
