@@ -35,19 +35,25 @@ This package does use [linguify](https://github.com/jomaway/typst-linguify) to s
 
 **Header titles:**
 The language of the header titles is detected automatically from the `context text.lang`.
-Currently the following languages are supported: "en", "de", "es", "fr". 
+Currently the following languages are supported: "en", "de", "es", "fr", "zh". 
 
 If an unsupported language is set it will fallback to english as default.
 Feel free to open a PR with your language added to the `lang.toml` file.
 
 ### Define your own clue
 
-But it is very easy to define your own. 
+Just need a clue once the fastest way is to use `clue` directly:
+The following example will create an orange Test clue.
+```typst
+#clue(title: "Test", icon: none, accent-color: orange)[We should run more tests!]
+```
+
+But it is also very easy to define a clue, which you can reuse.
 
 ```typst 
 // Define a clue called ghost
 #let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
-  accent-color: purple,
+  accent-color: silver,
   title: title,
   icon: icon,
   ..args
@@ -57,7 +63,7 @@ But it is very easy to define your own.
 #ghost[Huuuuuuh.]
 ```
 
-The icon can be an `emoji`, `symbol` or `.svg`-file. 
+The icon can be an `emoji`, `symbol` or a path to an image.
 
 ## License 
 
