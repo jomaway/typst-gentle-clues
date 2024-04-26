@@ -1,4 +1,4 @@
-#import "clues.typ": clue, get-title-for, if-auto-then
+#import "clues.typ": clue, get-title-for, if-auto-then, increment_task_counter, get_task_number
 #import quote as typst_quote  // needed for quote
 
 // Predefined gentle clues
