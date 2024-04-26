@@ -156,7 +156,7 @@
     let content-box(content) = block(
       breakable: if-auto-then(breakable, __gc_clues_breakable.get()),
       width: 100%,
-      fill: white, 
+      fill: none, 
       inset: if-auto-then(content-inset, __gc_content_inset.get()), 
       radius: (
         top-left: 0pt,
