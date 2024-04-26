@@ -84,6 +84,7 @@
   accent-color: navy, // color
   border-color: auto, 
   header-color: auto,
+  body-color: none,
   width: auto, // length
   radius: auto, // length
   border-width: auto, // length
@@ -156,7 +157,7 @@
     let content-box(content) = block(
       breakable: if-auto-then(breakable, __gc_clues_breakable.get()),
       width: 100%,
-      fill: none, 
+      fill: body-color, 
       inset: if-auto-then(content-inset, __gc_content_inset.get()), 
       radius: (
         top-left: 0pt,
