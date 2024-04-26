@@ -8,7 +8,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 Import the package
 ```typst
-#import "@preview/gentle-clues:0.7.1": *
+#import "@preview/gentle-clues:0.8.0": *
 ```
 if needed you can change the default settings.
 [See the docs.pdf for all options](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)

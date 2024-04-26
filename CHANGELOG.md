@@ -1,7 +1,16 @@
 # Changelog
 
+## v0.8.0 (latest)
+    - feat: allow clues without an icon.
+    - feat: add goal clue
+    - fix: transparent background for body
+    - feat: set body-color
+    - feat: use typst quote function inside quote.
+    - refactor: update to linguify 0.4.0
+    - refactor: split into multiple files for better maintainability
 
-## v0.7.1 (latest)
+
+## v0.7.1
     - fix: bug with linguify.
     
 ## v0.7.0 

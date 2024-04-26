@@ -1,10 +1,10 @@
 // #import "@local/gentle-clues:0.7.0": *
-#import "gentle-clues.typ": *
-#import "@local/svg-emoji:0.1.0": *
+#import "lib/lib.typ": *
+// #import "@local/svg-emoji:0.1.0": *
 
 #set page(margin: 2cm);
 
-#show: setup-emoji
+// #show: setup-emoji
 
 #show: gentle-clues.with(
   headless: false,
@@ -16,16 +16,16 @@
   // stroke-width: 5pt,
 )
 
-#set text(font: "Roboto", lang: "en")
+#set text(font: "Rubik", weight: 300, lang: "en")
+
 = Gentle clues for typst
 
 Add some beautiful, predefined admonitions or define your own.
 
-
 #clue(title: "Getting Started")[
   A minimal starting example
   ```typ
-  #import "@preview/gentle-clues:0.7.0": *
+  #import "@preview/gentle-clues:0.8.0": *
 
   #tip[Check out this cool package]
   ```
@@ -35,7 +35,7 @@ Add some beautiful, predefined admonitions or define your own.
 #clue(title: "Usage")[
   + Import the package like this:
     ```typ
-    #import "@preview/gentle-clues:0.7.0": *
+    #import "@preview/gentle-clues:0.8.0": *
     ```
 
   + Change the default settings for a clue.
@@ -73,12 +73,13 @@ Add some beautiful, predefined admonitions or define your own.
       #example(title: "Custom title")[ Content ...]
     ]
 
-  #memo(title: "New in v0.7.0",accent-color: gradient.linear(..color.map.crest))[
-    - language is detected by `#set text(lang: "de")`. `lang` argument is now deprecated.
-    - *Breaking:* `_color` changed to `accent-color` and can only be of type color or gradient.
-    - Use `border-color` and `header-color` to overwrite calculated header and border colors.
-  ]
+  + *I18n:*
+    - The current language which is set by `#set text(lang: "de")` changes the default header title. 
+    - Currently supported are `en`, `de`, `fr` and `es`. This package uses linguify for language settings. Feel free to contribute more languages.
+  
 ]
+
+
 
 
 #clue(title: "All Options for a clue")[ 
@@ -135,10 +136,7 @@ Add some beautiful, predefined admonitions or define your own.
   #tip[Use the `svg-emoji` package until emoji support is fully supported in typst ]
 ]
 
-#clue(title: "i18n")[
-  The current language which is set by `#set text(lang: "de")` changes the default header title.
-  Currently supported are `en`, `de`, `fr` and `es`. This package uses linguify for language settings so you can load your own language data file or feel free to contribute more languages.
-]
+
 
 #pagebreak()
 == List of all predefined clues <predefined>
@@ -184,7 +182,7 @@ Add some beautiful, predefined admonitions or define your own.
 #memo[Leave a #emoji.star on github.]
 
 `#quote`
-#quote(origin: "The maintainer")[Keep it simple. Admonish your life.]
+#quote(attribution: "The maintainer")[Keep it simple. Admonish your life.]
 
 === Headless Variant
 
