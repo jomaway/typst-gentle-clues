@@ -58,6 +58,7 @@ warning = "Avertissement"
 error = "Erreur"
 example = "Exemple"
 quote = "Citation"
+goal = "Objectif"
 
 [lang.zh]
 abstract = "摘要"
