@@ -2,9 +2,16 @@
 
 ## v.0.9.0 (upcomming)
   - feat: allow gradient and pattern as color settings.
+  - feat: add experiment clue
+  - feat: add idea clue
+  - feat: add code clue
 
   *BREAKING:*
   - refactor: change `quote` to `quotation` due to naming conflicts
+  - refactor: change example icon
+  - refactor: change conclusion icon and color
+  - refactor: change default title weight to a delta of 200
+
 
 ## v0.8.0 (latest)
     - feat: allow clues without an icon.
