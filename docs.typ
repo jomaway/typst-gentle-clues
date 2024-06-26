@@ -1,4 +1,3 @@
-// #import "@local/gentle-clues:0.7.0": *
 #import "lib/lib.typ": *
 #import "@local/svg-emoji:0.1.0": *
 
@@ -107,13 +106,27 @@ Add some beautiful, predefined admonitions or define your own.
   radius: 2pt,
   inset: 2mm,
   columns(2)[
-    #example(title: "Breaking news", breakable: true)[
+    #notify(title: "Breaking news", breakable: true)[
       Clues can now break onto the next page with option: `breakable: true`
 
       #lorem(30)
     ]
     This is a two columns layout.
 ])
+
+
+// Color options
+#clue(
+  title: "Color management",
+  accent-color: gradient.linear(red, yellow, blue),
+  body-color: pattern(".          \n          . ")
+)[
+  Clues can be styled in your liking.
+
+  The simplest way is to change the `accent-color` which will be the thick border stroke on the left side. Header and border color will then automatically derived from this color.
+
+  But you can set the `header-color`,`border-color` and `body-color` independently with a `color`, `gradient` or `pattern`.
+]
 
 
 #clue(title: "Define your own clue")[
@@ -141,8 +154,6 @@ Add some beautiful, predefined admonitions or define your own.
 ]
 
 
-
-#pagebreak()
 == List of all predefined clues <predefined>
 
 #columns(2)[
