@@ -150,7 +150,7 @@
                       image(icon, fit: "contain")
                     }
                   ],
-                  strong(title)
+                  strong(delta: 200, title)
                 )
               }
           ]

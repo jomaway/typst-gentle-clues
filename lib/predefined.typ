@@ -61,8 +61,8 @@
 )
 
 /* conclusion */
-#let conclusion(title: auto, icon: "assets/lightbulb.svg", ..args) = clue(
-  accent-color: rgb(255, 201, 23), // yellow
+#let conclusion(title: auto, icon: "assets/conclusion.svg", ..args) = clue(
+  accent-color: rgb(222, 49, 99),
   title: if-auto-then(title, get-title-for("conclusion")),
   icon: icon,
   ..args
@@ -96,9 +96,17 @@
 ]
 
 /* example */
-#let example(title: auto, icon: "assets/example.svg", ..args) = clue(
+#let example(title: auto, icon: "assets/simple-graph.svg", ..args) = clue(
   accent-color: orange,
   title: if-auto-then(title, get-title-for("example")),
+  icon: icon,
+  ..args
+)
+
+/* experiment */
+#let experiment(title: auto, icon: "assets/experiment.svg", ..args) = clue(
+  accent-color: orange,
+  title: if-auto-then(title, get-title-for("experiment")),
   icon: icon,
   ..args
 )
@@ -108,6 +116,38 @@
 #let goal(title: auto, icon: "assets/flag.svg", ..args) = clue(
   accent-color: red,
   title: if-auto-then(title, get-title-for("goal")),
+  icon: icon,
+  ..args
+)
+
+/* notify */
+#let notify(title: auto, icon: "assets/bell.svg", ..args) = clue(
+  accent-color: blue,
+  title: if-auto-then(title, get-title-for("notify")),
+  icon: icon,
+  ..args
+)
+
+/* code */
+#let code(title: auto, icon: "assets/code.svg", ..args) = clue(
+  accent-color: luma(100),
+  title: if-auto-then(title, get-title-for("code")),
+  icon: icon,
+  ..args
+)
+
+/* idea */
+#let idea(title: auto, icon: "assets/lightbulb.svg", ..args) = clue(
+  accent-color: rgb(255, 201, 23), // yellow
+  title: if-auto-then(title, get-title-for("idea")),
+  icon: icon,
+  ..args
+)
+
+/* danger */
+#let danger(title: auto, icon: "assets/danger.svg", ..args) = clue(
+  accent-color: rgb(255, 172, 51), // orange
+  title: if-auto-then(title, get-title-for("danger")),
   icon: icon,
   ..args
 )

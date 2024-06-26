@@ -6,7 +6,6 @@
 #let version = pkg-data.at("version")
 #let import_statement = raw(block: true, lang: "typ", "#import \"@preview/gentle-clues:" + version +"\": *")
 
-
 #set page(margin: 2cm);
 
 #show: setup-emoji
@@ -21,7 +20,7 @@
   // stroke-width: 5pt,
 )
 
-#set text(font: "Rubik", weight: 300, lang: "en")
+#set text(font: "Rubik", weight: 300, lang: "de")
 
 = Gentle clues for typst
 
@@ -147,6 +146,10 @@ Add some beautiful, predefined admonitions or define your own.
 == List of all predefined clues <predefined>
 
 #columns(2)[
+
+`idea`
+#idea[Lets make something beautifull.]
+
 `#abstract`
 #abstract[Make it short. This is all you need.]
 
@@ -162,6 +165,9 @@ Add some beautiful, predefined admonitions or define your own.
 
 `#example`,
 #example[Testing ...]
+
+`#experiment`
+#experiment[Testing ...]
 
 `#task`
 #task[
@@ -189,9 +195,28 @@ Add some beautiful, predefined admonitions or define your own.
 `#quotation`
 #quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
 
-
 `#goal`
 #goal[Beatuify your document!]
+
+`#notify`
+#notify[ In version 0.9 some new predefined clues where added.]
+
+`#code`
+#code[```typ
+  #let x = "secret"
+```]
+
+`#danger`
+#danger[
+  Nothing here ...
+]
+
+`#clue`
+#clue[
+  Default clue
+]
+
+
 
 === Headless Variant
 
