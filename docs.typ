@@ -2,6 +2,11 @@
 #import "lib/lib.typ": *
 // #import "@local/svg-emoji:0.1.0": *
 
+#let pkg-data = toml("typst.toml").package
+#let version = pkg-data.at("version")
+#let import_statement = raw(block: true, lang: "typ", "#import \"@preview/gentle-clues:" + version +"\": *")
+
+
 #set page(margin: 2cm);
 
 // #show: setup-emoji
@@ -24,9 +29,8 @@ Add some beautiful, predefined admonitions or define your own.
 
 #clue(title: "Getting Started")[
   A minimal starting example
+  #import_statement
   ```typ
-  #import "@preview/gentle-clues:0.8.0": *
-
   #tip[Check out this cool package]
   ```
   #tip[Check out this cool package]
@@ -34,9 +38,7 @@ Add some beautiful, predefined admonitions or define your own.
 
 #clue(title: "Usage")[
   + Import the package like this:
-    ```typ
-    #import "@preview/gentle-clues:0.8.0": *
-    ```
+    #import_statement
 
   + Change the default settings for a clue.
     ```typ
@@ -47,17 +49,17 @@ Add some beautiful, predefined admonitions or define your own.
       content-inset: 1em, // default content-inset
       stroke-width: 2pt, // default left stroke-width
       border-radius: 2pt, // default border-radius
-      border-width: 0.5pt,  // default boarder-width 
+      border-width: 0.5pt,  // default boarder-width
     )
     ```
-  + 
+  +
     #grid(columns: 2, gutter: 1em)[
       Use a predefined clue without any options
       ```typ
       #info[You will find a list with all predefined clues at the last page.]
       ```
       #align(end)[_Turns into this_ #sym.arrow]
-      
+
     ][
       #set align(bottom)
       #info[You will find a list with all predefined clues at the last page.]
@@ -74,20 +76,23 @@ Add some beautiful, predefined admonitions or define your own.
     ]
 
   + *I18n:*
-    - The current language which is set by `#set text(lang: "de")` changes the default header title. 
-    - Currently supported are `en`, `de`, `fr` and `es`. This package uses linguify for language settings. Feel free to contribute more languages.
-  
+    - The current language which is set by `#set text(lang: "de")` changes the default header title.
+    - Currently supported are `en`, `de`, `fr`, `es` and `zh`. This package uses linguify for language settings. Feel free to contribute more languages.
+
 ]
 
 
 
 
-#clue(title: "All Options for a clue")[ 
+#clue(title: "All Options for a clue")[
   All default settings can also be applied to a single clue through passing it as an named argument. Here is a list of accepted arguments:
   ```typ
   title: auto, // [string] or [none] (none will print headless)
-  icon: emoji.magnify.l, // [file] or [symbol]
-  accent-color: navy, // left accent color [color] or [gradient]
+  icon: emoji.magnify.l, // [file] or [symbol] or [none]
+  accent-color: navy, // left accent color [color], [gradient] or [pattern]
+  border-color: auto, // bottom and right border color [color], [gradient] or [pattern]
+  header-color: auto, // [color], [gradient] or [pattern]
+  body-color: none, // [color], [gradient] or [pattern]
   width: auto, // total width [length]
   radius: auto, // radius of the right border [length]
   border-width: auto, // width of the right and down border [length]
@@ -98,10 +103,10 @@ Add some beautiful, predefined admonitions or define your own.
 ]
 
 #box(
-  height: 4.5cm, 
+  height: 4.5cm,
   stroke: gray.lighten(40%),
   radius: 2pt,
-  inset: 2mm, 
+  inset: 2mm,
   columns(2)[
     #example(title: "Breaking news", breakable: true)[
       Clues can now break onto the next page with option: `breakable: true`
@@ -126,9 +131,9 @@ Add some beautiful, predefined admonitions or define your own.
   ```
   The result looks like this.
   #let ghost(
-    title: "Buuuuuuh.", 
+    title: "Buuuuuuh.",
     accent-color: purple,
-    icon: emoji.ghost , 
+    icon: emoji.ghost ,
     ..args
   ) = clue(title: title, icon: icon, ..args)
   #ghost[Huuuuuuh.]
@@ -149,8 +154,8 @@ Add some beautiful, predefined admonitions or define your own.
 #question[How do amonishments work?]
 
 `#info`
-#info[It's as easy as 
-```typst 
+#info[It's as easy as
+```typst
   #info[Whatever you want to say]
   ```
 ]
@@ -191,4 +196,3 @@ just add `title: none` to any example
 #info(title:none)[Just a short information.]
 
 ] // columns end
-
