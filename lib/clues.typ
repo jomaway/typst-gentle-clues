@@ -5,8 +5,8 @@
 #let if-auto-then(val,ret) = {
   if (val == auto){
     ret
-  } else { 
-    val 
+  } else {
+    val
   }
 }
 
@@ -21,7 +21,7 @@
 #let __gc_stroke_width = state("stroke-width", 2pt)
 
 #let __gc_task-counter = counter("gc-task-counter")
-#let __gc_enable-task-counter = state("gc-task-counter", true) 
+#let __gc_enable-task-counter = state("gc-task-counter", true)
 
 // load linguify language database
 #let lang_database = toml("lang.toml")
@@ -62,7 +62,7 @@
 
   // Update border width
   __gc_border_width.update(border-width);
-  
+
   // Update stroke width
   __gc_stroke_width.update(stroke-width);
 
@@ -78,11 +78,11 @@
 
 // Basic gentle-clue (clue) template
 #let clue(
-  content, 
+  content,
   title: "", // string or none
   icon: emoji.magnify.l, // file or symbol
   accent-color: navy, // color
-  border-color: auto, 
+  border-color: auto,
   header-color: auto,
   body-color: none,
   width: auto, // length
@@ -96,25 +96,27 @@
     // Set default color:
     let _stroke-color = luma(70);
     let _header-color = _stroke-color.lighten(85%);
-    let _border-color = _header-color.darken(10%); 
+    let _border-color = _header-color.darken(10%);
     let _border-width = if-auto-then(border-width, __gc_border_width.get());
     let _border-radius = if-auto-then(radius, __gc_border_radius.get())
     let _stroke-width = if-auto-then(auto, __gc_stroke_width.get())
     let _clip-content = true
 
-    // setting bg and stroke color from color argument
-    assert(type(accent-color) in (color, gradient), message: "expected color or gradient, found " + type(accent-color));
+    // check color types
+    assert(type(accent-color) in (color, gradient, pattern), message: "expected color, gradient or pattern found " + type(accent-color));
+
     if (header-color != auto) {
-      assert(type(header-color) in (color, gradient, pattern), message: "expected color or gradient, found " + type(header-color));
+      assert(type(header-color) in (color, gradient, pattern), message: "expected color, gradient or pattern found " + type(header-color));
     }
     if (border-color != auto) {
-      assert(type(border-color) == color, message: "expected color, found " + type(border-color));
+      assert(type(border-color) in (color, gradient, pattern), message: "expected color, gradient or pattern, found " + type(border-color));
     }
     if (body-color != none) {
-      assert(type(body-color) in (color, gradient, pattern), message: "expected color, found " + type(body-color));
+      assert(type(body-color) in (color, gradient, pattern), message: "expected color, gradient or pattern, found " + type(body-color));
     }
 
-    if (type(accent-color) == color) { 
+    // setting bg and stroke color from color argument
+    if (type(accent-color) == color) {
       _stroke-color = accent-color;
       _header-color = if-auto-then(header-color, accent-color.lighten(85%));
       _border-color = if-auto-then(border-color, accent-color.lighten(70%));
@@ -157,16 +159,16 @@
     let content-box(content) = block(
       breakable: if-auto-then(breakable, __gc_clues_breakable.get()),
       width: 100%,
-      fill: body-color, 
-      inset: if-auto-then(content-inset, __gc_content_inset.get()), 
+      fill: body-color,
+      inset: if-auto-then(content-inset, __gc_content_inset.get()),
       radius: (
         top-left: 0pt,
-        bottom-left: 0pt, 
+        bottom-left: 0pt,
         top-right: if (title != none){0pt} else {_border-radius},
         rest: _border-radius
       ),
     )[#content]
-    
+
     // Wrapper-Block
     block(
       breakable: if-auto-then(breakable, __gc_clues_breakable.get()),
@@ -209,6 +211,6 @@
 
 // Helper for fetching the translated title
 #let get-title-for(clue) = {
-  assert.eq(type(clue),str); 
+  assert.eq(type(clue),str);
   return linguify(clue, from: lang_database, default: linguify(clue, lang: "en", default: clue));
 }

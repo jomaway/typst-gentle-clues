@@ -1,5 +1,8 @@
 # Changelog
 
+## v.0.9.0 (upcomming)
+  - feat: allow gradient and pattern as color settings.
+
 ## v0.8.0 (latest)
     - feat: allow clues without an icon.
     - feat: add goal clue
@@ -12,8 +15,8 @@
 
 ## v0.7.1
     - fix: bug with linguify.
-    
-## v0.7.0 
+
+## v0.7.0
 
 - Use linguify:0.3.0 package to manage different languages.
     - lang will be detected from `context text.lang` now.
@@ -24,7 +27,7 @@
 - Added `border-color` and `header-color` to overwrite default color calculation from the accent-color.
 - Added `origin` parameter to `quote`.
 
-## v0.6.0 
+## v0.6.0
 
 - Added possibility to define default settings via `#show: gentle-clues.with()`  - *lang*, *width*, *stroke-width*, *border-width*, *border-radius*, *breakable* - (See all options in [docs.pdf](docs.pdf))
     - **Deprecated:** `#gc_header-title-lang.update("de")` use `#show: gentle-clues.with(lang: "de")` now.
@@ -38,7 +41,7 @@
 - Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
 - Removed aliases (breaking)
 
-## v0.4.0 
+## v0.4.0
 
 - Added french header titles. Use with `#gc_header-title-lang.update("fr")`
 - Fixed minor border issues
@@ -50,7 +53,7 @@
 - Fixed bug that the border was sometimes no longer visible after `typst 0.9.0` update.
 - Changed default border-color to the same color as `bg-color`
 - Added support for gradients: `#clue(_color: gradient.linear(..color.map.crest))`
-- **Breaking:** Removed string color_profiles. 
+- **Breaking:** Removed string color_profiles.
 - Changed some predefined colors.
 
 ## v0.3.0
