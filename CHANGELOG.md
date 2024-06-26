@@ -3,6 +3,9 @@
 ## v.0.9.0 (upcomming)
   - feat: allow gradient and pattern as color settings.
 
+  *BREAKING:*
+  - refactor: change `quote` to `quotation` due to naming conflicts
+
 ## v0.8.0 (latest)
     - feat: allow clues without an icon.
     - feat: add goal clue

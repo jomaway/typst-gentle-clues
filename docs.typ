@@ -1,6 +1,6 @@
 // #import "@local/gentle-clues:0.7.0": *
 #import "lib/lib.typ": *
-// #import "@local/svg-emoji:0.1.0": *
+#import "@local/svg-emoji:0.1.0": *
 
 #let pkg-data = toml("typst.toml").package
 #let version = pkg-data.at("version")
@@ -9,7 +9,7 @@
 
 #set page(margin: 2cm);
 
-// #show: setup-emoji
+#show: setup-emoji
 
 #show: gentle-clues.with(
   headless: false,
@@ -186,8 +186,12 @@ Add some beautiful, predefined admonitions or define your own.
 `#memo`
 #memo[Leave a #emoji.star on github.]
 
-`#quote`
-#quote(attribution: "The maintainer")[Keep it simple. Admonish your life.]
+`#quotation`
+#quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
+
+
+`#goal`
+#goal[Beatuify your document!]
 
 === Headless Variant
 
