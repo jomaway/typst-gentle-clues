@@ -5,12 +5,17 @@
   - feat: add experiment clue
   - feat: add idea clue
   - feat: add code clue
+  - feat: set custom image as icon.
+  - refactor: moved color and icon definitions to a seperate `theme.typ` file.
 
   *BREAKING:*
+  - refactor: To disable the task-counter `gc-task-counter-enabled.update(false)` needs to be called because moved states to `predefined.typ`
   - refactor: change `quote` to `quotation` due to naming conflicts
-  - refactor: change example icon
-  - refactor: change conclusion icon and color
+  - refactor: change `example` icon
+  - refactor: change `conclusion` icon and color
   - refactor: change default title weight to a delta of 200
+  - refactor: change default icon to none.
+
 
 
 ## v0.8.0 (latest)

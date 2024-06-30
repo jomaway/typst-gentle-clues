@@ -19,11 +19,13 @@
   // stroke-width: 5pt,
 )
 
-#set text(font: "Rubik", weight: 300, lang: "de")
+#set text(font: "Rubik", weight: 300, lang: "en")
 
 = Gentle clues for typst
 
 Add some beautiful, predefined admonitions or define your own.
+
+#info(title: "Test")[Test]
 
 #clue(title: "Getting Started")[
   A minimal starting example
@@ -79,9 +81,6 @@ Add some beautiful, predefined admonitions or define your own.
 
 ]
 
-
-
-
 #clue(title: "All Options for a clue")[
   All default settings can also be applied to a single clue through passing it as an named argument. Here is a list of accepted arguments:
   ```typ
@@ -118,16 +117,28 @@ Add some beautiful, predefined admonitions or define your own.
 // Color options
 #clue(
   title: "Color management",
-  accent-color: gradient.linear(red, yellow, blue),
-  body-color: pattern(".          \n          . ")
+  accent-color: gradient.linear(red, blue, dir: ttb),
+  header-color: gradient.linear(red, yellow, blue),
+  border-color: blue.darken(40%),
+  body-color: pattern(text(fill:fuchsia.lighten(40%),"\n           ."))
 )[
   Clues can be styled in your liking.
 
   The simplest way is to change the `accent-color` which will be the thick border stroke on the left side. Header and border color will then automatically derived from this color.
 
   But you can set the `header-color`,`border-color` and `body-color` independently with a `color`, `gradient` or `pattern`.
-]
 
+  *Example:*
+  ```typ
+  #clue(
+    title: "Color management",
+    accent-color: gradient.linear(red, blue, dir:ttb),
+    header-color: gradient.linear(red, yellow, blue),
+    border-color: blue.darken(40%),
+    body-color: pattern(text(fill:fuchsia.lighten(40%),"\n           ."))
+  )[...]
+  ```
+]
 
 #clue(title: "Define your own clue")[
   ```typst
@@ -182,7 +193,8 @@ Add some beautiful, predefined admonitions or define your own.
 
 `#task`
 #task[
-  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt) Check out this wonderful typst package!
+  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt)
+  Check out this wonderful typst package!
 ]
 
 `#error`
