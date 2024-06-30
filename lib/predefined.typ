@@ -1,153 +1,79 @@
-#import "clues.typ": clue, get-title-for, if-auto-then, increment_task_counter, get_task_number
+#import "@preview/linguify:0.4.0": *
+#import "clues.typ": clue, if-auto-then
+#import "theme.typ": default as theme
 
-// Predefined gentle clues
-/* info */
-#let info(title: auto, icon: "assets/info.svg", ..args) = clue(
-  accent-color: rgb(29, 144, 208), // blue
-  title: if-auto-then(title, get-title-for("info")),
-  icon: icon,
-  ..args
-)
+// load linguify language database
+#let lang_database = toml("lang.toml")
 
-/* success */
-#let success(title: auto, icon: "assets/checkbox.svg", ..args) = clue(
-  accent-color: rgb(102, 174, 62), // green
-  title: if-auto-then(title, get-title-for("success")),
-  icon: icon,
-  ..args
-)
-
-/* warning */
-#let warning(title: auto, icon: "assets/warning.svg", ..args) = clue(
-  accent-color: rgb(255, 145, 0), // orange
-  title: if-auto-then(title, get-title-for("warning")),
-  icon: icon,
-  ..args
-)
-
-/* error */
-#let error(title: auto, icon: "assets/crossmark.svg", ..args) = clue(
-  accent-color: rgb(237, 32, 84),  // red
-  title: if-auto-then(title, get-title-for("error")),
-  icon: icon,
-  ..args
-)
-
-/* task */
-#let task(title: auto, icon: "assets/task.svg", ..args) = {
-  increment_task_counter()
-  clue(
-    accent-color: maroon,
-    title: if-auto-then(title, get-title-for("task") + get_task_number()),
-    icon: icon,
-    ..args
-  )
+// Helper for fetching the translated title
+#let get-title-for(id) = {
+  assert.eq(type(id),str);
+  return linguify(id, from: lang_database, default: linguify(id, lang: "en", default: id));
 }
 
-/* tip */
-#let tip(title: auto, icon: "assets/tip.svg", ..args) = clue(
-  accent-color: rgb(0, 191, 165),  // teal
-  title: if-auto-then(title, get-title-for("tip")),
-  icon: icon,
+// get the accent-color from the theme
+#let get-accent-color-for(id) = {
+  return theme.at(id).accent-color
+}
+
+// get the icon from the theme
+#let get-icon-for(id) = {
+  let icon = theme.at(id).icon
+  if type(icon) == str {
+    return image("assets/" + theme.at(id).icon, fit: "contain")
+  } else {
+    return icon
+  }
+}
+
+// Wrapper function for all predefined clues.
+#let predefined-clue(id, ..args) = clue(
+  accent-color: get-accent-color-for(id),
+  title: get-title-for(id),
+  icon: get-icon-for(id),
   ..args
 )
 
-/* abstract */
-#let abstract(title: auto, icon: "assets/abstract.svg", ..args) = clue(
-  accent-color: olive,
-  title: if-auto-then(title, get-title-for("abstract")),
-  icon: icon,
-  ..args
-)
-
-/* conclusion */
-#let conclusion(title: auto, icon: "assets/conclusion.svg", ..args) = clue(
-  accent-color: rgb(222, 49, 99),
-  title: if-auto-then(title, get-title-for("conclusion")),
-  icon: icon,
-  ..args
-)
-
-/* memorize */
-#let memo(title: auto, icon: "assets/excl.svg", ..args) = clue(
-  accent-color: rgb(255, 82, 82), // kind of red
-  title: if-auto-then(title, get-title-for("memo")),
-  icon: icon,
-  ..args
-)
-
-/* question */
-#let question(title: auto, icon: "assets/questionmark.svg", ..args) = clue(
-  accent-color: rgb("#7ba10a"), // greenish
-  title: if-auto-then(title, get-title-for("question")),
-  icon: icon,
-  ..args
-)
-
-
-/* quote */
-#let quotation(title: auto, icon: "assets/quote.svg", attribution: none, content, ..args) = clue(
-  accent-color: eastern,
-  title: if-auto-then(title, get-title-for("quote")),
-  icon: icon,
-  ..args
-)[
+#let info(..args) = predefined-clue("info",..args)
+#let notify(..args) = predefined-clue("info",..args)
+#let success(..args) = predefined-clue("success",..args)
+#let warning(..args) = predefined-clue("warning",..args)
+#let danger(..args) = predefined-clue("danger",..args)
+#let error(..args) = predefined-clue("error",..args)
+#let tip(..args) = predefined-clue("tip",..args)
+#let abstract(..args) = predefined-clue("abstract",..args)
+#let goal(..args) = predefined-clue("goal",..args)
+#let question(..args) = predefined-clue("question",..args)
+#let idea(..args) = predefined-clue("idea",..args)
+#let example(..args) = predefined-clue("example",..args)
+#let experiment(..args) = predefined-clue("experiment",..args)
+#let conclusion(..args) = predefined-clue("conclusion",..args)
+#let memo(..args) = predefined-clue("memo",..args)
+#let code(..args) = predefined-clue("code",..args)
+#let quotation(attribution: none, content, ..args) = predefined-clue("quote",..args)[
   #quote(block: true, attribution: attribution)[#content]
 ]
 
-/* example */
-#let example(title: auto, icon: "assets/simple-graph.svg", ..args) = clue(
-  accent-color: orange,
-  title: if-auto-then(title, get-title-for("example")),
-  icon: icon,
-  ..args
-)
+#let __gc_task-counter = counter("gc-task-counter")
+#let gc-task-counter-enabled = state("gc-task-counter", true)
 
-/* experiment */
-#let experiment(title: auto, icon: "assets/experiment.svg", ..args) = clue(
-  accent-color: orange,
-  title: if-auto-then(title, get-title-for("experiment")),
-  icon: icon,
-  ..args
-)
+#let increment_task_counter() = {
+    context {
+    if (gc-task-counter-enabled.get() == true){
+      __gc_task-counter.step()
+    }
+  }
+}
 
+#let get_task_number() = {
+  context {
+    if (gc-task-counter-enabled.get() == true){
+      " " + __gc_task-counter.display()
+    }
+  }
+}
 
-/* goal */
-#let goal(title: auto, icon: "assets/flag.svg", ..args) = clue(
-  accent-color: red,
-  title: if-auto-then(title, get-title-for("goal")),
-  icon: icon,
-  ..args
-)
-
-/* notify */
-#let notify(title: auto, icon: "assets/bell.svg", ..args) = clue(
-  accent-color: blue,
-  title: if-auto-then(title, get-title-for("notify")),
-  icon: icon,
-  ..args
-)
-
-/* code */
-#let code(title: auto, icon: "assets/code.svg", ..args) = clue(
-  accent-color: luma(100),
-  title: if-auto-then(title, get-title-for("code")),
-  icon: icon,
-  ..args
-)
-
-/* idea */
-#let idea(title: auto, icon: "assets/lightbulb.svg", ..args) = clue(
-  accent-color: rgb(255, 201, 23), // yellow
-  title: if-auto-then(title, get-title-for("idea")),
-  icon: icon,
-  ..args
-)
-
-/* danger */
-#let danger(title: auto, icon: "assets/danger.svg", ..args) = clue(
-  accent-color: rgb(255, 172, 51), // orange
-  title: if-auto-then(title, get-title-for("danger")),
-  icon: icon,
-  ..args
-)
+#let task(..args) = {
+  increment_task_counter()
+  predefined-clue("task", title: get-title-for("task") + get_task_number(), ..args)
+}
