@@ -25,8 +25,6 @@
 
 Add some beautiful, predefined admonitions or define your own.
 
-#info(title: "Test")[Test]
-
 #clue(title: "Getting Started")[
   A minimal starting example
   #import_statement
