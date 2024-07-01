@@ -1,6 +1,6 @@
 [package]
 name = "gentle-clues"
-version = "0.9.0"
+version = "1.0.0"
 entrypoint = "lib/lib.typ"
 authors = ["Jomaway <https://github.com/jomaway>"]
 license = "MIT"

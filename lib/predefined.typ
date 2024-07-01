@@ -1,6 +1,6 @@
 #import "@preview/linguify:0.4.0": *
 #import "clues.typ": clue, if-auto-then
-#import "theme.typ": default as theme
+#import "theme.typ": catppuccin as theme
 
 // load linguify language database
 #let lang_database = toml("lang.toml")
