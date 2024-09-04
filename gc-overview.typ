@@ -2,7 +2,7 @@
 #import "lib/clues.typ": clue
 
 
-#set page(paper: "a5", flipped: true)
+#set page(paper: "a5", flipped: true, margin: 1cm)
 
 #let predefined-clues = (
   idea[`#idea[]`],
