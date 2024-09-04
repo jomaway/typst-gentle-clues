@@ -2,9 +2,27 @@
 #import "lib/clues.typ": clue
 
 
-#set page( paper: "a5", flipped: true)
+#set page(paper: "a5", flipped: true)
 
-#let predefined-clues = (idea[],abstract[],question[],info[],example[],experiment[],task[],error[],warning[],success[],tip[],conclusion[],memo[],quotation[],goal[],notify[],code[],danger[]
+#let predefined-clues = (
+  idea[`#idea[]`],
+  abstract[`#abstract[]`],
+  question[`#question[]`],
+  info[`#info[]`],
+  example[`#example[]`],
+  experiment[`#experiment[]`],
+  task[`#task[]`],
+  error[`#error[]`],
+  warning[`#warning[]`],
+  success[`#success[]`],
+  tip[`#tip[]`],
+  conclusion[`#conclusion[]`],
+  memo[`#memo[]`],
+  quotation[`#quotation[]`],
+  goal[`#goal[]`],
+  notify[`#notify[]`],
+  code[`#code[]`],
+  danger[`#danger[]`]
 )
 
 #let clue-grid = grid(
