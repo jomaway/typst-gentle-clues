@@ -1,6 +1,6 @@
 # Changelog
 
-## v.1.0.0 (upcomming)
+## v.1.0.0 (2024/09/04)
 
 - !refactor(predefined): use catppuccin palette as default theme colors.
 - fix(predefined): show notify clue correctly now
