@@ -5,18 +5,24 @@
 // load linguify language database
 #let lang_database = toml("lang.toml")
 
-// Helper for fetching the translated title
+/// Helper for fetching the translated title
 #let get-title-for(id) = {
   assert.eq(type(id),str);
   return linguify(id, from: lang_database, default: linguify(id, lang: "en", default: id));
 }
 
-// get the accent-color from the theme
+/// Helper to get the accent-color from the theme
+///
+/// - id (string): The id for the predefined clue.
+/// -> color
 #let get-accent-color-for(id) = {
   return theme.at(id).accent-color
 }
 
-// get the icon from the theme
+/// Helper to get the icon from the theme
+///
+/// - id (string): The id for the predefined clue.
+/// -> content
 #let get-icon-for(id) = {
   let icon = theme.at(id).icon
   if type(icon) == str {
@@ -26,7 +32,10 @@
   }
 }
 
-// Wrapper function for all predefined clues.
+/// Wrapper function for all predefined clues.
+///
+/// - id (string): The id of the clue from which color, icon and default title will be calculated.
+/// - ..args (parameter): for overwriting the default parameter of a clue.
 #let predefined-clue(id, ..args) = clue(
   accent-color: get-accent-color-for(id),
   title: get-title-for(id),
