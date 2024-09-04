@@ -4,64 +4,42 @@ Simple admonitions for typst. Add predefined or define your own.
 
 Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
+## Overview of all predefined clues:
+![Overview of the predefined clues](./gc-overview.svg)
+
 ## Usage
 
-Import the package
-```typst
-#import "@preview/gentle-clues:0.9.0": *
-```
-if needed you can change the default settings.
-[See the docs.pdf for all options](https://github.com/jomaway/typst-admonish/blob/main/docs.pdf)
+For information, see the [docs.pdf](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf)
 
-### Use predefined clues
-
+To use this package, simply add the following code to your document:
 ```typst
-// info clue
+#import "@preview/gentle-clues:1.0.0": *
+
+// add an info clue
 #info[ This is the info clue ... ]
 
-// or a tip
+// or a tip with custom title
 #tip(title: "Best tip ever")[Check out this cool package]
 ```
 
-Overview of the predefined clues:
+### Features
 
-![Overview of the predefined clues](gc_overview.svg)
+- Set global default for all clues
+- Overwrite each parameter on a single clue for changing title, color, etc.
+- Show or hide a counter value on tasks.
+- Define your own clues very easily.
 
-#### Language support
+
+## Language support
 
 This package does use [linguify](https://github.com/jomaway/typst-linguify) to support multiple languages.
 
 **Header titles:**
 The language of the header titles is detected automatically from the `context text.lang`.
-Currently the following languages are supported: "en", "de", "es", "fr", "zh".
+See the file [lang.toml](https://github.com/jomaway/typst-gentle-clues/blob/main/lib/lang.toml) for currently supported languages.
 
 If an unsupported language is set it will fallback to english as default.
 Feel free to open a PR with your language added to the `lang.toml` file.
-
-### Define your own clue
-
-Just need a clue once the fastest way is to use `clue` directly:
-The following example will create an orange Test clue.
-```typst
-#clue(title: "Test", icon: none, accent-color: orange)[We should run more tests!]
-```
-
-But it is also very easy to define a clue, which you can reuse.
-
-```typst
-// Define a clue called ghost
-#let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
-  accent-color: silver,
-  title: title,
-  icon: icon,
-  ..args
-)
-
-// Use it
-#ghost[Huuuuuuh.]
-```
-
-The icon can be an `emoji`, `symbol` or a path to an image.
 
 ## License
 

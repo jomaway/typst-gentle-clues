@@ -1,6 +1,12 @@
 # Changelog
 
-## v.0.9.0 (upcomming)
+## v.1.0.0 (upcomming)
+
+- !refactor(predefined): use catppuccin palette as default theme colors.
+- fix(predefined): show notify clue correctly now
+- refactor(docs): add API docs with tidy
+
+## v.0.9.0 (2024/07/01)
   - feat: allow gradient and pattern as color settings.
   - feat: add experiment clue
   - feat: add idea clue
@@ -16,9 +22,7 @@
   - refactor: change default title weight to a delta of 200
   - refactor: change default icon to none.
 
-
-
-## v0.8.0 (latest)
+## v0.8.0 (2024/04/26)
     - feat: allow clues without an icon.
     - feat: add goal clue
     - fix: transparent background for body
@@ -28,10 +32,10 @@
     - refactor: split into multiple files for better maintainability
 
 
-## v0.7.1
+## v0.7.1 (2024/03/26)
     - fix: bug with linguify.
 
-## v0.7.0
+## v0.7.0 (2024/03/18)
 
 - Use linguify:0.3.0 package to manage different languages.
     - lang will be detected from `context text.lang` now.
@@ -42,7 +46,7 @@
 - Added `border-color` and `header-color` to overwrite default color calculation from the accent-color.
 - Added `origin` parameter to `quote`.
 
-## v0.6.0
+## v0.6.0 (2024/01/06)
 
 - Added possibility to define default settings via `#show: gentle-clues.with()`  - *lang*, *width*, *stroke-width*, *border-width*, *border-radius*, *breakable* - (See all options in [docs.pdf](docs.pdf))
     - **Deprecated:** `#gc_header-title-lang.update("de")` use `#show: gentle-clues.with(lang: "de")` now.
@@ -50,13 +54,13 @@
 - Added option to show all clues without headers. `#show: gentle-clues.with(headless: true)`
 
 
-## v0.5.0
+## v0.5.0 (2024/01/05)
 
 - Added option `breakable: true` to make clues breakable .
 - Added spanish header titles. Use with `#gc_header-title-lang.update("es")`
 - Removed aliases (breaking)
 
-## v0.4.0
+## v0.4.0 (2023/11/17)
 
 - Added french header titles. Use with `#gc_header-title-lang.update("fr")`
 - Fixed minor border issues
@@ -71,7 +75,7 @@
 - **Breaking:** Removed string color_profiles.
 - Changed some predefined colors.
 
-## v0.3.0
+## v0.3.0 (2023/10/20)
 
 - Renamed entry files and base template
 - Changed default `header-inset`. It's `0.5em` now.
@@ -79,12 +83,12 @@
 - Changed `type` checks which requires typst version `0.8.0`
 - Renamed parameter `color` to `_color` due to naming conflicts with the color type.
 
-## v0.2.0
+## v0.2.0 (2023/09/26)
 
 - Added option to set the header inset. `#admonish(header-inset: 0.5em)`
 - Added custom color: `#admonish(color: (stroke: luma(150), bg: teal))`
 - Added predefined example clue: `#example[Testing]`
 
-## v0.1.0
+## v0.1.0 (2023/09/15)
 
 - Initial release
