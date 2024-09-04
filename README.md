@@ -9,7 +9,7 @@ Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
 ## Usage
 
-For information, see the [docs.pdf](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf)
+For full information, see the [docs.pdf](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf)
 
 To use this package, simply add the following code to your document:
 ```typst
@@ -22,13 +22,19 @@ To use this package, simply add the following code to your document:
 #tip(title: "Best tip ever")[Check out this cool package]
 ```
 
+_This will create an info clue and tip clue inside your document. See the overview for all available clues.
+
 ### Features
+
+This package provides some features which helps to customize the clues to your liking.
 
 - Set global default for all clues
 - Overwrite each parameter on a single clue for changing title, color, etc.
 - Show or hide a counter value on tasks.
 - Define your own clues very easily.
+- ...
 
+For a full list see the [documentation](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf).
 
 ## Language support
 
