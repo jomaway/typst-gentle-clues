@@ -20,21 +20,42 @@
 #let __gc_stroke_width = state("stroke-width", 2pt)
 
 
-
-/// Config Init
+/// Config the default settings for all clues globally.
+///
+/// *Example:*
+/// Change the default settings for all clues.
+/// #figure(
+/// ```typ
+/// #show: gentle-clues.with(
+///   headless: true,  // never show any headers
+///   breakable: false, // default breaking behavior
+///   content-inset: 2em, // default content-inset
+///   stroke-width: 6pt, // default left stroke-width
+/// )
+/// ```
+/// )<gentle-clues-example>
+///
+/// - breakable (boolean): sets if clues break across pages.
+/// - headless (boolean): if all clues should be shown without a header
+/// - header-inset (length): sets the default header-inset for all clues.
+/// - width (auto, length): sets the default width for all clues.
+/// - stroke-width (length): sets the default stroke width of the left colored stroke for all clues.
+/// - border-radius (length): sets the default border radius for all clues.
+/// - border-width (length): sets the default border width for all clues.
+/// - content-inset (length): sets the default content inset of the body for all clues.
+/// - show-task-counter (boolean): enable or disable task counter for all tasks.
+///
+/// -> content
 #let gentle-clues(
   breakable: false,
   headless: false,
   header-inset: 0.5em,
-  // default-title: auto, // string or none
-  // default-icon: emoji.magnify.l, // file or symbol
-  // default-color: navy, // color profile name
-  width: auto, // length
+  width: auto,
   stroke-width: 2pt,
-  border-radius: 2pt, // length
-  border-width: 0.5pt, // length
-  content-inset: 1em, // length
-  show-task-counter: false, // [bool]
+  border-radius: 2pt,
+  border-width: 0.5pt,
+  content-inset: 1em,
+  show-task-counter: false,
   body
 ) = {
 
@@ -66,20 +87,42 @@
 
   }
 
-// Basic gentle-clue (clue) template
+/// Basic gentle-clue (clue) template function.
+///
+/// This function can be used to create custom clues. You can pass all of this parameters to the predefined clues as well to overwrite the default settings.
+///
+/// *Example:*
+/// #example(`clue(title:"Test", width: 6cm)[Some important content]`)
+/// #figure(``)<clue-api>
+///
+/// - content (content): Content inside the body.
+/// - title (string, none): The title for the
+/// - icon (none, image, symbol): The icon to show in front of the title.
+/// - accent-color (color, gradient, pattern):
+/// - border-color (color, gradient, pattern):
+/// - header-color (color, gradient, pattern):
+/// - body-color (none, color, gradient, pattern):
+/// - width (auto, length):
+/// - radius (auto, length):
+/// - border-width (auto, length):
+/// - content-inset (auto, length):
+/// - header-inset (auto, length):
+/// - breakable (auto, boolean):
+///
+/// -> content
 #let clue(
   content,
-  title: "", // string or none
-  icon: none, // file or symbol
-  accent-color: navy, // color
+  title: "",
+  icon: none,
+  accent-color: navy,
   border-color: auto,
   header-color: auto,
   body-color: none,
-  width: auto, // length
-  radius: auto, // length
-  border-width: auto, // length
-  content-inset: auto, // length
-  header-inset: auto, // length
+  width: auto,
+  radius: auto,
+  border-width: auto,
+  content-inset: auto,
+  header-inset: auto,
   breakable: auto,
 ) = {
   // check color types

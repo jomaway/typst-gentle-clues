@@ -1,101 +1,94 @@
 #import "lib/lib.typ": *
-#import "@local/svg-emoji:0.1.0": *
+#import "@preview/tidy:0.3.0"
+// #import "@local/svg-emoji:0.1.0": *
 
+// extract version from typst.toml package file.
 #let pkg-data = toml("typst.toml").package
 #let version = pkg-data.at("version")
 #let import_statement = raw(block: true, lang: "typ", "#import \"@preview/gentle-clues:" + version +"\": *")
 
+// extract provided language translations
+#let lang-data = toml("lib/lang.toml")
+#let provided-translations = {
+  let languages = lang-data.lang.keys()
+  for lang in languages [
+    #if lang == languages.first() [] else if lang == languages.last() [and] else [,] "#lang"
+  ]
+}
+
+// global page settings
 #set page(margin: 2cm);
+#set text(font: "Rubik", weight: 300, lang: "en")
 
-#show: setup-emoji
+// #show: setup-emoji
 
-#show: gentle-clues.with(
-  headless: false,
-  breakable: false,
-  // header-inset: 0.4em,
-  // content-inset: 1.3em,
-  // border-radius: 12pt,
-  // border-width: 1pt,
-  // stroke-width: 5pt,
+// tidy docs
+#let docs-clues = tidy.parse-module(
+  read("lib/clues.typ"),
+  name: "Gentle Clues API",
+  scope: (clues: clues),
+  preamble: "import clues: *;",
+  label-prefix: "gc"
 )
 
-#set text(font: "Rubik", weight: 300, lang: "en")
+
+#let ex(a,b) = grid(columns: 2, gutter: 1em)[
+    #a
+    #align(end)[_Turns into this_ #sym.arrow]
+  ][
+    #b
+  ]
 
 = Gentle clues for typst
 
 Add some beautiful, predefined admonitions or define your own.
 
-#clue(title: "Getting Started")[
-  A minimal starting example
-  #import_statement
-  ```typ
-  #tip[Check out this cool package]
-  ```
-  #tip[Check out this cool package]
+== Getting started
+
+#clue(title: "Minimal starting example")[
+  #ex[
+    #import_statement
+    ```typ
+    #tip[Check out this cool package]
+    ```
+  ][
+    #tip[Check out this cool package]
+  ]
 ]
 
 #clue(title: "Usage")[
   + Import the package like this:
     #import_statement
 
-  + Change the default settings for a clue.
-    ```typ
-    #show: gentle-clues.with(
-      headless: false,  // never show any headers
-      breakable: false, // default breaking behavior
-      header-inset: 0.5em, // default header-inset
-      content-inset: 1em, // default content-inset
-      stroke-width: 2pt, // default left stroke-width
-      border-radius: 2pt, // default border-radius
-      border-width: 0.5pt,  // default boarder-width
-    )
-    ```
+  + *Optional:* Change the default settings for all clues if desired. See @gentle-clues-example.
   +
-    #grid(columns: 2, gutter: 1em)[
+    #ex[
       Use a predefined clue without any options
       ```typ
       #info[You will find a list with all predefined clues at the last page.]
       ```
-      #align(end)[_Turns into this_ #sym.arrow]
-
     ][
       #set align(bottom)
       #info[You will find a list with all predefined clues at the last page.]
     ]
-  + #grid(columns: 2, gutter: 1em)[
-      Or add some options like a custom title
+  + #ex[
+      Or overwrite the default parameters. e.g. set a custom title
       ```typ
       #example(title: "Custom title")[ Content ...]
       ```
-      #align(end)[_Turns into this_ #sym.arrow]
     ][
       #set align(bottom)
       #example(title: "Custom title")[ Content ...]
     ]
+    See *all available parameters* at @clue-api.
 
   + *I18n:*
     - The current language which is set by `#set text(lang: "de")` changes the default header title.
-    - Currently supported are `en`, `de`, `fr`, `es` and `zh`. This package uses linguify for language settings. Feel free to contribute more languages.
+    - Currently supported are #provided-translations. This package uses linguify for language settings. Feel free to contribute more languages.
 
 ]
 
-#clue(title: "All Options for a clue")[
-  All default settings can also be applied to a single clue through passing it as an named argument. Here is a list of accepted arguments:
-  ```typ
-  title: auto, // [string] or [none] (none will print headless)
-  icon: emoji.magnify.l, // [file] or [symbol] or [none]
-  accent-color: navy, // left accent color [color], [gradient] or [pattern]
-  border-color: auto, // bottom and right border color [color], [gradient] or [pattern]
-  header-color: auto, // [color], [gradient] or [pattern]
-  body-color: none, // [color], [gradient] or [pattern]
-  width: auto, // total width [length]
-  radius: auto, // radius of the right border [length]
-  border-width: auto, // width of the right and down border [length]
-  content-inset: auto, // [length]
-  header-inset: auto, // [length]
-  breakable: auto, // if clue can break onto next page [bool]
-  ```
-]
+== Features
 
 #box(
   height: 4.5cm,
@@ -167,6 +160,11 @@ Add some beautiful, predefined admonitions or define your own.
 
 #columns(2)[
 
+`#clue`
+#clue[
+  Default clue
+]
+
 `idea`
 #idea[Lets make something beautifull.]
 
@@ -232,10 +230,7 @@ Add some beautiful, predefined admonitions or define your own.
   Nothing here ...
 ]
 
-`#clue`
-#clue[
-  Default clue
-]
+
 
 
 
@@ -246,3 +241,6 @@ just add `title: none` to any example
 #info(title:none)[Just a short information.]
 
 ] // columns end
+
+
+#tidy.show-module(docs-clues, style: tidy.styles.default)
