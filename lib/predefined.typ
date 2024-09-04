@@ -44,7 +44,7 @@
 )
 
 #let info(..args) = predefined-clue("info",..args)
-#let notify(..args) = predefined-clue("info",..args)
+#let notify(..args) = predefined-clue("notify",..args)
 #let success(..args) = predefined-clue("success",..args)
 #let warning(..args) = predefined-clue("warning",..args)
 #let danger(..args) = predefined-clue("danger",..args)
