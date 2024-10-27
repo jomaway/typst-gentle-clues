@@ -111,7 +111,7 @@ Add some beautiful, predefined admonitions or define your own.
   accent-color: gradient.linear(red, blue, dir: ttb),
   header-color: gradient.linear(red, yellow, blue),
   border-color: blue.darken(40%),
-  body-color: pattern(text(fill:fuchsia.lighten(40%),"\n           ."))
+  body-color: fuchsia.lighten(80%)
 )[
   Clues can be styled in your liking.
 
@@ -126,7 +126,7 @@ Add some beautiful, predefined admonitions or define your own.
     accent-color: gradient.linear(red, blue, dir:ttb),
     header-color: gradient.linear(red, yellow, blue),
     border-color: blue.darken(40%),
-    body-color: pattern(text(fill:fuchsia.lighten(40%),"\n           ."))
+    body-color: pattern(text(fill:fuchsia.lighten(40%)," . "))
   )[...]
   ```
 ]
