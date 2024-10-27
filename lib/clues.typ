@@ -156,11 +156,10 @@
     let _stroke-width = if-auto-then(auto, __gc_stroke_width.get())
     let _clip-content = true
 
-    // Disable Heading numbering for those headings
-    set heading(numbering: none, outlined: false, supplement: "Box")
-
     // Header Part
-    let header = box(
+    let header-block = block(
+            sticky: true,
+            below: 0pt,
             fill: _header-color,
             width: 100%,
             radius: (top-right: _border-radius),
@@ -172,22 +171,14 @@
                   columns: (auto, auto),
                   align: (horizon, left + horizon),
                   gutter: 1em,
-                  box(height: 1em)[ #icon
-                    // #if type(icon) == symbol {
-                    //     text(1em,icon)
-                    // } else if (type(icon) == str) {
-                    //   image(icon, fit: "contain")
-                    // } else {
-                    //   icon
-                    // }
-                  ],
+                  box(height: 1em)[ #icon ],
                   strong(delta: 200, title)
                 )
               }
           ]
 
     // Content-Box
-    let content-box(content) = block(
+    let content-block(content) = block(
       breakable: if-auto-then(breakable, __gc_clues_breakable.get()),
       width: 100%,
       fill: body-color,
@@ -198,6 +189,7 @@
         top-right: if (title != none){0pt} else {_border-radius},
         rest: _border-radius
       ),
+      above: 0pt,
     )[#content]
 
     // Wrapper-Block
@@ -214,12 +206,8 @@
       clip: _clip-content,
     )[
       #set align(start)
-      #stack(dir: ttb,
-        if __gc_clues_headless.get() == false and title != none {
-          header
-        },
-        content-box(content)
-      )
-    ] // block end
+      #if __gc_clues_headless.get() == false and title != none { header-block }
+      #content-block(content)
+    ] // wrapper block end
   }
 }
