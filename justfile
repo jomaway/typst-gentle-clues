@@ -14,3 +14,8 @@ create-overview:
 [doc('needs package svgcleaner installed.')]
 minify-icons:
     ./minify-icons.sh
+
+
+# create docs
+create-docs:
+    typst compile docs.typ
