@@ -3,12 +3,12 @@
 #import "theme.typ": catppuccin as theme
 
 // load linguify language database
-#let lang_database = toml("lang.toml")
+#let lang-database = toml("lang.toml")
 
 /// Helper for fetching the translated title
 #let get-title-for(id) = {
   assert.eq(type(id),str);
-  return linguify(id, from: lang_database, default: linguify(id, lang: "en", default: id));
+  return linguify(id, from: lang-database, default: linguify(id, lang: "en", default: id));
 }
 
 /// Helper to get the accent-color from the theme
@@ -63,26 +63,26 @@
   #quote(block: true, attribution: attribution)[#content]
 ]
 
-#let __gc_task-counter = counter("gc-task-counter")
+#let gc-task-counter = counter("gc-task-counter")
 #let gc-task-counter-enabled = state("gc-task-counter", true)
 
-#let increment_task_counter() = {
+#let increment-task-counter() = {
     context {
     if (gc-task-counter-enabled.get() == true){
-      __gc_task-counter.step()
+      gc-task-counter.step()
     }
   }
 }
 
-#let get_task_number() = {
+#let get-task-number() = {
   context {
     if (gc-task-counter-enabled.get() == true){
-      " " + __gc_task-counter.display()
+      " " + gc-task-counter.display()
     }
   }
 }
 
 #let task(..args) = {
-  increment_task_counter()
-  predefined-clue("task", title: get-title-for("task") + get_task_number(), ..args)
+  increment-task-counter()
+  predefined-clue("task", title: get-title-for("task") + get-task-number(), ..args)
 }
