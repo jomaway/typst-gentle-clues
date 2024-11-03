@@ -103,7 +103,7 @@ danger = "Veszély"
 
 [lang.zh]
 abstract = "摘要"
-info = "简介"
+info = "信息"
 question = "问题"
 memo = "备忘"
 task = "任务"
@@ -114,6 +114,12 @@ warning = "警告"
 error = "错误"
 example = "例子"
 quote = "引述"
+goal = "目标"
+idea = "想法"
+experiment = "实验"
+notify = "通知"
+code = "代码"
+danger = "危险"
 
 [lang.it]
 abstract = "Abstract"
