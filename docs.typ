@@ -112,7 +112,7 @@ Add some beautiful, predefined admonitions or define your own.
   header-color: gradient.linear(red, yellow, blue),
   border-color: blue.darken(40%),
   body-color: fuchsia.lighten(80%),
-  title-font: "Liberation Sans",
+  title-font: "Liberation Mono",
   title-weight-delta: 300
 )[
   Clues can be styled in your liking.
