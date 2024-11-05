@@ -18,6 +18,8 @@
 #let __gc_border_radius = state("border-radius", 2pt)
 #let __gc_border_width = state("border-width", 0.5pt)
 #let __gc_stroke_width = state("stroke-width", 2pt)
+#let __gc_title_font = state("title-font", auto)
+#let __gc_title_weight_delta = state("title-weight-delta", 200)
 
 
 /// Config the default settings for all clues globally.
@@ -44,6 +46,8 @@
 /// - border-width (length): sets the default border width for all clues.
 /// - content-inset (length): sets the default content inset of the body for all clues.
 /// - show-task-counter (boolean): enable or disable task counter for all tasks.
+/// - title-font (auto, string): font for the title
+/// - title-weight-delta (auto, int): weight offset of the title
 ///
 /// -> content
 #let gentle-clues(
@@ -56,6 +60,8 @@
   border-width: 0.5pt,
   content-inset: 1em,
   show-task-counter: false,
+  title-font: auto,
+  title-weight-delta: auto,
   body
 ) = {
 
@@ -83,6 +89,12 @@
   // Update content inset
   __gc_content_inset.update(content-inset);
 
+  // Update content inset
+  __gc_title_font.update(title-font);
+
+  // Update content inset
+  __gc_title_weight_delta.update(title-weight-delta);
+
   body
 
   }
@@ -108,6 +120,8 @@
 /// - content-inset (auto, length):
 /// - header-inset (auto, length):
 /// - breakable (auto, boolean):
+/// - title-font (auto, string):
+/// - title-weight-delta (auto, int):
 ///
 /// -> content
 #let clue(
@@ -123,6 +137,8 @@
   border-width: auto,
   content-inset: auto,
   header-inset: auto,
+  title-font: auto,
+  title-weight-delta: auto,
   breakable: auto,
 ) = {
   // check color types
@@ -154,7 +170,10 @@
     let _border-width = if-auto-then(border-width, __gc_border_width.get());
     let _border-radius = if-auto-then(radius, __gc_border_radius.get())
     let _stroke-width = if-auto-then(auto, __gc_stroke_width.get())
+    let _title-weight-delta = if-auto-then(title-weight-delta, __gc_title_weight_delta.get())
+    let _title-font = if-auto-then(title-font, if-auto-then(__gc_title_font.get(), text.font))
     let _clip-content = true
+    let _title-content = strong(delta: _title-weight-delta, text(font: _title-font, title))
 
     // Header Part
     let header-block = block(
@@ -166,13 +185,13 @@
             inset: if-auto-then(header-inset, __gc_header_inset.get()),
             stroke: (right: _border-width + _header-color )
           )[
-              #if icon == none { strong(delta:200, title) } else {
+              #if icon == none { _title-content } else {
                 grid(
                   columns: (auto, auto),
                   align: (horizon, left + horizon),
                   gutter: 1em,
                   box(height: 1em)[ #icon ],
-                  strong(delta: 200, title)
+                  _title-content
                 )
               }
           ]

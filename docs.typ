@@ -107,11 +107,13 @@ Add some beautiful, predefined admonitions or define your own.
 
 // Color options
 #clue(
-  title: "Color management",
+  title: "Color management and title font",
   accent-color: gradient.linear(red, blue, dir: ttb),
   header-color: gradient.linear(red, yellow, blue),
   border-color: blue.darken(40%),
-  body-color: fuchsia.lighten(80%)
+  body-color: fuchsia.lighten(80%),
+  title-font: "Liberation Sans",
+  title-weight-delta: 300
 )[
   Clues can be styled in your liking.
 
@@ -119,14 +121,18 @@ Add some beautiful, predefined admonitions or define your own.
 
   But you can set the `header-color`,`border-color` and `body-color` independently with a `color`, `gradient` or `pattern`.
 
+  Additionally, you can set a different font for the title with `title-font` and its weight offset with `title-weight-delta`.
+
   *Example:*
   ```typ
   #clue(
-    title: "Color management",
+    title: "Color management and title font",
     accent-color: gradient.linear(red, blue, dir:ttb),
     header-color: gradient.linear(red, yellow, blue),
     border-color: blue.darken(40%),
-    body-color: pattern(text(fill:fuchsia.lighten(40%)," . "))
+    body-color: pattern(text(fill:fuchsia.lighten(40%)," . ")),
+    title-font: "Liberation Mono",
+    title-weight-delta: 300
   )[...]
   ```
 ]
