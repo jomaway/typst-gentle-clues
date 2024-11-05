@@ -89,10 +89,10 @@
   // Update content inset
   __gc_content_inset.update(content-inset);
 
-  // Update content inset
+  // Update title font
   __gc_title_font.update(title-font);
 
-  // Update content inset
+  // Update title weight delta
   __gc_title_weight_delta.update(title-weight-delta);
 
   body
