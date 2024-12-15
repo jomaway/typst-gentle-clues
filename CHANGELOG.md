@@ -1,39 +1,48 @@
 # Changelog
 
-## v.1.0.0 (2024/09/04)
+## v1.1.0 (2024/12/15)
+
+- feat: Add Hungarian translation
+- feat: Add support for custom title fonts and weights
+- fix: Update chinese translation
+
+## v1.0.0 (2024/09/04)
 
 - !refactor(predefined): use catppuccin palette as default theme colors.
 - fix(predefined): show notify clue correctly now
 - refactor(docs): add API docs with tidy
 
-## v.0.9.0 (2024/07/01)
-  - feat: allow gradient and pattern as color settings.
-  - feat: add experiment clue
-  - feat: add idea clue
-  - feat: add code clue
-  - feat: set custom image as icon.
-  - refactor: moved color and icon definitions to a seperate `theme.typ` file.
+## v0.9.0 (2024/07/01)
 
-  *BREAKING:*
-  - refactor: To disable the task-counter `gc-task-counter-enabled.update(false)` needs to be called because moved states to `predefined.typ`
-  - refactor: change `quote` to `quotation` due to naming conflicts
-  - refactor: change `example` icon
-  - refactor: change `conclusion` icon and color
-  - refactor: change default title weight to a delta of 200
-  - refactor: change default icon to none.
+- feat: allow gradient and pattern as color settings.
+- feat: add experiment clue
+- feat: add idea clue
+- feat: add code clue
+- feat: set custom image as icon.
+- refactor: moved color and icon definitions to a seperate `theme.typ` file.
+
+*BREAKING:*
+- refactor: To disable the task-counter `gc-task-counter-enabled.update(false)` needs to be called because moved states to `predefined.typ`
+- refactor: change `quote` to `quotation` due to naming conflicts
+- refactor: change `example` icon
+- refactor: change `conclusion` icon and color
+- refactor: change default title weight to a delta of 200
+- refactor: change default icon to none.
 
 ## v0.8.0 (2024/04/26)
-    - feat: allow clues without an icon.
-    - feat: add goal clue
-    - fix: transparent background for body
-    - feat: set body-color
-    - feat: use typst quote function inside quote.
-    - refactor: update to linguify 0.4.0
-    - refactor: split into multiple files for better maintainability
+
+- feat: allow clues without an icon.
+- feat: add goal clue
+- fix: transparent background for body
+- feat: set body-color
+- feat: use typst quote function inside quote.
+- refactor: update to linguify 0.4.0
+- refactor: split into multiple files for better maintainability
 
 
 ## v0.7.1 (2024/03/26)
-    - fix: bug with linguify.
+
+- fix: bug with linguify.
 
 ## v0.7.0 (2024/03/18)
 

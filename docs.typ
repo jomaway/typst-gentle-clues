@@ -1,6 +1,5 @@
 #import "lib/lib.typ": *
 #import "@preview/tidy:0.3.0"
-// #import "@local/svg-emoji:0.1.0": *
 
 // extract version from typst.toml package file.
 #let pkg-data = toml("typst.toml").package
@@ -157,14 +156,13 @@ Add some beautiful, predefined admonitions or define your own.
     ..args
   ) = clue(title: title, icon: icon, ..args)
   #ghost[Huuuuuuh.]
-  #set text(9pt)
-  #tip[Use the `svg-emoji` package until emoji support is fully supported in typst ]
 ]
 
 
 == List of all predefined clues <predefined>
 
 #columns(2)[
+#set text(10pt)
 
 `#clue`
 #clue[
