@@ -47,7 +47,7 @@
 /// - content-inset (length): sets the default content inset of the body for all clues.
 /// - show-task-counter (boolean): enable or disable task counter for all tasks.
 /// - title-font (auto, string): font for the title
-/// - title-weight-delta (auto, int): weight offset of the title
+/// - title-weight-delta (int): weight offset of the title
 ///
 /// -> content
 #let gentle-clues(
