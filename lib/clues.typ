@@ -61,7 +61,7 @@
   content-inset: 1em,
   show-task-counter: false,
   title-font: auto,
-  title-weight-delta: auto,
+  title-weight-delta: 200,
   body
 ) = {
 
