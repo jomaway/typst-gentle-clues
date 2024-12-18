@@ -193,6 +193,14 @@
   ///
   /// -> auto | length
   border-width: auto,
+  /// Defines the width of the stroke on the left side.
+  /// ```example
+  /// #clue(title:"big", stroke-width: 5pt,)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | length
+  stroke-width: auto,
+
   /// The inset for the content body.
   /// ```example
   /// #clue(title:"squeeze", content-inset: 1pt)[Some important content.]
@@ -252,7 +260,7 @@
 
     let _border-width = if-auto-then(border-width, __gc_border_width.get());
     let _border-radius = if-auto-then(radius, __gc_border_radius.get())
-    let _stroke-width = if-auto-then(auto, __gc_stroke_width.get())
+    let _stroke-width = if-auto-then(stroke-width, __gc_stroke_width.get())
     let _title-weight-delta = if-auto-then(title-weight-delta, __gc_title_weight_delta.get())
     let _title-font = if-auto-then(title-font, if-auto-then(__gc_title_font.get(), text.font))
     let _clip-content = true
