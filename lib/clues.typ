@@ -69,9 +69,6 @@
   /// defines the default weight offset for the title
   /// -> int
   title-weight-delta: 200,
-  /// enable or disable task counter for all tasks.
-  /// -> boolean
-  show-task-counter: false,
   body
 ) = {
 
