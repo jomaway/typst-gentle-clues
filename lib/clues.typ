@@ -63,10 +63,10 @@
   /// defines the default content inset of the body for all clues.
   /// -> length
   content-inset: 1em,
-  /// - title-font (auto, string): font for the title
+  /// defines the default font for the title
   /// -> auto | string
   title-font: auto,
-  /// - title-weight-delta (int): weight offset of the title
+  /// defines the default weight offset for the title
   /// -> int
   title-weight-delta: 200,
   /// enable or disable task counter for all tasks.
