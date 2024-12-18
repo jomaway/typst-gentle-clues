@@ -1,5 +1,5 @@
 #import "lib/lib.typ": *
-#import "@preview/tidy:0.3.0"
+#import "@preview/tidy:0.4.0"
 
 // extract version from typst.toml package file.
 #let pkg-data = toml("typst.toml").package
@@ -18,15 +18,18 @@
 // global page settings
 #set page(margin: 2cm);
 #set text(font: "Rubik", weight: 300, lang: "en")
-
-// #show: setup-emoji
-
+#set heading(
+  numbering: (..numbers) =>
+    if numbers.pos().len() == 2 {
+      return numbering("1.", ..numbers.pos().slice(1))
+    }
+)
 // tidy docs
 #let docs-clues = tidy.parse-module(
   read("lib/clues.typ"),
   name: "Gentle Clues API",
   scope: (clues: clues),
-  preamble: "import clues: *;",
+  preamble: "#import clues: *; #show: gentle-clues.with(width: 8cm);",
   label-prefix: "gc"
 )
 
@@ -129,7 +132,7 @@ Add some beautiful, predefined admonitions or define your own.
     accent-color: gradient.linear(red, blue, dir:ttb),
     header-color: gradient.linear(red, yellow, blue),
     border-color: blue.darken(40%),
-    body-color: pattern(text(fill:fuchsia.lighten(40%)," . ")),
+    body-color: pattern(text(fill:fuchsia.lighten(80%)," . ")),
     title-font: "Liberation Mono",
     title-weight-delta: 300
   )[...]

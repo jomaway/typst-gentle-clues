@@ -27,41 +27,51 @@
 /// *Example:*
 /// Change the default settings for all clues.
 /// #figure(
-/// ```typ
+/// ```example
 /// #show: gentle-clues.with(
-///   headless: true,  // never show any headers
-///   breakable: false, // default breaking behavior
-///   content-inset: 2em, // default content-inset
-///   stroke-width: 6pt, // default left stroke-width
+///   headless: true,
+///   stroke-width: 6pt,
+///   width: 5.5cm,
 /// )
+/// #clue[With changed default settings.]
 /// ```
 /// )<gentle-clues-example>
 ///
-/// - breakable (boolean): sets if clues break across pages.
-/// - headless (boolean): if all clues should be shown without a header
-/// - header-inset (length): sets the default header-inset for all clues.
-/// - width (auto, length): sets the default width for all clues.
-/// - stroke-width (length): sets the default stroke width of the left colored stroke for all clues.
-/// - border-radius (length): sets the default border radius for all clues.
-/// - border-width (length): sets the default border width for all clues.
-/// - content-inset (length): sets the default content inset of the body for all clues.
-/// - show-task-counter (boolean): enable or disable task counter for all tasks.
-/// - title-font (auto, string): font for the title
-/// - title-weight-delta (int): weight offset of the title
-///
 /// -> content
 #let gentle-clues(
+  /// defines if clues break across pages by default.
+  /// -> boolean
   breakable: false,
+  /// defines if clues should be shown without a header by default.
+  /// -> boolean
   headless: false,
+  /// defines the default header-inset for all clues.
+  /// -> length
   header-inset: 0.5em,
+  /// defines the default width for all clues.
+  /// -> auto | length
   width: auto,
+  /// defines the default stroke width of the left colored stroke for all clues.
+  /// -> length
   stroke-width: 2pt,
+  /// defines the default border radius for all clues.
+  /// -> length
   border-radius: 2pt,
+  /// defines the default border width for all clues.
+  /// -> length
   border-width: 0.5pt,
+  /// defines the default content inset of the body for all clues.
+  /// -> length
   content-inset: 1em,
-  show-task-counter: false,
+  /// - title-font (auto, string): font for the title
+  /// -> auto | string
   title-font: auto,
+  /// - title-weight-delta (int): weight offset of the title
+  /// -> int
   title-weight-delta: 200,
+  /// enable or disable task counter for all tasks.
+  /// -> boolean
+  show-task-counter: false,
   body
 ) = {
 
@@ -101,44 +111,118 @@
 
 /// Basic gentle-clue (clue) template function.
 ///
-/// This function can be used to create custom clues. You can pass all of this parameters to the predefined clues as well to overwrite the default settings.
+/// This function can be used to create custom clues. You can pass all of this parameters to the predefined clues (@predefined) as well to overwrite the default settings.
+/// If an argument is `auto` it will fallback to the value which is specified in @gentle-clues
 ///
 /// *Example:*
-/// #example(`clue(title:"Test", width: 6cm)[Some important content]`)
+/// ```example
+/// #clue(title:"Test")[Some important content.]
+/// ```
 /// #figure(``)<clue-api>
 ///
-/// - content (content): Content inside the body.
-/// - title (string, none): The title for the
-/// - icon (none, image, symbol): The icon to show in front of the title.
-/// - accent-color (color, gradient, pattern):
-/// - border-color (color, gradient, pattern):
-/// - header-color (color, gradient, pattern):
-/// - body-color (none, color, gradient, pattern):
-/// - width (auto, length):
-/// - radius (auto, length):
-/// - border-width (auto, length):
-/// - content-inset (auto, length):
-/// - header-inset (auto, length):
-/// - breakable (auto, boolean):
-/// - title-font (auto, string):
-/// - title-weight-delta (auto, int):
 ///
 /// -> content
 #let clue(
+  /// Content inside the body.
+  /// -> content
   content,
+  /// The title of the clue. If `none` the header is ommited.
+  /// ```example
+  /// #clue(title:none)[Some headless content.]
+  /// ```
+  ///
+  /// -> string | none
   title: "",
+  /// The icon to show in front of the title.
+  /// ```example
+  /// #clue(title:"with icon", icon: emoji.ticket)[Some important content.]
+  /// ```
+  ///
+  /// -> none | image | symbol
   icon: none,
+
+  /// The accent color defines the color of the stroke on the left side.
+  /// If border-color and header-color are set to auto those get derived from the accent color.
+  /// ```example
+  /// #clue(title:"red accent", accent-color: red)[Some important content.]
+  /// ```
+  ///
+  /// -> color | gradient | pattern
   accent-color: navy,
-  border-color: auto,
+  /// The background color of the header.
+  /// ```example
+  /// #clue(title:"green header", header-color: green.lighten(50%))[Some important content.]
+  /// ```
+  ///
+  /// -> auto | color | gradient | pattern
   header-color: auto,
+  /// The color of the small border on the bottom and right side.
+  /// if in headless mode also for the top border.
+  /// ```example
+  /// #clue(title: "blue borders", border-color: blue)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | color | gradient | pattern
+  border-color: auto,
+  /// The background color of the body
+  /// ```example
+  /// #clue(title:"pink body", body-color: fuchsia.lighten(50%))[Some important content.]
+  /// ```
+  ///
+  /// -> none | color | gradient | pattern
   body-color: none,
+
+  /// The total width of the clue.
+  /// ```example
+  /// #clue(title:"4 cm wide", width: 4cm)[Some small content.]
+  /// ```
+  ///
+  /// -> auto | length
   width: auto,
+  /// The border radius on the right side.
+  /// ```example
+  /// #clue(title:"rounded", radius: 10pt)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | length
   radius: auto,
+  /// Defines the width of the border.
+  /// ```example
+  /// #clue(title:"thick", border-width: 5pt, border-color: orange)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | length
   border-width: auto,
+  /// The inset for the content body.
+  /// ```example
+  /// #clue(title:"squeeze", content-inset: 1pt)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | length
   content-inset: auto,
+  /// Defines the inset for the header
+  /// ```example
+  /// #clue(title:"tight", header-inset: 1pt)[Some important content.]
+  /// ```
+  ///
+  /// -> auto | length
   header-inset: auto,
+  /// The font which is used for the title.
+  /// ```example
+  /// #clue(title:"styled", title-font:"New Computer Modern" )[Some important content.]
+  /// ```
+  ///
+  /// -> auto | string
   title-font: auto,
+  /// The weight delta which is used for the title. Output depends on the used font.
+  /// ```example
+  /// #clue(title:"fat", title-weight-delta: 500)[Some important content.]
+  /// ```
+  ///
+  /// -> auto  | int
   title-weight-delta: auto,
+  /// Defines if the clue is breakable. If auto it falls back to the default settings. See @gentle-clues
+  /// -> auto | boolean
   breakable: auto,
 ) = {
   // check color types
@@ -153,7 +237,6 @@
   if (body-color != none) {
     assert(type(body-color) in (color, gradient, pattern), message: "expected color, gradient or pattern, found " + type(body-color));
   }
-
 
   context {
     // Set default color:
@@ -185,7 +268,7 @@
             inset: if-auto-then(header-inset, __gc_header_inset.get()),
             stroke: (right: _border-width + _header-color )
           )[
-              #if icon == none { _title-content } else {
+            #if icon == none { _title-content  } else {
                 grid(
                   columns: (auto, auto),
                   align: (horizon, left + horizon),
