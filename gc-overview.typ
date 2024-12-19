@@ -31,6 +31,8 @@
   ..predefined-clues
 )
 
-#clue(title:"Gentle Clues - Overview", header-color: gradient.linear(..color.map.crest), body-color: color.white)[
+#let overview = clue(title:"Gentle Clues - Overview", header-color: gradient.linear(..color.map.crest), body-color: color.white)[
   #clue-grid
 ]
+
+#overview

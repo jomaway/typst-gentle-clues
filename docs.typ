@@ -15,8 +15,18 @@
   ]
 }
 
+#let pkg-info = (
+  author: link("<https://github.com/jomaway>", "jomaway"),
+  repo: link(pkg-data.at("repository")),
+  version: version
+)
+
 // global page settings
-#set page(margin: 2cm);
+#set page(
+  margin: 2cm,
+  header: align(start,text(font:"Noto Sans Mono")[Docs for #link("https://typst.app/universe/package/gentle-clues",[gentle-clues:#version])]),
+  footer: [Author: #link("https://github.com/jomaway","jomaway"), License: MIT #h(1fr) #context {counter(page).display("1/1", both: true)}]
+);
 #set text(font: "Rubik", weight: 300, lang: "en")
 #set heading(
   numbering: (..numbers) =>
@@ -24,12 +34,23 @@
       return numbering("1.", ..numbers.pos().slice(1))
     }
 )
+#show link: set text(blue)
+
+
 // tidy docs
 #let docs-clues = tidy.parse-module(
   read("lib/clues.typ"),
   name: "Gentle Clues API",
   scope: (clues: clues),
   preamble: "#import clues: *; #show: gentle-clues.with(width: 8cm);",
+  label-prefix: "gc"
+)
+
+#let docs-predefined = tidy.parse-module(
+  read("lib/predefined.typ"),
+  name: "Predefined Clues",
+  scope: (predefined: predefined, clues: clues),
+  preamble: "#import predefined: *; #import clues: gentle-clues; #show: gentle-clues.with(width: 8cm, title-font: \"Rubik\");",
   label-prefix: "gc"
 )
 
@@ -41,9 +62,29 @@
     #b
   ]
 
-= Gentle clues for typst
+#set align(center)
+= Gentle clues
 
-Add some beautiful, predefined admonitions or define your own.
+#v(1em)
+#emph[Add some beautiful, predefined admonitions or define your own.]
+#v(1em)
+
+`gentle-clues` is a package for the typst ecosystem \
+by #pkg-info.at("author").
+
+
+#import "gc-overview.typ": overview
+#align(horizon + center, box(width: 90%)[
+  #figure(
+    overview,
+    caption: "Overview of all predefined clues."
+  )
+])
+
+#outline(depth: 2)
+
+#pagebreak()
+#set align(start)
 
 == Getting started
 
@@ -62,7 +103,7 @@ Add some beautiful, predefined admonitions or define your own.
   + Import the package like this:
     #import_statement
 
-  + *Optional:* Change the default settings for all clues if desired. See @gentle-clues-example.
+  + *Optional:* Change the default settings for all clues if desired. See @gentle-clues-example[Example].
   +
     #ex[
       Use a predefined clue without any options
@@ -162,92 +203,99 @@ Add some beautiful, predefined admonitions or define your own.
 ]
 
 
-== List of all predefined clues <predefined>
+// == List of all predefined clues <predefined>
 
-#columns(2)[
-#set text(10pt)
+// #columns(2)[
+// #set text(10pt)
 
-`#clue`
-#clue[
-  Default clue
-]
+// `#clue`
+// #clue[
+//   Default clue
+// ]
 
-`idea`
-#idea[Lets make something beautifull.]
+// `idea`
+// #idea[Lets make something beautifull.]
 
-`#abstract`
-#abstract[Make it short. This is all you need.]
+// `#abstract`
+// #abstract[Make it short. This is all you need.]
 
-`#question`
-#question[How do amonishments work?]
+// `#question`
+// #question[How do amonishments work?]
 
-`#info`
-#info[It's as easy as
-```typst
-  #info[Whatever you want to say]
-  ```
-]
+// `#info`
+// #info[It's as easy as
+// ```typst
+//   #info[Whatever you want to say]
+//   ```
+// ]
 
-`#example`,
-#example[Testing ...]
+// `#example`,
+// #example[Testing ...]
 
-`#experiment`
-#experiment[Testing ...]
+// `#experiment`
+// #experiment[Testing ...]
 
-`#task`
-#task[
-  #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt)
-  Check out this wonderful typst package!
-]
+// `#task`
+// #task[
+//   #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt)
+//   Check out this wonderful typst package!
+// ]
 
-`#error`
-#error[Something did not work here.]
+// `#error`
+// #error[Something did not work here.]
 
-`#warning`
-#warning[Still a work in progress.]
+// `#warning`
+// #warning[Still a work in progress.]
 
-`#success`
-#success[All tests passed. It's worth a try.]
+// `#success`
+// #success[All tests passed. It's worth a try.]
 
-`#tip`
-#tip[Try it yourself]
+// `#tip`
+// #tip[Try it yourself]
 
-`#conclusion`
-#conclusion[This package makes it easy to add some beatufillness to your documents]
+// `#conclusion`
+// #conclusion[This package makes it easy to add some beatufillness to your documents]
 
-`#memo`
-#memo[Leave a #emoji.star on github.]
+// `#memo`
+// #memo[Leave a #emoji.star on github.]
 
-`#quotation`
-#quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
+// `#quotation`
+// #quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
 
-`#goal`
-#goal[Beatuify your document!]
+// `#goal`
+// #goal[Beatuify your document!]
 
-`#notify`
-#notify[ In version 0.9 some new predefined clues where added.]
+// `#notify`
+// #notify[ In version 0.9 some new predefined clues where added.]
 
-`#code`
-#code[```typ
-  #let x = "secret"
-```]
+// `#code`
+// #code[```typ
+//   #let x = "secret"
+// ```]
 
-`#danger`
-#danger[
-  Nothing here ...
-]
-
-
+// `#danger`
+// #danger[
+//   Nothing here ...
+// ]
 
 
 
-=== Headless Variant
+// === Headless Variant
 
-just add `title: none` to any example
+// just add `title: none` to any example
 
-#info(title:none)[Just a short information.]
+// #info(title:none)[Just a short information.]
 
-] // columns end
+// ] // columns end
 
 
+#pagebreak()
+==== List of all predefined clues <predefined>
+#tidy.show-module(
+  docs-predefined,
+  style: tidy.styles.default,
+  omit-private-definitions: true,
+)
+
+#pagebreak()
 #tidy.show-module(docs-clues, style: tidy.styles.default)

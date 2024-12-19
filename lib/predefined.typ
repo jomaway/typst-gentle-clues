@@ -6,24 +6,28 @@
 #let lang-database = toml("lang.toml")
 
 /// Helper for fetching the translated title
-#let get-title-for(id) = {
+#let _get-title-for(id) = {
   assert.eq(type(id),str);
   return linguify(id, from: lang-database, default: linguify(id, lang: "en", default: id));
 }
 
 /// Helper to get the accent-color from the theme
-///
-/// - id (string): The id for the predefined clue.
 /// -> color
-#let get-accent-color-for(id) = {
+#let _get-accent-color-for(
+  /// The id for the predefined clue.
+  /// -> string
+  id
+) = {
   return theme.at(id).accent-color
 }
 
 /// Helper to get the icon from the theme
-///
-/// - id (string): The id for the predefined clue.
 /// -> content
-#let get-icon-for(id) = {
+#let _get-icon-for(
+  /// The id for the predefined clue.
+  /// -> string
+  id
+) = {
   let icon = theme.at(id).icon
   if type(icon) == str {
     return image("assets/" + theme.at(id).icon, fit: "contain")
@@ -33,33 +37,108 @@
 }
 
 /// Wrapper function for all predefined clues.
-///
-/// - id (string): The id of the clue from which color, icon and default title will be calculated.
-/// - ..args (parameter): for overwriting the default parameter of a clue.
-#let predefined-clue(id, ..args) = clue(
-  accent-color: get-accent-color-for(id),
-  title: get-title-for(id),
-  icon: get-icon-for(id),
+/// -> clue
+#let _predefined-clue(
+  /// The id of the clue from which color, icon and default title will be calculated.
+  /// -> string
+  id,
+  /// for overwriting the default parameter of a clue.
+  /// -> parameter
+  ..args
+) = clue(
+  accent-color: _get-accent-color-for(id),
+  title: _get-title-for(id),
+  icon: _get-icon-for(id),
   ..args
 )
 
-#let info(..args) = predefined-clue("info",..args)
-#let notify(..args) = predefined-clue("notify",..args)
-#let success(..args) = predefined-clue("success",..args)
-#let warning(..args) = predefined-clue("warning",..args)
-#let danger(..args) = predefined-clue("danger",..args)
-#let error(..args) = predefined-clue("error",..args)
-#let tip(..args) = predefined-clue("tip",..args)
-#let abstract(..args) = predefined-clue("abstract",..args)
-#let goal(..args) = predefined-clue("goal",..args)
-#let question(..args) = predefined-clue("question",..args)
-#let idea(..args) = predefined-clue("idea",..args)
-#let example(..args) = predefined-clue("example",..args)
-#let experiment(..args) = predefined-clue("experiment",..args)
-#let conclusion(..args) = predefined-clue("conclusion",..args)
-#let memo(..args) = predefined-clue("memo",..args)
-#let code(..args) = predefined-clue("code",..args)
-#let quotation(attribution: none, content, ..args) = predefined-clue("quote",..args)[
+/// Info
+/// ```example
+/// #info[Whatever you want to say]
+/// ```
+/// -> content
+#let info(..args) = _predefined-clue("info",..args)
+/// Notificaton
+/// ```example
+/// #notify[New features in future versions.]
+/// ```
+/// -> content
+#let notify(..args) = _predefined-clue("notify",..args)
+/// ```example
+/// #success[All tests passed. It's worth a try.]
+/// ```
+/// -> content
+#let success(..args) = _predefined-clue("success",..args)
+/// ```example
+/// #warning[Still a work in progress.]
+/// ```
+/// -> content
+#let warning(..args) = _predefined-clue("warning",..args)
+/// ```example
+/// #danger[Be carefull.]
+/// ```
+/// -> content
+#let danger(..args) = _predefined-clue("danger",..args)
+/// ```example
+/// #error[Something did not work here.]
+/// ```
+/// -> content
+#let error(..args) = _predefined-clue("error",..args)
+/// ```example
+/// #tip[Check out this cool package]
+/// ```
+/// -> content
+#let tip(..args) = _predefined-clue("tip",..args)
+/// ```example
+/// #abstract[Make it short. This is all you need.]
+/// ```
+/// -> content
+#let abstract(..args) = _predefined-clue("abstract",..args)
+/// ```example
+/// #goal[Beatuify your document!]
+/// ```
+/// -> content
+#let goal(..args) = _predefined-clue("goal",..args)
+/// ```example
+/// #question[How do amonishments work?]
+/// ```
+/// -> content
+#let question(..args) = _predefined-clue("question",..args)
+/// ```example
+/// #idea[Some content]
+/// ```
+/// -> content
+#let idea(..args) = _predefined-clue("idea",..args)
+/// ```example
+/// #example[Lets make something beautifull.]
+/// ```
+/// -> content
+#let example(..args) = _predefined-clue("example",..args)
+/// ```example
+/// #experiment[Try this ...]
+/// ```
+/// -> content
+#let experiment(..args) = _predefined-clue("experiment",..args)
+/// ```example
+/// #conclusion[This package makes it easy to add some beatufillness to your documents.]
+/// ```
+/// -> content
+#let conclusion(..args) = _predefined-clue("conclusion",..args)
+/// ```example
+/// #memo[Leave a #emoji.star on github.]
+/// ```
+/// -> content
+#let memo(..args) = _predefined-clue("memo",..args)
+/// ```example
+/// #code[`#let x = "secret"`]
+/// ```
+/// -> content
+#let code(..args) = _predefined-clue("code",..args)
+/// ```example
+/// #quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
+/// ```
+/// -> content
+#let quotation(attribution: none, content, ..args) = _predefined-clue("quote",..args)[
   #quote(block: true, attribution: attribution)[#content]
 ]
 
@@ -82,7 +161,11 @@
   }
 }
 
+/// ```example
+/// #task[Check out this wonderful typst package!]
+/// ```
+/// -> content
 #let task(..args) = {
   increment-task-counter()
-  predefined-clue("task", title: get-title-for("task") + get-task-number(), ..args)
+  _predefined-clue("task", title: _get-title-for("task") + get-task-number(), ..args)
 }
