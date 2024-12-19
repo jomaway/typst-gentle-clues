@@ -125,11 +125,11 @@
   content,
   /// The title of the clue. If `none` the header is ommited.
   /// ```example
-  /// #clue(title:none)[Some headless content.]
+  /// #clue(title:"My title")[Some important content.]
   /// ```
   ///
   /// -> string | none
-  title: "",
+  title: none,
   /// The icon to show in front of the title.
   /// ```example
   /// #clue(title:"with icon", icon: emoji.ticket)[Some important content.]
@@ -226,9 +226,17 @@
   ///
   /// -> auto  | int
   title-weight-delta: auto,
-  /// Defines if the clue is breakable. If auto it falls back to the default settings. See @gentle-clues
+
+  /// Defines if the clue is breakable. If `auto` it falls back to the default settings. See @gentle-clues
   /// -> auto | boolean
   breakable: auto,
+  /// Defines if clues should be shown without a header. If `auto` it falls back to the default settings. See @gentle-clues
+  /// ```example
+  /// #clue(title:"fat", headless: true)[Some important content.]
+  /// ```
+  ///
+  /// -> boolean
+  headless: auto,
 ) = {
   // check color types
   assert(type(accent-color) in (color, gradient, pattern), message: "expected color, gradient or pattern found " + type(accent-color));
@@ -313,7 +321,7 @@
       clip: _clip-content,
     )[
       #set align(start)
-      #if __gc_clues_headless.get() == false and title != none { header-block }
+      #if if-auto-then(headless, __gc_clues_headless.get())  == false and title != none { header-block }
       #content-block(content)
     ] // wrapper block end
   }
