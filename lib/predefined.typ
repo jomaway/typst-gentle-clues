@@ -52,93 +52,135 @@
   ..args
 )
 
-/// Info
+
+/// #docs-info("abstract")
+/// ```example
+/// #abstract[Make it short. This is all you need.]
+/// ```
+/// -> content
+#let abstract(
+  /// Supports all parameters of @clue.
+  ..args
+) = _predefined-clue("abstract",..args)
+
+/// #docs-info("info")
 /// ```example
 /// #info[Whatever you want to say]
 /// ```
 /// -> content
 #let info(..args) = _predefined-clue("info",..args)
+
+/// #docs-info("notify")
 /// Notificaton
 /// ```example
 /// #notify[New features in future versions.]
 /// ```
 /// -> content
 #let notify(..args) = _predefined-clue("notify",..args)
+
+/// #docs-info("success")
 /// ```example
 /// #success[All tests passed. It's worth a try.]
 /// ```
 /// -> content
 #let success(..args) = _predefined-clue("success",..args)
+
+/// #docs-info("warning")
 /// ```example
 /// #warning[Still a work in progress.]
 /// ```
 /// -> content
 #let warning(..args) = _predefined-clue("warning",..args)
+
+/// #docs-info("danger")
 /// ```example
 /// #danger[Be carefull.]
 /// ```
 /// -> content
 #let danger(..args) = _predefined-clue("danger",..args)
+
+/// #docs-info("error")
 /// ```example
 /// #error[Something did not work here.]
 /// ```
 /// -> content
 #let error(..args) = _predefined-clue("error",..args)
+
+/// #docs-info("tip")
 /// ```example
 /// #tip[Check out this cool package]
 /// ```
 /// -> content
 #let tip(..args) = _predefined-clue("tip",..args)
-/// ```example
-/// #abstract[Make it short. This is all you need.]
-/// ```
-/// -> content
-#let abstract(..args) = _predefined-clue("abstract",..args)
+
+/// #docs-info("goal")
 /// ```example
 /// #goal[Beatuify your document!]
 /// ```
 /// -> content
 #let goal(..args) = _predefined-clue("goal",..args)
+
+/// #docs-info("question")
 /// ```example
 /// #question[How do amonishments work?]
 /// ```
 /// -> content
 #let question(..args) = _predefined-clue("question",..args)
+
+/// #docs-info("idea")
 /// ```example
 /// #idea[Some content]
 /// ```
 /// -> content
 #let idea(..args) = _predefined-clue("idea",..args)
+
+/// #docs-info("example")
 /// ```example
 /// #example[Lets make something beautifull.]
 /// ```
 /// -> content
 #let example(..args) = _predefined-clue("example",..args)
+
+/// #docs-info("experiment")
 /// ```example
 /// #experiment[Try this ...]
 /// ```
 /// -> content
 #let experiment(..args) = _predefined-clue("experiment",..args)
+
+/// #docs-info("conclusion")
 /// ```example
 /// #conclusion[This package makes it easy to add some beatufillness to your documents.]
 /// ```
 /// -> content
 #let conclusion(..args) = _predefined-clue("conclusion",..args)
+
+/// #docs-info("memo")
 /// ```example
 /// #memo[Leave a #emoji.star on github.]
 /// ```
 /// -> content
 #let memo(..args) = _predefined-clue("memo",..args)
+
+/// #docs-info("code")
 /// ```example
 /// #code[`#let x = "secret"`]
 /// ```
 /// -> content
 #let code(..args) = _predefined-clue("code",..args)
+
+/// #docs-info("quote")
 /// ```example
 /// #quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
 /// ```
 /// -> content
-#let quotation(attribution: none, content, ..args) = _predefined-clue("quote",..args)[
+#let quotation(
+  /// The author of the quote
+  attribution: none,
+  /// the quote itself
+  content,
+  /// Supports all parameter from @clue.
+  ..args) = _predefined-clue("quote",..args)[
   #quote(block: true, attribution: attribution)[#content]
 ]
 
@@ -161,6 +203,7 @@
   }
 }
 
+/// #docs-info("task")
 /// ```example
 /// #task[Check out this wonderful typst package!]
 /// ```

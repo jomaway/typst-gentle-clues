@@ -46,10 +46,25 @@
   label-prefix: "gc"
 )
 
+/// docs-helper function
+#let predefined-docs-info-table(id) = {
+  import predefined: _get-accent-color-for, _get-icon-for, _get-title-for
+  box(radius:3pt, clip:true, stroke: 1pt + black, table(
+    columns: (auto,auto,auto, 1fr),
+    inset: 0.6em,
+    fill: (col,row) => if row == 0 {gray.lighten(60%)},
+    align: (col,row) => if row >= 1 {center + horizon} else {auto},
+    table.header([*Accent-color*],[*Icon*],[*Title*], [*Example*]),
+    [#circle(fill:_get-accent-color-for(id)); #raw(_get-accent-color-for(id).to-hex())],
+    [#box(width: 2em, _get-icon-for(id))],
+    [#_get-title-for(id)],
+  ))
+}
+
 #let docs-predefined = tidy.parse-module(
   read("lib/predefined.typ"),
   name: "Predefined Clues",
-  scope: (predefined: predefined, clues: clues),
+  scope: (predefined: predefined, clues: clues, docs-info: predefined-docs-info-table),
   preamble: "#import predefined: *; #import clues: gentle-clues; #show: gentle-clues.with(width: 8cm, title-font: \"Rubik\");",
   label-prefix: "gc"
 )
@@ -65,10 +80,9 @@
 #set align(center)
 = Gentle clues
 
-#v(1em)
-#emph[Add some beautiful, predefined admonitions or define your own.]
-#v(1em)
-
+#block(inset: 1em)[
+  #emph[Add some beautiful, predefined admonitions or define your own.]
+]
 `gentle-clues` is a package for the typst ecosystem \
 by #pkg-info.at("author").
 
@@ -123,7 +137,7 @@ by #pkg-info.at("author").
       #set align(bottom)
       #example(title: "Custom title")[ Content ...]
     ]
-    See *all available parameters* at @clue-api.
+    See *all available parameters* at @clue-api[API].
 
   + *I18n:*
     - The current language which is set by `#set text(lang: "de")` changes the default header title.
@@ -180,113 +194,33 @@ by #pkg-info.at("author").
   ```
 ]
 
-#clue(title: "Define your own clue")[
-  ```typst
+#show: tidy.render-examples.with(
+  scope: (clues:clues),
+  layout: (code,preview) => grid(columns: 2, gutter: 1em, code,preview)
+)
+
+=== Define your own clues
+
+You can easily define your own clues. Just set some default values for `color`, `title`, `icon`, ... and you are ready to go.
+#box[
+  ```example
+  #import clues: *
   // Define a clue called ghost
   #let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
-    accent-color: purple, // Define a base color
-    title: title,   // Define the default title
-    icon: icon,     // Define the default icon
-    ..args          // Pass along all other arguments
+    // Define default values.
+    accent-color: purple,
+    title: title,
+    icon: icon,
+    // Pass along all other arguments
+    ..args
   )
+
   // Use it
+  #ghost[This is the ghost number one.]
+  #ghost(title: "Poltergeist")[This ghost has a custom name.]
   #ghost[Huuuuuuh.]
   ```
-  The result looks like this.
-  #let ghost(
-    title: "Buuuuuuh.",
-    accent-color: purple,
-    icon: emoji.ghost ,
-    ..args
-  ) = clue(title: title, icon: icon, ..args)
-  #ghost[Huuuuuuh.]
 ]
-
-
-// == List of all predefined clues <predefined>
-
-// #columns(2)[
-// #set text(10pt)
-
-// `#clue`
-// #clue[
-//   Default clue
-// ]
-
-// `idea`
-// #idea[Lets make something beautifull.]
-
-// `#abstract`
-// #abstract[Make it short. This is all you need.]
-
-// `#question`
-// #question[How do amonishments work?]
-
-// `#info`
-// #info[It's as easy as
-// ```typst
-//   #info[Whatever you want to say]
-//   ```
-// ]
-
-// `#example`,
-// #example[Testing ...]
-
-// `#experiment`
-// #experiment[Testing ...]
-
-// `#task`
-// #task[
-//   #box(width: 0.8em, height: 0.8em, stroke: 0.5pt + black, radius: 2pt)
-//   Check out this wonderful typst package!
-// ]
-
-// `#error`
-// #error[Something did not work here.]
-
-// `#warning`
-// #warning[Still a work in progress.]
-
-// `#success`
-// #success[All tests passed. It's worth a try.]
-
-// `#tip`
-// #tip[Try it yourself]
-
-// `#conclusion`
-// #conclusion[This package makes it easy to add some beatufillness to your documents]
-
-// `#memo`
-// #memo[Leave a #emoji.star on github.]
-
-// `#quotation`
-// #quotation(attribution: "The maintainer")[Keep it simple. Admonish your life.]
-
-// `#goal`
-// #goal[Beatuify your document!]
-
-// `#notify`
-// #notify[ In version 0.9 some new predefined clues where added.]
-
-// `#code`
-// #code[```typ
-//   #let x = "secret"
-// ```]
-
-// `#danger`
-// #danger[
-//   Nothing here ...
-// ]
-
-
-
-// === Headless Variant
-
-// just add `title: none` to any example
-
-// #info(title:none)[Just a short information.]
-
-// ] // columns end
 
 
 #pagebreak()
@@ -297,5 +231,6 @@ by #pkg-info.at("author").
   omit-private-definitions: true,
 )
 
+// Clues API
 #pagebreak()
 #tidy.show-module(docs-clues, style: tidy.styles.default)
