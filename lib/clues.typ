@@ -34,7 +34,8 @@
 ///   width: 5.5cm,
 /// )
 /// #clue[With changed default settings.]
-/// ```
+/// ```,
+/// supplement: "Example"
 /// )<gentle-clues-example>
 ///
 /// -> content
@@ -115,7 +116,7 @@
 /// ```example
 /// #clue(title:"Test")[Some important content.]
 /// ```
-/// #figure(``)<clue-api>
+/// #figure(``, supplement: "Section")<clue-api>
 ///
 ///
 /// -> content

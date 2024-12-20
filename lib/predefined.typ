@@ -60,6 +60,7 @@
 /// -> content
 #let abstract(
   /// Supports all parameters of @clue.
+  /// -> arguments
   ..args
 ) = _predefined-clue("abstract",..args)
 
@@ -176,10 +177,13 @@
 /// -> content
 #let quotation(
   /// The author of the quote
+  /// -> string | none
   attribution: none,
   /// the quote itself
+  /// -> content
   content,
   /// Supports all parameter from @clue.
+  /// -> arguments
   ..args) = _predefined-clue("quote",..args)[
   #quote(block: true, attribution: attribution)[#content]
 ]

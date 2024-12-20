@@ -30,7 +30,7 @@
 #set text(font: "Rubik", weight: 300, lang: "en")
 #set heading(
   numbering: (..numbers) =>
-    if numbers.pos().len() == 2 {
+    if numbers.pos().len() >= 2 and numbers.pos().len() <= 3 {
       return numbering("1.", ..numbers.pos().slice(1))
     }
 )
@@ -48,25 +48,35 @@
 
 /// docs-helper function
 #let predefined-docs-info-table(id) = {
-  import predefined: _get-accent-color-for, _get-icon-for, _get-title-for
+  import predefined: * // _get-accent-color-for, _get-icon-for, _get-title-for
   box(radius:3pt, clip:true, stroke: 1pt + black, table(
     columns: (auto,auto,auto, 1fr),
     inset: 0.6em,
     fill: (col,row) => if row == 0 {gray.lighten(60%)},
     align: (col,row) => if row >= 1 {center + horizon} else {auto},
-    table.header([*Accent-color*],[*Icon*],[*Title*], [*Example*]),
+    table.header([*Color*],[*Icon*],[*Title*], [*Note*]),
     [#circle(fill:_get-accent-color-for(id)); #raw(_get-accent-color-for(id).to-hex())],
     [#box(width: 2em, _get-icon-for(id))],
     [#_get-title-for(id)],
+    // raw(lang: "example", example)
   ))
 }
 
 #let docs-predefined = tidy.parse-module(
   read("lib/predefined.typ"),
   name: "Predefined Clues",
-  scope: (predefined: predefined, clues: clues, docs-info: predefined-docs-info-table),
+  scope: (
+    predefined: predefined,
+    clues: clues,
+    docs-info: predefined-docs-info-table,
+  ),
   preamble: "#import predefined: *; #import clues: gentle-clues; #show: gentle-clues.with(width: 8cm, title-font: \"Rubik\");",
   label-prefix: "gc"
+)
+
+#show: tidy.render-examples.with(
+  scope: (clues:clues),
+  layout: (code,preview) => grid(columns: 2, gutter: 1em, box(inset: 0.5em,code), align(horizon, box(preview)))
 )
 
 
@@ -86,9 +96,12 @@
 `gentle-clues` is a package for the typst ecosystem \
 by #pkg-info.at("author").
 
+#block(inset: 1em)[
+  *Version:* #version
+]
 
 #import "gc-overview.typ": overview
-#align(horizon + center, box(width: 90%)[
+#align(center, box(width: 90%)[
   #figure(
     overview,
     caption: "Overview of all predefined clues."
@@ -147,64 +160,51 @@ by #pkg-info.at("author").
 
 == Features
 
-#box(
-  height: 4.5cm,
-  stroke: gray.lighten(40%),
-  radius: 2pt,
-  inset: 2mm,
-  columns(2)[
-    #notify(title: "Breaking news", breakable: true)[
-      Clues can now break onto the next page with option: `breakable: true`
+This package provides some features which helps to customize the clues to your liking.
 
-      #lorem(30)
-    ]
-    This is a two columns layout.
-])
+- Brings a wide variaty of predefined clues. See @predefined.
+- Set global default for all clues. See @gentle-clues-example.
+- Overwrite each parameter on a single clue for changing title, color, etc. See @clue-api.
+- Show or hide a counter value on tasks.
+- Define your own clues very easily. See @define-own-clues
 
+=== Custom styling<custom-styling>
+Clues can be styled in your liking.
 
-// Color options
-#clue(
-  title: "Color management and title font",
-  accent-color: gradient.linear(red, blue, dir: ttb),
-  header-color: gradient.linear(red, yellow, blue),
-  border-color: blue.darken(40%),
-  body-color: fuchsia.lighten(80%),
-  title-font: "Liberation Mono",
-  title-weight-delta: 300
-)[
-  Clues can be styled in your liking.
+The simplest way is to change the `accent-color` which will be the thick border stroke on the left side. Header and border color will then automatically derived from this color.
 
-  The simplest way is to change the `accent-color` which will be the thick border stroke on the left side. Header and border color will then automatically derived from this color.
+But you can set the `header-color`,`border-color` and `body-color` independently with a `color`, `gradient` or `pattern`.
 
-  But you can set the `header-color`,`border-color` and `body-color` independently with a `color`, `gradient` or `pattern`.
+Additionally, you can set a different font for the title with `title-font` and its weight offset with `title-weight-delta`.
 
-  Additionally, you can set a different font for the title with `title-font` and its weight offset with `title-weight-delta`.
+*Example:*
 
-  *Example:*
-  ```typ
+#box[
+  ```example
+  >>> #import clues: clue
   #clue(
-    title: "Color management and title font",
-    accent-color: gradient.linear(red, blue, dir:ttb),
+    title: "Rainbow style",
+    accent-color: gradient.linear(red, blue, dir: ttb),
     header-color: gradient.linear(red, yellow, blue),
     border-color: blue.darken(40%),
-    body-color: pattern(text(fill:fuchsia.lighten(80%)," . ")),
+    body-color: yellow.lighten(80%),
     title-font: "Liberation Mono",
     title-weight-delta: 300
-  )[...]
+  )[Some content. #lorem(20)]
   ```
 ]
 
-#show: tidy.render-examples.with(
-  scope: (clues:clues),
-  layout: (code,preview) => grid(columns: 2, gutter: 1em, code,preview)
-)
+There are many more options for customazation. For all possible parameters see @clue-api[API].
 
-=== Define your own clues
+
+
+
+== Define your own clues <define-own-clues>
 
 You can easily define your own clues. Just set some default values for `color`, `title`, `icon`, ... and you are ready to go.
 #box[
   ```example
-  #import clues: *
+  >>> #import clues: clue
   // Define a clue called ghost
   #let ghost(title: "Buuuuuuh", icon: emoji.ghost , ..args) = clue(
     // Define default values.
@@ -224,10 +224,45 @@ You can easily define your own clues. Just set some default values for `color`, 
 
 
 #pagebreak()
-==== List of all predefined clues <predefined>
+
+
+
+#let show-outline(module-doc, style-args: (:)) = {
+  let prefix = module-doc.label-prefix
+  let gen-entry(name) = {
+    if "enable-cross-references" in style-args and style-args.enable-cross-references {
+      link(label(prefix + name), name)
+    } else {
+      name
+    }
+  }
+  if module-doc.functions.len() > 0 {
+    grid(
+      columns: 5 * (1fr,),
+      inset: 1em,
+      ..module-doc.functions.map(fn => [ - #gen-entry(fn.name + "()")])
+    )
+  }
+
+  if module-doc.variables.len() > 0 {
+    text([Variables:], weight: "bold")
+    list(..module-doc.variables.map(var => gen-entry(var.name)))
+  }
+}
+
+
+#let predefined-docs-style = dictionary(tidy.styles.default)
+#{
+  predefined-docs-style.show-parameter-list = (fn, style-args: (:)) => {}
+  predefined-docs-style.show-outline = show-outline
+  // predefined-docs-style.show-example = show-example
+  predefined-docs-style.show-function = (fn,style-args) => block(breakable: false, tidy.styles.default.show-function(fn, style-args))
+}
+
+#figure([],supplement: "Section")<predefined>
 #tidy.show-module(
   docs-predefined,
-  style: tidy.styles.default,
+  style: predefined-docs-style,
   omit-private-definitions: true,
 )
 
