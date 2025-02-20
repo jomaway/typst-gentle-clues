@@ -240,16 +240,16 @@
   headless: auto,
 ) = {
   // check color types
-  assert(type(accent-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + type(accent-color));
+  assert(type(accent-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + str(type(accent-color)));
 
   if (header-color != auto) {
-    assert(type(header-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + type(header-color));
+    assert(type(header-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + str(type(header-color)));
   }
   if (border-color != auto) {
-    assert(type(border-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + type(border-color));
+    assert(type(border-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + str(type(border-color)));
   }
   if (body-color != none) {
-    assert(type(body-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + type(body-color));
+    assert(type(body-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + str(type(body-color)));
   }
 
   context {
