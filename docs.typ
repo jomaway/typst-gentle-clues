@@ -1,5 +1,5 @@
 #import "lib/lib.typ": *
-#import "@preview/tidy:0.4.0"
+#import "@preview/tidy:0.4.1"
 
 // extract version from typst.toml package file.
 #let pkg-data = toml("typst.toml").package
