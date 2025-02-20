@@ -145,14 +145,14 @@
   /// #clue(title:"red accent", accent-color: red)[Some important content.]
   /// ```
   ///
-  /// -> color | gradient | pattern
+  /// -> color | gradient | tiling
   accent-color: navy,
   /// The background color of the header.
   /// ```example
   /// #clue(title:"green header", header-color: green.lighten(50%))[Some important content.]
   /// ```
   ///
-  /// -> auto | color | gradient | pattern
+  /// -> auto | color | gradient | tiling
   header-color: auto,
   /// The color of the small border on the bottom and right side.
   /// if in headless mode also for the top border.
@@ -160,14 +160,14 @@
   /// #clue(title: "blue borders", border-color: blue)[Some important content.]
   /// ```
   ///
-  /// -> auto | color | gradient | pattern
+  /// -> auto | color | gradient | tiling
   border-color: auto,
   /// The background color of the body
   /// ```example
   /// #clue(title:"pink body", body-color: fuchsia.lighten(50%))[Some important content.]
   /// ```
   ///
-  /// -> none | color | gradient | pattern
+  /// -> none | color | gradient | tiling
   body-color: none,
 
   /// The total width of the clue.
@@ -240,16 +240,16 @@
   headless: auto,
 ) = {
   // check color types
-  assert(type(accent-color) in (color, gradient, pattern), message: "expected color, gradient or pattern found " + type(accent-color));
+  assert(type(accent-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + type(accent-color));
 
   if (header-color != auto) {
-    assert(type(header-color) in (color, gradient, pattern), message: "expected color, gradient or pattern found " + type(header-color));
+    assert(type(header-color) in (color, gradient, tiling), message: "expected color, gradient or tiling found " + type(header-color));
   }
   if (border-color != auto) {
-    assert(type(border-color) in (color, gradient, pattern), message: "expected color, gradient or pattern, found " + type(border-color));
+    assert(type(border-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + type(border-color));
   }
   if (body-color != none) {
-    assert(type(body-color) in (color, gradient, pattern), message: "expected color, gradient or pattern, found " + type(body-color));
+    assert(type(body-color) in (color, gradient, tiling), message: "expected color, gradient or tiling, found " + type(body-color));
   }
 
   context {
