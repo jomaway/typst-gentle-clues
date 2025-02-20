@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.0 (2025/02/20)
+
+- feat: Add Czech translations.
+- refactor: update to typst 0.13
+
 ## v1.1.0 (2024/12/15)
 
 - feat: Add Hungarian translation
