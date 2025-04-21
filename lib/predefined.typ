@@ -72,7 +72,7 @@
 #let info(..args) = _predefined-clue("info",..args)
 
 /// #docs-info("notify")
-/// Notificaton
+/// Notification
 /// ```example
 /// #notify[New features in future versions.]
 /// ```
@@ -95,7 +95,7 @@
 
 /// #docs-info("danger")
 /// ```example
-/// #danger[Be carefull.]
+/// #danger[Be careful.]
 /// ```
 /// -> content
 #let danger(..args) = _predefined-clue("danger",..args)
@@ -116,14 +116,14 @@
 
 /// #docs-info("goal")
 /// ```example
-/// #goal[Beatuify your document!]
+/// #goal[Beautify your document!]
 /// ```
 /// -> content
 #let goal(..args) = _predefined-clue("goal",..args)
 
 /// #docs-info("question")
 /// ```example
-/// #question[How do amonishments work?]
+/// #question[How do admonishments work?]
 /// ```
 /// -> content
 #let question(..args) = _predefined-clue("question",..args)
@@ -137,7 +137,7 @@
 
 /// #docs-info("example")
 /// ```example
-/// #example[Lets make something beautifull.]
+/// #example[Let's make something beautiful.]
 /// ```
 /// -> content
 #let example(..args) = _predefined-clue("example",..args)
@@ -151,7 +151,7 @@
 
 /// #docs-info("conclusion")
 /// ```example
-/// #conclusion[This package makes it easy to add some beatufillness to your documents.]
+/// #conclusion[This package makes it easy to add some beauty to your documents.]
 /// ```
 /// -> content
 #let conclusion(..args) = _predefined-clue("conclusion",..args)
