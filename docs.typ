@@ -162,7 +162,7 @@ by #pkg-info.at("author").
 
 This package provides some features which helps to customize the clues to your liking.
 
-- Brings a wide variaty of predefined clues. See @predefined.
+- Brings a wide variety of predefined clues. See @predefined.
 - Set global default for all clues. See @gentle-clues-example.
 - Overwrite each parameter on a single clue for changing title, color, etc. See @clue-api.
 - Show or hide a counter value on tasks.
@@ -194,7 +194,7 @@ Additionally, you can set a different font for the title with `title-font` and i
   ```
 ]
 
-There are many more options for customazation. For all possible parameters see @clue-api[API].
+There are many more options for customization. For all possible parameters see @clue-api[API].
 
 
 
