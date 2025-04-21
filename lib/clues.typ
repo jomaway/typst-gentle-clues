@@ -109,7 +109,7 @@
 
 /// Basic gentle-clue (clue) template function.
 ///
-/// This function can be used to create custom clues. You can pass all of this parameters to the predefined clues (@predefined) as well to overwrite the default settings.
+/// This function can be used to create custom clues. You can pass all of these parameters to the predefined clues (@predefined) as well to overwrite the default settings.
 /// If an argument is `auto` it will fallback to the value which is specified in @gentle-clues
 ///
 /// *Example:*
@@ -124,7 +124,7 @@
   /// Content inside the body.
   /// -> content
   content,
-  /// The title of the clue. If `none` the header is ommited.
+  /// The title of the clue. If `none` the header is omitted.
   /// ```example
   /// #clue(title:"My title")[Some important content.]
   /// ```
@@ -155,14 +155,14 @@
   /// -> auto | color | gradient | tiling
   header-color: auto,
   /// The color of the small border on the bottom and right side.
-  /// if in headless mode also for the top border.
+  /// If in headless mode also for the top border.
   /// ```example
   /// #clue(title: "blue borders", border-color: blue)[Some important content.]
   /// ```
   ///
   /// -> auto | color | gradient | tiling
   border-color: auto,
-  /// The background color of the body
+  /// The background color of the body.
   /// ```example
   /// #clue(title:"pink body", body-color: fuchsia.lighten(50%))[Some important content.]
   /// ```
@@ -206,7 +206,7 @@
   ///
   /// -> auto | length
   content-inset: auto,
-  /// Defines the inset for the header
+  /// Defines the inset for the header.
   /// ```example
   /// #clue(title:"tight", header-inset: 1pt)[Some important content.]
   /// ```
