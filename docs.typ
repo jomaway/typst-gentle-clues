@@ -1,10 +1,10 @@
 #import "lib/lib.typ": *
-#import "@preview/tidy:0.4.1"
+#import "@preview/tidy:0.4.3"
 
 // extract version from typst.toml package file.
 #let pkg-data = toml("typst.toml").package
 #let version = pkg-data.at("version")
-#let import_statement = raw(block: true, lang: "typ", "#import \"@preview/gentle-clues:" + version +"\": *")
+#let import_statement = raw(block: true, lang: "typ", "#import \"@preview/gentle-clues:" + version + "\": *")
 
 // extract provided language translations
 #let lang-data = toml("lib/lang.toml")
@@ -18,21 +18,22 @@
 #let pkg-info = (
   author: link("<https://github.com/jomaway>", "jomaway"),
   repo: link(pkg-data.at("repository")),
-  version: version
+  version: version,
 )
 
 // global page settings
 #set page(
   margin: 2cm,
-  header: align(start,text(font:"Noto Sans Mono")[Docs for #link("https://typst.app/universe/package/gentle-clues",[gentle-clues:#version])]),
-  footer: [Author: #link("https://github.com/jomaway","jomaway"), License: MIT #h(1fr) #context {counter(page).display("1/1", both: true)}]
+  header: align(start, text(
+    font: "Noto Sans Mono",
+  )[Docs for #link("https://typst.app/universe/package/gentle-clues", [gentle-clues:#version])]),
+  footer: [Author: #link("https://github.com/jomaway", "jomaway"), License: MIT #h(1fr) #context { counter(page).display("1/1", both: true) }],
 );
 #set text(font: "Rubik", weight: 300, lang: "en")
 #set heading(
-  numbering: (..numbers) =>
-    if numbers.pos().len() >= 2 and numbers.pos().len() <= 3 {
-      return numbering("1.", ..numbers.pos().slice(1))
-    }
+  numbering: (..numbers) => if numbers.pos().len() >= 2 and numbers.pos().len() <= 3 {
+    return numbering("1.", ..numbers.pos().slice(1))
+  },
 )
 #show link: set text(blue)
 
@@ -43,19 +44,19 @@
   name: "Gentle Clues API",
   scope: (clues: clues),
   preamble: "#import clues: *; #show: gentle-clues.with(width: 8cm);",
-  label-prefix: "gc"
+  label-prefix: "gc",
 )
 
 /// docs-helper function
 #let predefined-docs-info-table(id) = {
   import predefined: * // _get-accent-color-for, _get-icon-for, _get-title-for
-  box(radius:3pt, clip:true, stroke: 1pt + black, table(
-    columns: (auto,auto,auto, 1fr),
+  box(radius: 3pt, clip: true, stroke: 1pt + black, table(
+    columns: (auto, auto, auto, 1fr),
     inset: 0.6em,
-    fill: (col,row) => if row == 0 {gray.lighten(60%)},
-    align: (col,row) => if row >= 1 {center + horizon} else {auto},
-    table.header([*Color*],[*Icon*],[*Title*], [*Note*]),
-    [#circle(fill:_get-accent-color-for(id)); #raw(_get-accent-color-for(id).to-hex())],
+    fill: (col, row) => if row == 0 { gray.lighten(60%) },
+    align: (col, row) => if row >= 1 { center + horizon } else { auto },
+    table.header([*Color*], [*Icon*], [*Title*], [*Note*]),
+    [#circle(fill: _get-accent-color-for(id)); #raw(_get-accent-color-for(id).to-hex())],
     [#box(width: 2em, _get-icon-for(id))],
     [#_get-title-for(id)],
     // raw(lang: "example", example)
@@ -71,21 +72,25 @@
     docs-info: predefined-docs-info-table,
   ),
   preamble: "#import predefined: *; #import clues: gentle-clues; #show: gentle-clues.with(width: 8cm, title-font: \"Rubik\");",
-  label-prefix: "gc"
+  label-prefix: "gc",
 )
 
 #show: tidy.render-examples.with(
-  scope: (clues:clues),
-  layout: (code,preview) => grid(columns: 2, gutter: 1em, box(inset: 0.5em,code), align(horizon, box(preview)))
+  scope: (clues: clues),
+  layout: (code, preview) => grid(
+    columns: 2,
+    gutter: 1em,
+    box(inset: 0.5em, code), align(horizon, box(preview)),
+  ),
 )
 
 
-#let ex(a,b) = grid(columns: 2, gutter: 1em)[
-    #a
-    #align(end)[_Turns into this_ #sym.arrow]
-  ][
-    #b
-  ]
+#let ex(a, b) = grid(columns: 2, gutter: 1em)[
+  #a
+  #align(end)[_Turns into this_ #sym.arrow]
+][
+  #b
+]
 
 #set align(center)
 = Gentle clues
@@ -104,7 +109,7 @@ by #pkg-info.at("author").
 #align(center, box(width: 90%)[
   #figure(
     overview,
-    caption: "Overview of all predefined clues."
+    caption: "Overview of all predefined clues.",
   )
 ])
 
@@ -240,7 +245,7 @@ You can easily define your own clues. Just set some default values for `color`, 
     grid(
       columns: 5 * (1fr,),
       inset: 1em,
-      ..module-doc.functions.map(fn => [ - #gen-entry(fn.name + "()")])
+      ..module-doc.functions.map(fn => [- #gen-entry(fn.name + "()")])
     )
   }
 
@@ -256,10 +261,13 @@ You can easily define your own clues. Just set some default values for `color`, 
   predefined-docs-style.show-parameter-list = (fn, style-args: (:)) => {}
   predefined-docs-style.show-outline = show-outline
   // predefined-docs-style.show-example = show-example
-  predefined-docs-style.show-function = (fn,style-args) => block(breakable: false, tidy.styles.default.show-function(fn, style-args))
+  predefined-docs-style.show-function = (fn, style-args) => block(breakable: false, tidy.styles.default.show-function(
+    fn,
+    style-args,
+  ))
 }
 
-#figure([],supplement: "Section")<predefined>
+#figure([], supplement: "Section")<predefined>
 #tidy.show-module(
   docs-predefined,
   style: predefined-docs-style,
