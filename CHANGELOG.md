@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3.0 (2026/01/26)
+
+- feat: Add danish translations.
+- fix: Allow quotations without using typst quote function.
+
 ## v1.2.0 (2025/02/20)
 
 - feat: Add Czech translations.
