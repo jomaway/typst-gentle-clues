@@ -1,6 +1,6 @@
 [package]
 name = "gentle-clues"
-version = "1.3.1"
+version = "1.3.2"
 entrypoint = "lib/lib.typ"
 authors = ["Jomaway <https://github.com/jomaway>"]
 license = "MIT"
@@ -16,4 +16,5 @@ exclude = [
     "justfile",
     "minify-icons.sh",
     "CHANGELOG.md",
+    ".git"
 ]
