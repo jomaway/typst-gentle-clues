@@ -53,4 +53,4 @@ Feel free to open a PR with your language added to the `lang.toml` file.
 
 ## Changelog
 
-[See CHANGELOG.md](CHANGELOG.md)
+[See CHANGELOG.md](https://github.com/jomaway/typst-gentle-clues/blob/main/CHANGELOG.md)
