@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.3 (2026/11/15)
+- feat: Add Hebrew translation
+
+## v1.3.2 (2026/11/02)
+- feat: Add polish translation
+
 ## v1.3.1 (2026/02/01)
 - feat: Add japanese translations.
 

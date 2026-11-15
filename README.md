@@ -1,19 +1,17 @@
-# gentle-clues
+# Gentle-Clues
 
-Simple admonitions for typst. Use predefined ones or define your own.
+Simple admonitions for Typst. Use predefined ones or define your own.
 
-Inspired from [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
+Inspired by [mdbook-admonish](https://tommilligan.github.io/mdbook-admonish/).
 
-## Overview of all predefined clues
+## Overview
 ![Overview of the predefined clues](./gc-overview.svg)
 
 ## Usage
 
-For detailed information, see the [documentation (PDF)](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf).
-
 To use this package, simply add the following code to your document:
 ```typst
-#import "@preview/gentle-clues:1.3.2": *
+#import "@preview/gentle-clues:1.3.3": *
 
 // add an info clue
 #info[ This is the info clue ... ]
@@ -34,15 +32,15 @@ This package provides some features which help to customize the clues to your li
 - Define your own clues very easily.
 - ...
 
-For a full list see the [documentation (PDF)](https://github.com/jomaway/typst-gentle-clues/blob/main/docs.pdf).
+For a full list see the [documentation (PDF)](https://github.com/jomaway/typst-gentle-clues/blob/v1.3.3/docs.pdf).
 
-## Language support
+## Language Support
 
 This package does use [linguify](https://github.com/jomaway/typst-linguify) to support multiple languages.
 
 **Header titles:**
 The language of the header titles is detected automatically from the `context text.lang`.
-See the file [lang.toml](https://github.com/jomaway/typst-gentle-clues/blob/main/lib/lang.toml) for currently supported languages.
+See the file [`lang.toml`](lib/lang.toml) for currently supported languages.
 
 If an unsupported language is set, it will fall back to English as default.
 Feel free to open a PR with your language added to the `lang.toml` file.
@@ -51,6 +49,3 @@ Feel free to open a PR with your language added to the `lang.toml` file.
 
 [MIT License](LICENSE)
 
-## Changelog
-
-[See CHANGELOG.md](https://github.com/jomaway/typst-gentle-clues/blob/main/CHANGELOG.md)
